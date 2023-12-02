@@ -1,13 +1,13 @@
 # Getting Started
 
 This is the project to generate the test data for our the InValNoS dashboard.
-It contains these folders and files, following our recommended project layout:
+It contains these folders and files, following the recommended project layout:
 
 File or Folder | Purpose
 ---------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
+`app/` | content for UI frontends
+`db/` | domain models and data
+`srv/` | service models and code
 `package.json` | project metadata and configuration
 `readme.md` | this getting started guide
 
