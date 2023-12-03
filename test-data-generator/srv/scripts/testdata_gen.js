@@ -4,11 +4,11 @@ import { generateContractDetail } from './generators/contract_details_gen.js'
 /**
  * Generates the desired number of fake InsuranceContract objects with its corresponding 
  * InsuranceContractDetails and Mails objects
- * @param {int} count - A param specifying the desired count of InsuranceContract objects
- * @returns {Array} Returns a 2D-array containing an InsuranceContract array, 
- * an InsuranceContractDetail array and a Mail array.
+ * @param {int} contractCount - A param specifying the desired count of InsuranceContract objects
+ * @param {int} detailsCount - A param specifying the desired count of InsuranceContractDetails objects for each InsuranceContract
+ * @returns {Array} Returns a 2D-array containing an InsuranceContract array, an InsuranceContractDetail array and a Mail array.
  */
-function generateContracts(contractCount, detailsCount) {
+export function generateContracts(contractCount, detailsCount) {
     const fakeContracts = [];
     const fakeContractDetails = [];
     const fakeMails = [];
@@ -25,4 +25,4 @@ function generateContracts(contractCount, detailsCount) {
     return [fakeContracts, fakeContractDetails, fakeMails]
 }
 
-console.log(generateContracts(2, 1));
+//console.log(generateContracts(2, 1));

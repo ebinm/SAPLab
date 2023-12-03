@@ -26,6 +26,7 @@ export function generateContractDetail(contract) {
   const allowedDelay = 14;
   const finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + allowedDelay));
   const timezone = 'CEST';
+  // TODO
   const penaltyEndorsement = false;
 
   // Set status and the respective submission/transfer date accordingly
@@ -150,10 +151,7 @@ export function generateContractDetail(contract) {
     transferReportingDate: transferReportingDate,
     penaltyEndorsement: penaltyEndorsement,
     contractDetailStatus: status,
-    emails: [],
+    // emails: [],
     timezone: timezone,
   }
 }
-
-
-
