@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
  * Generates one fake InsuranceContract object
  * @returns {InsuranceContract} Returns one fake InsuranceContract object.
  */
-function generateInsuranceContract() {
+export function generateInsuranceContract() {
   const now = new Date();
 
   // Fake attributes of InsuranceContract entity
@@ -45,20 +45,6 @@ function generateInsuranceContract() {
     policyStatus: policyStatus,
   }
 }
-
-/**
- * Generates many fake InsuranceContract objects
- * @param {int} count - A param specifying the desired count of InsuranceContract objects
- * @returns {InsuranceContract} Returns many fake InsuranceContract objects.
- */
-export function generateInsuranceContracts(count) {
-  const testContracts = [];
-  for (let i = 0; i < count; i++) {
-    testContracts.push(generateInsuranceContract());
-  }
-return testContracts;
-};
-
 
 
 
