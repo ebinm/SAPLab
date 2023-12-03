@@ -27,10 +27,9 @@ function generateInsuranceContract() {
   const clientEmail = faker.internet.email({ firstName: firstName, lastName: lastName })
 
   // Fake PolicyStatus
-  // TODO: add other PolicyStatus variations
-  const policyStatus = 'ACTIVE'  
+  const policyStatus = faker.helpers.arrayElement['ACTIVE', 'INACTIVE', 'REVERSED']  
 
-  // Construct and return the fake InsuranceContract class
+  // Construct and return the fake InsuranceContract object
   return {
     ID: ID,
     createdAt: createdAt,
