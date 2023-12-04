@@ -1,10 +1,10 @@
-import { faker } from '@faker-js/faker'
+const { faker } = require('@faker-js/faker');
 
 /**
  * Generates one fake InsuranceContract object
  * @returns {InsuranceContract} Returns one fake InsuranceContract object.
  */
-export function generateInsuranceContract() {
+exports.genContract = function generateInsuranceContract() {
   const now = new Date();
 
   // Fake attributes of InsuranceContract entity
@@ -45,6 +45,3 @@ export function generateInsuranceContract() {
     policyStatus: policyStatus,
   }
 }
-
-
-

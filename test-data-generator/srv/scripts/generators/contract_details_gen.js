@@ -1,10 +1,10 @@
-import { faker } from '@faker-js/faker'
+const { faker } = require('@faker-js/faker');
 
 /**
  * Generates one fake InsuranceContractDetail object
  * @returns {InsuranceContractDetail} Returns one fake InsuranceContractDetail object.
  */
-export function generateContractDetail(contract) {
+exports.genContractDetails = function generateContractDetails(contract) {
   const now = new Date();
 
   // Fake attributes of InsuranceContractDetail entity
@@ -42,8 +42,6 @@ export function generateContractDetail(contract) {
   } else if (now < reportingPeriodStart) {
     // Reporting period is in the future
     status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
-
-    // TODO reset final report values
   } else if (reportingPeriodStart <= now && now <= reportingPeriodEnd) {
     // Reporting period is currently active
     status = faker.helpers.arrayElement(['FINALIZED', 'NOTIFIED', 'NOTIFIED_FAILED', 'TRANSFER_OK', 'TRANSFER_FAILED']);
