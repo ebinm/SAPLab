@@ -15,7 +15,7 @@ File or Folder | Purpose
 - Install the following necessary prequisites to run/edit this project:
   - VS Code
     - SAP CDS Language Support extension
-    - REST Client (for easy endpoints access)
+    - REST Client extension (or Postman, for easy endpoints access)
   - Node.js
 - Run `npm install` in the project's root directory to install the necessary libraries for this project
 
