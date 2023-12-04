@@ -1,13 +1,13 @@
 const { faker } = require('@faker-js/faker');
 
 /**
- * Generates one fake ContractDetail object
- * @returns {ContractDetail} Returns one fake ContractDetail object.
+ * Generates one fake ContractDetails object
+ * @returns {ContractDetails} Returns one fake ContractDetails object.
  */
 exports.genContractDetails = function generateContractDetails(contract) {
   const now = new Date();
 
-  // Fake attributes of InsuranceContractDetail entity
+  // Fake attributes of ContractDetails entity
   const ID = faker.string.uuid();
   const createdAt = faker.date.between({ from: contract.createdAt, to: now });
   const createdBy = faker.string.uuid();
