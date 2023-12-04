@@ -1,26 +1,35 @@
 # Getting Started
 
-This is the project to generate the test data for our the InValNoS dashboard.
-It contains these folders and files, following the recommended project layout:
+This is the CAP project to generate test data for our the InValNoS dashboard.
 
 File or Folder | Purpose
 ---------|----------
-`app/` | content for UI frontends
-`db/` | domain models and data
+`app/` | content for UI frontends (no need for us)
+`db/` | domain models
 `srv/` | service models and code
+`test/` | http files to test/access the endpoints
 `package.json` | project metadata and configuration
-`readme.md` | this getting started guide
 
 ## Next Steps
 
 - Install the following necessary prequisites to run/edit this project:
-  - VS Code and the SAP CDS Language Support extension
+  - VS Code
+    - SAP CDS Language Support extension
+    - REST Client (for easy endpoints access)
   - Node.js
-  - CAP tooling via `npm install --global @sap/cds-dk`
-  - TODO: did I forget something?
-- Open a new terminal, navigate to this project's root directory  and run:
-  - `npm install` to install the necessary libraries for this project
-  - `cds watch` to start a local CAP server and utilize the in-memory SQlite database in place of the SAP HANA database (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
+- Run `npm install` in the project's root directory to install the necessary libraries for this project
+
+## How To Use
+
+- Run `cds watch` in the project's root to start a local CAP server and utilize the in-memory SQlite database
+- Navigate to the file `test/testdata-service.http` and start generating fake test data for InValNoS!
+
+## TODOs
+
+- See `TODO` comments in the code
+  - Fake mails
+  - Realistic distribution of status, provisional/final values etc.
+- Connect the server to the HANA database
 
 ## Learn More
 
