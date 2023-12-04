@@ -3,7 +3,7 @@
  * Description: Contains the rebuilt InValNoS data model schema
  */
 
-namespace generator;
+namespace testdatagenerator;
 
 entity InsuranceContract {
   key ID            : UUID;

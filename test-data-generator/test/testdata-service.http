@@ -1,0 +1,11 @@
+@serviceUrl = http://localhost:4004/odata/v4/test-data
+
+### Get InsuranceContracts
+GET {{serviceUrl}}/InsuranceContract
+
+### Get InsuranceContractDetails
+GET {{serviceUrl}}/InsuranceContractDetails
+
+### Init Testdata
+POST {{serviceUrl}}/generate
+content-type: application/json

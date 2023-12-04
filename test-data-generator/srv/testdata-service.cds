@@ -1,7 +1,8 @@
-using generator from '../db/schema';
+using testdatagenerator as db from '../db/schema';
 
-@path: 'service/testdata'
+// Service definition
 service TestDataService {
-    entity InsuranceContract as projection on generator.InsuranceContract
-    entity InsuranceContractDetails as projection on generator.InsuranceContractDetails
+    entity InsuranceContract        as projection on db.InsuranceContract
+    entity InsuranceContractDetails as projection on db.InsuranceContractDetails
+    action generate();
 }
