@@ -1,8 +1,8 @@
 const { faker } = require('@faker-js/faker');
 
 /**
- * Generates one fake InsuranceContractDetail object
- * @returns {InsuranceContractDetail} Returns one fake InsuranceContractDetail object.
+ * Generates one fake ContractDetail object
+ * @returns {ContractDetail} Returns one fake ContractDetail object.
  */
 exports.genContractDetails = function generateContractDetails(contract) {
   const now = new Date();
@@ -37,8 +37,8 @@ exports.genContractDetails = function generateContractDetails(contract) {
   let transferReportingDate = null;
 
   if (contract.policyStatus == 'REVERSED') {
-    // All contract details are 'CANCELED' if the contract ifself is 'REVERSED'
-    status = 'CANCELED';
+    // If the contract ifself is 'REVERSED', the contractDetailStatus can only be 'CANCELED' or 'REVERSED'
+    status = faker.helpers.arrayElement(['CANCELED', 'REVERSED']);
   } else if (now < reportingPeriodStart) {
     // Reporting period is in the future
     status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
@@ -68,8 +68,6 @@ exports.genContractDetails = function generateContractDetails(contract) {
       }
     }
   }
-
-  // TODO REVERSED status?
 
   // Generate provisional and final reported values
   // 1. Set all values to null first

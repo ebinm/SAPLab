@@ -24,10 +24,10 @@ exports.genContract = function generateInsuranceContract() {
   const firstName = faker.person.firstName();
   const lastName = faker.person.lastName();
   const clientName = lastName + ', ' + firstName;
-  const clientEmail = faker.internet.email({ firstName: firstName, lastName: lastName })
+  const clientEmail = faker.internet.email({ firstName: firstName, lastName: lastName });
 
   // Fake PolicyStatus
-  const policyStatus = faker.helpers.arrayElement['ACTIVE', 'INACTIVE', 'REVERSED']  
+  const policyStatus = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE', 'REVERSED']);
 
   // Construct and return the fake InsuranceContract object
   return {

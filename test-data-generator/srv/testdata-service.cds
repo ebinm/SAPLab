@@ -4,5 +4,6 @@ using testdatagenerator as db from '../db/schema';
 service TestDataService {
     entity InsuranceContract        as projection on db.InsuranceContract
     entity InsuranceContractDetails as projection on db.InsuranceContractDetails
-    action generate();
+
+    action generateData(contractCount: Integer);
 }

@@ -3,9 +3,13 @@
 ### Get InsuranceContracts
 GET {{serviceUrl}}/InsuranceContract
 
-### Get InsuranceContractDetails
+### Get ContractDetails
 GET {{serviceUrl}}/InsuranceContractDetails
 
-### Init Testdata
-POST {{serviceUrl}}/generate
+### Generate Data
+POST {{serviceUrl}}/generateData
 content-type: application/json
+
+{
+    "contractCount" : 3
+}
