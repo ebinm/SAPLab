@@ -1,6 +1,6 @@
+const { faker } = require('@faker-js/faker');
 const cg = require('./generators/contract_gen');
 const cdg = require('./generators/contract_details_gen');
-const { faker } = require('@faker-js/faker');
 
 /**
  * Generates the desired number of fake InsuranceContract objects with a random number of ContractDetails and Mail objects
@@ -10,22 +10,23 @@ const { faker } = require('@faker-js/faker');
 exports.genData = function generateData(contractCount) {
     const fakeContracts = [];
     const fakeContractDetails = [];
-    const fakeMails = [];
+    const fakeEmails = [];
 
     for (let i = 0; i < contractCount; i++) {
         const contract = cg.genContract();
         fakeContracts.push(contract);
 
-        // Only create ContractDetails if the contract is not INACTIVE
+        // Only create ContractDetails/Emails if the contract is not INACTIVE
         if (contract.policyStatus != 'INACTIVE') {
             // Create between 1 and 10 ContractDetails per Contract
             const contractDetailsCount = faker.number.int({ min: 1, max: 10})
             for (let n = 0; n < contractDetailsCount; n++) {
-                fakeContractDetails.push(cdg.genContractDetails(contract))
-                // TODO fake mails
+                const result = cdg.genContractDetails(contract)
+                fakeContractDetails.push(result[0])
+                fakeEmails.push(result[1]);
             }
         }
     }
 
-    return [fakeContracts, fakeContractDetails, fakeMails]
+    return [fakeContracts, fakeContractDetails, fakeEmails]
 }

@@ -5,7 +5,7 @@ const gen = require('./scripts/testdata_gen');
 class TestDataService extends cds.ApplicationService {
     init() {
         // Get the entity definitions from the db/schema.cds file to interact with the database
-        const { InsuranceContract, InsuranceContractDetails } = cds.entities;
+        const { InsuranceContract, ContractDetails, Emails } = cds.entities;
 
         // If generateData(contractCount) is called, generate test data and insert it into database
         this.on('generateData', async function onGenerateData(request) {
@@ -16,8 +16,8 @@ class TestDataService extends cds.ApplicationService {
             console.log('Inserting generated data into database...');
             try {
                 await INSERT.into(InsuranceContract).entries(testData[0]);
-                await INSERT.into(InsuranceContractDetails).entries(testData[1]);
-                // TODO mails
+                await INSERT.into(ContractDetails).entries(testData[1]);
+                await INSERT.into(Emails).entries(testData[2]);
                 console.log('Done.');
             } catch (error) {
                 return request.error('Error inserting data:', error);

@@ -1,7 +1,9 @@
 const { faker } = require('@faker-js/faker');
+const eg = require('./email_gen');
 
 /**
  * Generates one fake ContractDetails object
+ * @param {InsuranceContract} contract - The InsuranceContract the ContractDetails object is associated with
  * @returns {ContractDetails} Returns one fake ContractDetails object.
  */
 exports.genContractDetails = function generateContractDetails(contract) {
@@ -117,10 +119,8 @@ exports.genContractDetails = function generateContractDetails(contract) {
       }
   }
 
-  // TODO mail generator
-
-  // Construct and return the fake InsuranceContractDetails object
-  return {
+  // Construct ContractDetails object
+  const contractDetails = {
     ID: ID,
     createdAt: createdAt,
     createdBy: createdBy,
@@ -147,8 +147,13 @@ exports.genContractDetails = function generateContractDetails(contract) {
     transferReportingDate: transferReportingDate,
     penaltyEndorsement: penaltyEndorsement,
     contractDetailStatus: status,
-    // emails: [],
     timezone: timezone,
     insuranceContract_ID: contract.ID,
-  }
+  };
+
+  // Generate suitable email depending on status
+  const emails = eg.genEmail(contract, contractDetails);
+  
+  // Return the fake InsuranceContractDetails object, as well as the emails array
+  return [contractDetails, emails];
 }

@@ -4,7 +4,10 @@
 GET {{serviceUrl}}/InsuranceContract
 
 ### Get ContractDetails
-GET {{serviceUrl}}/InsuranceContractDetails
+GET {{serviceUrl}}/ContractDetails
+
+### Get Emails
+GET {{serviceUrl}}/Emails
 
 ### Generate Data
 POST {{serviceUrl}}/generateData
