@@ -149,5 +149,6 @@ exports.genContractDetails = function generateContractDetails(contract) {
     contractDetailStatus: status,
     // emails: [],
     timezone: timezone,
+    insuranceContract_ID: contract.ID,
   }
 }

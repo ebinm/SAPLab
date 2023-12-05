@@ -18,7 +18,9 @@ entity InsuranceContract {
       clientName    : String;
       clientEmail   : String;
       policyStatus  : String;
-// TODO connect with ContractDetails
+
+      // Connect InsuranceContract with ContractDetails
+      contractDetails: Association to many InsuranceContractDetails on contractDetails.insuranceContract = $self
 }
 
 entity InsuranceContractDetails {
@@ -49,8 +51,9 @@ entity InsuranceContractDetails {
       penaltyEndorsement                 : Boolean;
       contractDetailStatus               : String;
       timezone                           : String;
-// TODO mails
-}
 
+      // TODO mails
+      insuranceContract: Association to InsuranceContract;
+}
 
 // TODO: other classes
