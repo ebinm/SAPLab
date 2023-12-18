@@ -6,5 +6,5 @@ service TestDataService {
     entity ContractDetails   as projection on db.ContractDetails;
     entity Emails            as projection on db.Emails;
     action generateData(contractCount : Integer);
-    function MyFunction() returns Integer;
+    function generateContracts() returns String;
 }

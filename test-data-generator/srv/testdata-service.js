@@ -24,11 +24,9 @@ class TestDataService extends cds.ApplicationService {
             }
         });
 
-        this.on('MyFunction', async function test() {
+        this.on('generateContracts', async function test() {
             console.log('Generating data for ' + 7 + ' contracts...');
             const testData = gen.genData(7);
-            console.log('Done.');
-
             console.log('Inserting generated data into database...');
             try {
                 await INSERT.into(InsuranceContract).entries(testData[0]);
@@ -38,13 +36,12 @@ class TestDataService extends cds.ApplicationService {
             } catch (error) {
                 return console.error('Error inserting data:', error);
             }
-            return 7;
+            console.log('Done.');
+            return "Successfully Generated 7 Contracts";
         });
         
         return super.init();
     }
-
-
 }
 
 module.exports = TestDataService

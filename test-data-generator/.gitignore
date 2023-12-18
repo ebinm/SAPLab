@@ -1,4 +1,4 @@
-# CAP test-data-generator
+# CAP data-generator
 _out
 *.db
 *.sqlite

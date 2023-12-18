@@ -1,5 +1,5 @@
 {
-  "name": "test-data-generator",
+  "name": "data-generator",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
@@ -9,15 +9,16 @@
     "@faker-js/faker": "^8.3.1",
     "@sap/cds": "^7",
     "@sap/cds-hana": "^2",
-    "express": "^4"
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@faker-js/faker": "^8.3.1",
     "@sap/cds-dk": "^7"
   },
   "engines": {
-    "node": "^20"
+    "node": "^18"
   },
   "scripts": {
     "start": "cds-serve"
@@ -25,7 +26,8 @@
   "cds": {
     "requires": {
       "[production]": {
-        "db": "hana"
+        "db": "hana",
+        "auth": "xsuaa"
       }
     }
   }

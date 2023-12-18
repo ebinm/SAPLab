@@ -1,5 +1,5 @@
 _schema-version: '3.1'
-ID: test-data-generator
+ID: data-generator
 version: 1.0.0
 description: "A simple CAP project."
 parameters:
@@ -8,9 +8,10 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
+        - npm install --production
         - npx cds build --production
 modules:
-  - name: test-data-generator-srv
+  - name: data-generator-srv
     type: nodejs
     path: gen/srv
     parameters:
@@ -22,19 +23,45 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: test-data-generator-db
+      - name: data-generator-db
+      - name: data-generator-auth
 
-  - name: test-data-generator-db-deployer
+  - name: data-generator-db-deployer
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: test-data-generator-db
+      - name: data-generator-db
+
+  - name: data-generator
+    type: approuter.nodejs
+    path: app/
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: data-generator-auth
 
 resources:
-  - name: test-data-generator-db
+  - name: data-generator-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: data-generator-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: data-generator-${org}-${space}
+        tenant-mode: dedicated

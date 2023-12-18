@@ -1,0 +1,25 @@
+@serviceUrl = http://localhost:4004/odata/v4/test-data
+
+# @serviceUrl = https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com/odata/v4/test-data
+
+msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com
+
+### Get InsuranceContracts
+GET {{serviceUrl}}/InsuranceContract
+
+### Get ContractDetails
+GET {{serviceUrl}}/ContractDetails
+
+### Get Emails
+GET {{serviceUrl}}/Emails
+
+### Generate Data
+POST {{serviceUrl}}/generateData
+content-type: application/json
+
+{
+    "contractCount" : 3
+}
+
+### Generate Data
+GET {{serviceUrl}}/generateContracts()
