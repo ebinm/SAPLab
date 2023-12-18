@@ -6,7 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^8.3.1",
     "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
     "express": "^4"
   },
   "devDependencies": {
@@ -14,7 +16,17 @@
     "@faker-js/faker": "^8.3.1",
     "@sap/cds-dk": "^7"
   },
+  "engines": {
+    "node": "^20"
+  },
   "scripts": {
     "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana"
+      }
+    }
   }
 }

@@ -24,8 +24,27 @@ class TestDataService extends cds.ApplicationService {
             }
         });
 
+        this.on('MyFunction', async function test() {
+            console.log('Generating data for ' + 7 + ' contracts...');
+            const testData = gen.genData(7);
+            console.log('Done.');
+
+            console.log('Inserting generated data into database...');
+            try {
+                await INSERT.into(InsuranceContract).entries(testData[0]);
+                await INSERT.into(ContractDetails).entries(testData[1]);
+                await INSERT.into(Emails).entries(testData[2]);
+                console.log('Done.');
+            } catch (error) {
+                return console.error('Error inserting data:', error);
+            }
+            return 7;
+        });
+        
         return super.init();
     }
+
+
 }
 
 module.exports = TestDataService
