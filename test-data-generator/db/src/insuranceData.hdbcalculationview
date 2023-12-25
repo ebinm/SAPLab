@@ -16,7 +16,7 @@
 </dataSources>
 <snapshotProcedures/>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="ID"/>
       <viewAttribute id="CREATEDAT"/>
@@ -54,7 +54,7 @@
       <viewAttribute id="DISPATCHSTATUS"/>
       <viewAttribute id="DELIVERYERRORREASON"/>
       <viewAttribute id="CONTRACTDETAILS_ID"/>
-      <viewAttribute hidden="true" id="JOIN$ID$ID"/>
+      <viewAttribute hidden="true" id="JOIN$ID$CONTRACTDETAILS_ID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="TESTDATASERVICE_CONTRACTDETAILS">
@@ -86,7 +86,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILSTATUS" source="CONTRACTDETAILSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TIMEZONE" source="TIMEZONE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$CONTRACTDETAILS_ID" source="ID"/>
     </input>
     <input node="TESTDATASERVICE_EMAILS">
       <mapping xsi:type="Calculation:AttributeMapping" target="SENTDATETIME" source="SENTDATETIME"/>
@@ -97,11 +97,11 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="DISPATCHSTATUS" source="DISPATCHSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYERRORREASON" source="DELIVERYERRORREASON"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
     </input>
-    <joinAttribute name="JOIN$ID$ID"/>
+    <joinAttribute name="JOIN$ID$CONTRACTDETAILS_ID"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="ID"/>
       <viewAttribute id="CREATEDAT"/>
@@ -150,7 +150,7 @@
       <viewAttribute id="CLIENTNAME"/>
       <viewAttribute id="CLIENTEMAIL_1"/>
       <viewAttribute id="POLICYSTATUS"/>
-      <viewAttribute hidden="true" id="JOIN$ID$ID"/>
+      <viewAttribute hidden="true" id="JOIN$INSURANCECONTRACT_ID$ID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Join_1_1">
@@ -190,7 +190,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="DISPATCHSTATUS" source="DISPATCHSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYERRORREASON" source="DELIVERYERRORREASON"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$INSURANCECONTRACT_ID$ID" source="INSURANCECONTRACT_ID"/>
     </input>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
       <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDAT_1" source="CREATEDAT"/>
@@ -204,9 +204,9 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTNAME" source="CLIENTNAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTEMAIL_1" source="CLIENTEMAIL"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="POLICYSTATUS" source="POLICYSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$INSURANCECONTRACT_ID$ID" source="ID"/>
     </input>
-    <joinAttribute name="JOIN$ID$ID"/>
+    <joinAttribute name="JOIN$INSURANCECONTRACT_ID$ID"/>
   </calculationView>
 </calculationViews>
 
@@ -431,18 +431,18 @@
       <upperLeftCorner x="100" y="228"/>
       <rectangleSize height="30" width="160"/>
     </shape>
+    <shape modelObjectName="TESTDATASERVICE_INSURANCECONTRACT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="-181" y="85"/>
+      <rectangleSize width="324"/>
+    </shape>
   
     <shape modelObjectName="TESTDATASERVICE_CONTRACTDETAILS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
       <upperLeftCorner x="313" y="46"/>
-      <rectangleSize width="338.23193359375"/>
+      <rectangleSize width="338"/>
     </shape>
     <shape modelObjectName="TESTDATASERVICE_EMAILS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
       <upperLeftCorner x="746" y="56"/>
-      <rectangleSize width="230.6875"/>
-    </shape>
-    <shape modelObjectName="TESTDATASERVICE_INSURANCECONTRACT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
-      <upperLeftCorner x="-171" y="58"/>
-      <rectangleSize width="324.015625"/>
+      <rectangleSize width="230"/>
     </shape>
     <shape modelObjectName="Join_1_2" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
       <upperLeftCorner x="20" y="30"/>
