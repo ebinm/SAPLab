@@ -16,7 +16,7 @@
 </dataSources>
 <snapshotProcedures/>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="ID"/>
       <viewAttribute id="CREATEDAT"/>
@@ -101,7 +101,7 @@
     </input>
     <joinAttribute name="JOIN$ID$CONTRACTDETAILS_ID"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_1" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="ID"/>
       <viewAttribute id="CREATEDAT"/>
