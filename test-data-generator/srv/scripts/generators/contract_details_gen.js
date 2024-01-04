@@ -16,7 +16,6 @@ exports.genContractDetails = function generateContractDetails(contract) {
   const modifiedAt = faker.date.between({ from: createdAt, to: now });
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
-  // TODO creationDate vs. createdAt
   const creationDate = createdAt.toString();
   // TODO make contractNo unique
   const contractNo = faker.number.int({ min: 100000, max: 999999 }).toString();
@@ -69,6 +68,8 @@ exports.genContractDetails = function generateContractDetails(contract) {
         transferReportingDate = faker.date.between({ from: reportSubmissionDate, to: reportingPeriodEnd });
       }
     }
+
+    // TODO set penalty if REMINDED/FINALIZED???
   }
 
   // Generate provisional and final reported values
@@ -91,29 +92,32 @@ exports.genContractDetails = function generateContractDetails(contract) {
   switch (reportingValueType) {
     case 'NOP':
       reportingValueUnit_code = 'persons';
-      // NOP does not require precision as there can only be complete people
-      provisionalReportedNumberOfPersons = faker.number.float({ min: 100, max: 100000 });
+      // Realistic value: 2-3 digits
+      provisionalReportedNumberOfPersons = faker.number.int({ min: 10, max: 999 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedNumberOfPersons = faker.number.float({ min: 100, max: 100000 });
+        finalReportedNumberOfPersons = faker.number.int({ min: 10, max: 999 });
       }
       break;
     case 'R':
       reportingValueUnit_code = '€';
-      provisionalReportedAmount = faker.number.float({ min: 0, max: 100000000, precision: 0.01 });
+      // Highest value: millions to billions, in 100000 steps
+      provisionalReportedAmount = Math.round(faker.number.float({ min: 1000000, max: 100000000000})/100000)*100000;
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedAmount = faker.number.float({ min: 0, max: 100000000, precision: 0.01 });
       }
       break;
     case 'AS':
       reportingValueUnit_code = 'stocks';
-      provisionalReportedAssetsStocks = faker.number.float({ min: 0, max: 10000000, precision: 0.001 });
+      // Realistic value: millions to billions
+      provisionalReportedAssetsStocks = faker.number.float({ min: 1000000, max: 10000000000, precision: 0.001 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedAssetsStocks = faker.number.float({ min: 0, max: 10000000, precision: 0.001 });
       }
       break;
     case 'VOG':
       reportingValueUnit_code = '€';
-      provisionalReportedValueOfGoods = faker.number.float({ min: 0, max: 10000000, precision: 0.01 });
+      // Realistic value: millions to billions
+      provisionalReportedValueOfGoods = faker.number.float({ min: 1000000, max: 10000000000, precision: 0.01 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedValueOfGoods = faker.number.float({ min: 0, max: 10000000, precision: 0.01 });
       }
