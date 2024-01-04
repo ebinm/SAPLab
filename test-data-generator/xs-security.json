@@ -3,6 +3,8 @@
   "attributes": [],
   "role-templates": [],
   "oauth2-configuration": {
-    "redirect-uris": ["https://*.eu10-004.hana.ondemand.com/**"]
-}
+    "redirect-uris": [
+      "https://*.eu10-004.hana.ondemand.com/**"
+    ]
+  }
 }

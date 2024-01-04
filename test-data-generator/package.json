@@ -9,6 +9,7 @@
     "@faker-js/faker": "^8.3.1",
     "@sap/cds": "^7",
     "@sap/cds-hana": "^2",
+    "@sap/hdi-deploy": "^4.9.1",
     "@sap/xssec": "^3",
     "express": "^4",
     "passport": "^0",
@@ -34,7 +35,8 @@
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
-      }
+      },
+      "db": "hana"
     }
   }
 }
