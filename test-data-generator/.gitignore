@@ -1,4 +1,4 @@
-# CAP test-data-generator
+# CAP data-generator
 _out
 *.db
 *.sqlite
@@ -32,3 +32,6 @@ mta_archives/
 
 # @cap-js/cds-typer
 @cds-models
+
+# auto generated wildcard
+db/.env
