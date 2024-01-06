@@ -27,7 +27,15 @@ exports.genContract = function generateInsuranceContract() {
   const clientEmail = faker.internet.email({ firstName: firstName, lastName: lastName });
 
   // Fake PolicyStatus
-  const policyStatus = faker.helpers.arrayElement(['ACTIVE', 'INACTIVE', 'REVERSED']);
+  let policyStatus = '';
+
+  // Set roughly 80 % of all contracts to 'ACTIVE'
+  const random_int = faker.number.int({min: 1, max: 10});
+  if (random_int <= 8) {
+    policyStatus = 'ACTIVE';
+  } else {
+    policyStatus = faker.helpers.arrayElement(['INACTIVE', 'REVERSED']);
+  }
 
   // Construct and return the fake InsuranceContract object
   return {
