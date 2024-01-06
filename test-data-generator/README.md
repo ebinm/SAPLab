@@ -10,7 +10,6 @@ This is the CAP project to generate test data for our the InValNoS dashboard.
 | `test/`        | http files to test/access the endpoints   |
 | `package.json` | project metadata and configuration        |
 
-
 ## Next Steps
 
 - Install the following necessary prequisites to run/edit this project:
