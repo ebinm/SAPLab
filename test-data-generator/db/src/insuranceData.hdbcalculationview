@@ -16,402 +16,418 @@
 </dataSources>
 <snapshotProcedures/>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
-      <viewAttribute id="ID"/>
-      <viewAttribute id="CREATEDAT"/>
-      <viewAttribute id="CREATEDBY"/>
-      <viewAttribute id="MODIFIEDAT"/>
-      <viewAttribute id="MODIFIEDBY"/>
-      <viewAttribute id="CREATIONDATE"/>
-      <viewAttribute id="CONTRACTNO"/>
-      <viewAttribute id="CONTRACTDESCRIPTION"/>
-      <viewAttribute id="REPORTINGVALUETYPE"/>
-      <viewAttribute id="PROVISIONALREPORTEDAMOUNT" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDAMOUNT" aggregationType="sum"/>
-      <viewAttribute id="REPORTINGVALUEUNIT_CODE"/>
-      <viewAttribute id="PROVISIONALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
-      <viewAttribute id="PROVISIONALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
-      <viewAttribute id="PROVISIONALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
-      <viewAttribute id="REPORTINGPERIODSTART"/>
-      <viewAttribute id="REPORTINGPERIODEND"/>
-      <viewAttribute id="ALLOWEDDELAY" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTINGDATE"/>
-      <viewAttribute id="REPORTSUBMISSIONDATE"/>
-      <viewAttribute id="TRANSFERREPORTINGDATE"/>
-      <viewAttribute id="PENALTYENDORSEMENT"/>
-      <viewAttribute id="CONTRACTDETAILSTATUS"/>
-      <viewAttribute id="TIMEZONE"/>
+      <viewAttribute id="Email_SENTDATETIME" aggregationType="min"/>
+      <viewAttribute id="Email_EMAILTYPE"/>
+      <viewAttribute id="Email_CLIENTEMAIL"/>
+      <viewAttribute id="Email_GRAPHMAILID"/>
+      <viewAttribute id="Email_RETRY" aggregationType="sum"/>
+      <viewAttribute id="Email_DISPATCHSTATUS"/>
+      <viewAttribute id="Email_DELIVERYERRORREASON"/>
+      <viewAttribute id="Email_CONTRACTDETAILS_ID"/>
+      <viewAttribute id="Email_ID"/>
+      <viewAttribute id="Details_ID"/>
+      <viewAttribute id="Details_CREATEDAT"/>
+      <viewAttribute id="Details_CREATEDBY"/>
+      <viewAttribute id="Details_MODIFIEDAT"/>
+      <viewAttribute id="Details_MODIFIEDBY"/>
+      <viewAttribute id="Details_CREATIONDATE"/>
+      <viewAttribute id="Details_CONTRACTNO"/>
+      <viewAttribute id="Details_CONTRACTDESCRIPTION"/>
+      <viewAttribute id="Details_REPORTINGVALUETYPE"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="Details_REPORTINGVALUEUNIT_CODE"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
+      <viewAttribute id="Details_REPORTINGPERIODSTART"/>
+      <viewAttribute id="Details_REPORTINGPERIODEND"/>
+      <viewAttribute id="Details_ALLOWEDDELAY" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTINGDATE"/>
+      <viewAttribute id="Details_REPORTSUBMISSIONDATE"/>
+      <viewAttribute id="Details_TRANSFERREPORTINGDATE"/>
+      <viewAttribute id="Details_PENALTYENDORSEMENT"/>
+      <viewAttribute id="Details_CONTRACTDETAILSTATUS"/>
+      <viewAttribute id="Details_TIMEZONE"/>
+      <viewAttribute id="Details_INSURANCECONTRACT_ID"/>
       <viewAttribute id="INSURANCECONTRACT_ID"/>
-      <viewAttribute id="SENTDATETIME" aggregationType="min"/>
-      <viewAttribute id="EMAILTYPE"/>
-      <viewAttribute id="CLIENTEMAIL"/>
-      <viewAttribute id="GRAPHMAILID"/>
-      <viewAttribute id="RETRY" aggregationType="sum"/>
-      <viewAttribute id="DISPATCHSTATUS"/>
-      <viewAttribute id="DELIVERYERRORREASON"/>
-      <viewAttribute id="CONTRACTDETAILS_ID"/>
       <viewAttribute hidden="true" id="JOIN$ID$CONTRACTDETAILS_ID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="TESTDATASERVICE_CONTRACTDETAILS">
-      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDAT" source="CREATEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY" source="CREATEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDAT" source="MODIFIEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDBY" source="MODIFIEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATIONDATE" source="CREATIONDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTNO" source="CONTRACTNO"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDESCRIPTION" source="CONTRACTDESCRIPTION"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGVALUETYPE" source="REPORTINGVALUETYPE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDAMOUNT" source="PROVISIONALREPORTEDAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDAMOUNT" source="FINALREPORTEDAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGVALUEUNIT_CODE" source="REPORTINGVALUEUNIT_CODE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDNUMBEROFPERSONS" source="PROVISIONALREPORTEDNUMBEROFPERSONS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDNUMBEROFPERSONS" source="FINALREPORTEDNUMBEROFPERSONS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDASSETSSTOCKS" source="PROVISIONALREPORTEDASSETSSTOCKS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDASSETSSTOCKS" source="FINALREPORTEDASSETSSTOCKS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDVALUEOFGOODS" source="PROVISIONALREPORTEDVALUEOFGOODS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDVALUEOFGOODS" source="FINALREPORTEDVALUEOFGOODS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGPERIODSTART" source="REPORTINGPERIODSTART"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGPERIODEND" source="REPORTINGPERIODEND"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="ALLOWEDDELAY" source="ALLOWEDDELAY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTINGDATE" source="FINALREPORTINGDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTSUBMISSIONDATE" source="REPORTSUBMISSIONDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="TRANSFERREPORTINGDATE" source="TRANSFERREPORTINGDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PENALTYENDORSEMENT" source="PENALTYENDORSEMENT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILSTATUS" source="CONTRACTDETAILSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="TIMEZONE" source="TIMEZONE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATEDAT" source="CREATEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_MODIFIEDAT" source="MODIFIEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_MODIFIEDBY" source="MODIFIEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATIONDATE" source="CREATIONDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTNO" source="CONTRACTNO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTDESCRIPTION" source="CONTRACTDESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGVALUETYPE" source="REPORTINGVALUETYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDAMOUNT" source="PROVISIONALREPORTEDAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDAMOUNT" source="FINALREPORTEDAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGVALUEUNIT_CODE" source="REPORTINGVALUEUNIT_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDNUMBEROFPERSONS" source="PROVISIONALREPORTEDNUMBEROFPERSONS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDNUMBEROFPERSONS" source="FINALREPORTEDNUMBEROFPERSONS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDASSETSSTOCKS" source="PROVISIONALREPORTEDASSETSSTOCKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDASSETSSTOCKS" source="FINALREPORTEDASSETSSTOCKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDVALUEOFGOODS" source="PROVISIONALREPORTEDVALUEOFGOODS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDVALUEOFGOODS" source="FINALREPORTEDVALUEOFGOODS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGPERIODSTART" source="REPORTINGPERIODSTART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGPERIODEND" source="REPORTINGPERIODEND"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_ALLOWEDDELAY" source="ALLOWEDDELAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTINGDATE" source="FINALREPORTINGDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTSUBMISSIONDATE" source="REPORTSUBMISSIONDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_TRANSFERREPORTINGDATE" source="TRANSFERREPORTINGDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PENALTYENDORSEMENT" source="PENALTYENDORSEMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTDETAILSTATUS" source="CONTRACTDETAILSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_TIMEZONE" source="TIMEZONE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$CONTRACTDETAILS_ID" source="ID"/>
     </input>
     <input node="TESTDATASERVICE_EMAILS">
-      <mapping xsi:type="Calculation:AttributeMapping" target="SENTDATETIME" source="SENTDATETIME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="EMAILTYPE" source="EMAILTYPE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTEMAIL" source="CLIENTEMAIL"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="GRAPHMAILID" source="GRAPHMAILID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="RETRY" source="RETRY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="DISPATCHSTATUS" source="DISPATCHSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYERRORREASON" source="DELIVERYERRORREASON"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_SENTDATETIME" source="SENTDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_EMAILTYPE" source="EMAILTYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_CLIENTEMAIL" source="CLIENTEMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_GRAPHMAILID" source="GRAPHMAILID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_RETRY" source="RETRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_DISPATCHSTATUS" source="DISPATCHSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_DELIVERYERRORREASON" source="DELIVERYERRORREASON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_ID" source="ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
     </input>
     <joinAttribute name="JOIN$ID$CONTRACTDETAILS_ID"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_1" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
-      <viewAttribute id="ID"/>
-      <viewAttribute id="CREATEDAT"/>
-      <viewAttribute id="CREATEDBY"/>
-      <viewAttribute id="MODIFIEDAT"/>
-      <viewAttribute id="MODIFIEDBY"/>
-      <viewAttribute id="CREATIONDATE"/>
-      <viewAttribute id="CONTRACTNO"/>
-      <viewAttribute id="CONTRACTDESCRIPTION"/>
-      <viewAttribute id="REPORTINGVALUETYPE"/>
-      <viewAttribute id="PROVISIONALREPORTEDAMOUNT" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDAMOUNT" aggregationType="sum"/>
-      <viewAttribute id="REPORTINGVALUEUNIT_CODE"/>
-      <viewAttribute id="PROVISIONALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
-      <viewAttribute id="PROVISIONALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
-      <viewAttribute id="PROVISIONALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
-      <viewAttribute id="REPORTINGPERIODSTART"/>
-      <viewAttribute id="REPORTINGPERIODEND"/>
-      <viewAttribute id="ALLOWEDDELAY" aggregationType="sum"/>
-      <viewAttribute id="FINALREPORTINGDATE"/>
-      <viewAttribute id="REPORTSUBMISSIONDATE"/>
-      <viewAttribute id="TRANSFERREPORTINGDATE"/>
-      <viewAttribute id="PENALTYENDORSEMENT"/>
-      <viewAttribute id="CONTRACTDETAILSTATUS"/>
-      <viewAttribute id="TIMEZONE"/>
-      <viewAttribute id="INSURANCECONTRACT_ID"/>
-      <viewAttribute id="SENTDATETIME" aggregationType="min"/>
-      <viewAttribute id="EMAILTYPE"/>
-      <viewAttribute id="CLIENTEMAIL"/>
-      <viewAttribute id="GRAPHMAILID"/>
-      <viewAttribute id="RETRY" aggregationType="sum"/>
-      <viewAttribute id="DISPATCHSTATUS"/>
-      <viewAttribute id="DELIVERYERRORREASON"/>
-      <viewAttribute id="CONTRACTDETAILS_ID"/>
-      <viewAttribute id="CREATEDAT_1"/>
-      <viewAttribute id="CREATEDBY_1"/>
-      <viewAttribute id="MODIFIEDAT_1"/>
-      <viewAttribute id="MODIFIEDBY_1"/>
-      <viewAttribute id="POLICY"/>
-      <viewAttribute id="INSURANCEID"/>
-      <viewAttribute id="INSURANCENAME"/>
-      <viewAttribute id="CLIENTID"/>
-      <viewAttribute id="CLIENTNAME"/>
-      <viewAttribute id="CLIENTEMAIL_1"/>
-      <viewAttribute id="POLICYSTATUS"/>
-      <viewAttribute hidden="true" id="JOIN$INSURANCECONTRACT_ID$ID"/>
+      <viewAttribute id="Email_SENTDATETIME" aggregationType="min"/>
+      <viewAttribute id="Email_EMAILTYPE"/>
+      <viewAttribute id="Email_CLIENTEMAIL"/>
+      <viewAttribute id="Email_GRAPHMAILID"/>
+      <viewAttribute id="Email_RETRY" aggregationType="sum"/>
+      <viewAttribute id="Email_DISPATCHSTATUS"/>
+      <viewAttribute id="Email_DELIVERYERRORREASON"/>
+      <viewAttribute id="Email_CONTRACTDETAILS_ID"/>
+      <viewAttribute id="Email_ID"/>
+      <viewAttribute id="Details_ID"/>
+      <viewAttribute id="Details_CREATEDAT"/>
+      <viewAttribute id="Details_CREATEDBY"/>
+      <viewAttribute id="Details_MODIFIEDAT"/>
+      <viewAttribute id="Details_MODIFIEDBY"/>
+      <viewAttribute id="Details_CREATIONDATE"/>
+      <viewAttribute id="Details_CONTRACTNO"/>
+      <viewAttribute id="Details_CONTRACTDESCRIPTION"/>
+      <viewAttribute id="Details_REPORTINGVALUETYPE"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="Details_REPORTINGVALUEUNIT_CODE"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDNUMBEROFPERSONS" aggregationType="sum"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDASSETSSTOCKS" aggregationType="sum"/>
+      <viewAttribute id="Details_PROVISIONALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTEDVALUEOFGOODS" aggregationType="sum"/>
+      <viewAttribute id="Details_REPORTINGPERIODSTART"/>
+      <viewAttribute id="Details_REPORTINGPERIODEND"/>
+      <viewAttribute id="Details_ALLOWEDDELAY" aggregationType="sum"/>
+      <viewAttribute id="Details_FINALREPORTINGDATE"/>
+      <viewAttribute id="Details_REPORTSUBMISSIONDATE"/>
+      <viewAttribute id="Details_TRANSFERREPORTINGDATE"/>
+      <viewAttribute id="Details_PENALTYENDORSEMENT"/>
+      <viewAttribute id="Details_CONTRACTDETAILSTATUS"/>
+      <viewAttribute id="Details_TIMEZONE"/>
+      <viewAttribute id="Details_INSURANCECONTRACT_ID"/>
+      <viewAttribute id="Contract_CREATEDAT"/>
+      <viewAttribute id="Contract_CREATEDBY"/>
+      <viewAttribute id="Contract_MODIFIEDAT"/>
+      <viewAttribute id="Contract_MODIFIEDBY"/>
+      <viewAttribute id="Contract_POLICY"/>
+      <viewAttribute id="Contract_INSURANCEID"/>
+      <viewAttribute id="Contract_INSURANCENAME"/>
+      <viewAttribute id="Contract_CLIENTID"/>
+      <viewAttribute id="Contract_CLIENTNAME"/>
+      <viewAttribute id="Contract_CLIENTEMAIL"/>
+      <viewAttribute id="Contract_POLICYSTATUS"/>
+      <viewAttribute id="Contract_ID"/>
+      <viewAttribute hidden="true" id="JOIN$ID$INSURANCECONTRACT_ID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="Join_1_1">
-      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDAT" source="CREATEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY" source="CREATEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDAT" source="MODIFIEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDBY" source="MODIFIEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATIONDATE" source="CREATIONDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTNO" source="CONTRACTNO"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDESCRIPTION" source="CONTRACTDESCRIPTION"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGVALUETYPE" source="REPORTINGVALUETYPE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDAMOUNT" source="PROVISIONALREPORTEDAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDAMOUNT" source="FINALREPORTEDAMOUNT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGVALUEUNIT_CODE" source="REPORTINGVALUEUNIT_CODE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDNUMBEROFPERSONS" source="PROVISIONALREPORTEDNUMBEROFPERSONS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDNUMBEROFPERSONS" source="FINALREPORTEDNUMBEROFPERSONS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDASSETSSTOCKS" source="PROVISIONALREPORTEDASSETSSTOCKS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDASSETSSTOCKS" source="FINALREPORTEDASSETSSTOCKS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PROVISIONALREPORTEDVALUEOFGOODS" source="PROVISIONALREPORTEDVALUEOFGOODS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTEDVALUEOFGOODS" source="FINALREPORTEDVALUEOFGOODS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGPERIODSTART" source="REPORTINGPERIODSTART"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTINGPERIODEND" source="REPORTINGPERIODEND"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="ALLOWEDDELAY" source="ALLOWEDDELAY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FINALREPORTINGDATE" source="FINALREPORTINGDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="REPORTSUBMISSIONDATE" source="REPORTSUBMISSIONDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="TRANSFERREPORTINGDATE" source="TRANSFERREPORTINGDATE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PENALTYENDORSEMENT" source="PENALTYENDORSEMENT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILSTATUS" source="CONTRACTDETAILSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="TIMEZONE" source="TIMEZONE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SENTDATETIME" source="SENTDATETIME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="EMAILTYPE" source="EMAILTYPE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTEMAIL" source="CLIENTEMAIL"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="GRAPHMAILID" source="GRAPHMAILID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="RETRY" source="RETRY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="DISPATCHSTATUS" source="DISPATCHSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="DELIVERYERRORREASON" source="DELIVERYERRORREASON"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CONTRACTDETAILS_ID" source="CONTRACTDETAILS_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$INSURANCECONTRACT_ID$ID" source="INSURANCECONTRACT_ID"/>
-    </input>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDAT_1" source="CREATEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CREATEDBY_1" source="CREATEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDAT_1" source="MODIFIEDAT"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="MODIFIEDBY_1" source="MODIFIEDBY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="POLICY" source="POLICY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCEID" source="INSURANCEID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCENAME" source="INSURANCENAME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTID" source="CLIENTID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTNAME" source="CLIENTNAME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENTEMAIL_1" source="CLIENTEMAIL"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="POLICYSTATUS" source="POLICYSTATUS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$INSURANCECONTRACT_ID$ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDAT" source="CREATEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDBY" source="CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_MODIFIEDAT" source="MODIFIEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_MODIFIEDBY" source="MODIFIEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_POLICY" source="POLICY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_INSURANCEID" source="INSURANCEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_INSURANCENAME" source="INSURANCENAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CLIENTID" source="CLIENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CLIENTNAME" source="CLIENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CLIENTEMAIL" source="CLIENTEMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_POLICYSTATUS" source="POLICYSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Contract_ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$INSURANCECONTRACT_ID" source="ID"/>
     </input>
-    <joinAttribute name="JOIN$INSURANCECONTRACT_ID$ID"/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_SENTDATETIME" source="Email_SENTDATETIME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_EMAILTYPE" source="Email_EMAILTYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_CLIENTEMAIL" source="Email_CLIENTEMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_GRAPHMAILID" source="Email_GRAPHMAILID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_RETRY" source="Email_RETRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_DISPATCHSTATUS" source="Email_DISPATCHSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_DELIVERYERRORREASON" source="Email_DELIVERYERRORREASON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_CONTRACTDETAILS_ID" source="Email_CONTRACTDETAILS_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Email_ID" source="Email_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_ID" source="Details_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATEDAT" source="Details_CREATEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATEDBY" source="Details_CREATEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_MODIFIEDAT" source="Details_MODIFIEDAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_MODIFIEDBY" source="Details_MODIFIEDBY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CREATIONDATE" source="Details_CREATIONDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTNO" source="Details_CONTRACTNO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTDESCRIPTION" source="Details_CONTRACTDESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGVALUETYPE" source="Details_REPORTINGVALUETYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDAMOUNT" source="Details_PROVISIONALREPORTEDAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDAMOUNT" source="Details_FINALREPORTEDAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGVALUEUNIT_CODE" source="Details_REPORTINGVALUEUNIT_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDNUMBEROFPERSONS" source="Details_PROVISIONALREPORTEDNUMBEROFPERSONS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDNUMBEROFPERSONS" source="Details_FINALREPORTEDNUMBEROFPERSONS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDASSETSSTOCKS" source="Details_PROVISIONALREPORTEDASSETSSTOCKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDASSETSSTOCKS" source="Details_FINALREPORTEDASSETSSTOCKS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PROVISIONALREPORTEDVALUEOFGOODS" source="Details_PROVISIONALREPORTEDVALUEOFGOODS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTEDVALUEOFGOODS" source="Details_FINALREPORTEDVALUEOFGOODS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGPERIODSTART" source="Details_REPORTINGPERIODSTART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTINGPERIODEND" source="Details_REPORTINGPERIODEND"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_ALLOWEDDELAY" source="Details_ALLOWEDDELAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_FINALREPORTINGDATE" source="Details_FINALREPORTINGDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_REPORTSUBMISSIONDATE" source="Details_REPORTSUBMISSIONDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_TRANSFERREPORTINGDATE" source="Details_TRANSFERREPORTINGDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_PENALTYENDORSEMENT" source="Details_PENALTYENDORSEMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTDETAILSTATUS" source="Details_CONTRACTDETAILSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_TIMEZONE" source="Details_TIMEZONE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Details_INSURANCECONTRACT_ID" source="Details_INSURANCECONTRACT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
+    </input>
+    <joinAttribute name="JOIN$ID$INSURANCECONTRACT_ID"/>
   </calculationView>
 </calculationViews>
 
 <logicalModel id="Join_1_2">
   <attributes>
-    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="ID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="ID"/>
+    <attribute id="Details_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_ID"/>
     </attribute>
-    <attribute id="CREATEDAT" order="2" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CREATEDAT"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CREATEDAT"/>
+    <attribute id="Details_CREATEDAT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CREATEDAT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CREATEDAT"/>
     </attribute>
-    <attribute id="CREATEDBY" order="3" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CREATEDBY"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CREATEDBY"/>
+    <attribute id="Details_CREATEDBY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CREATEDBY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CREATEDBY"/>
     </attribute>
-    <attribute id="MODIFIEDAT" order="4" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="MODIFIEDAT"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="MODIFIEDAT"/>
+    <attribute id="Details_MODIFIEDAT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_MODIFIEDAT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_MODIFIEDAT"/>
     </attribute>
-    <attribute id="MODIFIEDBY" order="5" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="MODIFIEDBY"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="MODIFIEDBY"/>
+    <attribute id="Details_MODIFIEDBY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_MODIFIEDBY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_MODIFIEDBY"/>
     </attribute>
-    <attribute id="CREATIONDATE" order="6" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CREATIONDATE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CREATIONDATE"/>
+    <attribute id="Details_CREATIONDATE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CREATIONDATE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CREATIONDATE"/>
     </attribute>
-    <attribute id="CONTRACTNO" order="7" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CONTRACTNO"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CONTRACTNO"/>
+    <attribute id="Details_CONTRACTNO" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CONTRACTNO"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CONTRACTNO"/>
     </attribute>
-    <attribute id="CONTRACTDESCRIPTION" order="8" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CONTRACTDESCRIPTION"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CONTRACTDESCRIPTION"/>
+    <attribute id="Details_CONTRACTDESCRIPTION" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CONTRACTDESCRIPTION"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CONTRACTDESCRIPTION"/>
     </attribute>
-    <attribute id="REPORTINGVALUETYPE" order="9" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="REPORTINGVALUETYPE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="REPORTINGVALUETYPE"/>
+    <attribute id="Details_REPORTINGVALUETYPE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_REPORTINGVALUETYPE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_REPORTINGVALUETYPE"/>
     </attribute>
-    <attribute id="REPORTINGVALUEUNIT_CODE" order="12" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="REPORTINGVALUEUNIT_CODE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="REPORTINGVALUEUNIT_CODE"/>
+    <attribute id="Details_REPORTINGVALUEUNIT_CODE" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_REPORTINGVALUEUNIT_CODE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_REPORTINGVALUEUNIT_CODE"/>
     </attribute>
-    <attribute id="REPORTINGPERIODSTART" order="19" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="REPORTINGPERIODSTART"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="REPORTINGPERIODSTART"/>
+    <attribute id="Details_REPORTINGPERIODSTART" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_REPORTINGPERIODSTART"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_REPORTINGPERIODSTART"/>
     </attribute>
-    <attribute id="REPORTINGPERIODEND" order="20" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="REPORTINGPERIODEND"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="REPORTINGPERIODEND"/>
+    <attribute id="Details_REPORTINGPERIODEND" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_REPORTINGPERIODEND"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_REPORTINGPERIODEND"/>
     </attribute>
-    <attribute id="FINALREPORTINGDATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="FINALREPORTINGDATE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="FINALREPORTINGDATE"/>
+    <attribute id="Details_FINALREPORTINGDATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_FINALREPORTINGDATE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_FINALREPORTINGDATE"/>
     </attribute>
-    <attribute id="REPORTSUBMISSIONDATE" order="23" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="REPORTSUBMISSIONDATE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="REPORTSUBMISSIONDATE"/>
+    <attribute id="Details_REPORTSUBMISSIONDATE" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_REPORTSUBMISSIONDATE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_REPORTSUBMISSIONDATE"/>
     </attribute>
-    <attribute id="TRANSFERREPORTINGDATE" order="24" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="TRANSFERREPORTINGDATE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="TRANSFERREPORTINGDATE"/>
+    <attribute id="Details_TRANSFERREPORTINGDATE" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_TRANSFERREPORTINGDATE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_TRANSFERREPORTINGDATE"/>
     </attribute>
-    <attribute id="PENALTYENDORSEMENT" order="25" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="PENALTYENDORSEMENT"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="PENALTYENDORSEMENT"/>
+    <attribute id="Details_PENALTYENDORSEMENT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_PENALTYENDORSEMENT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_PENALTYENDORSEMENT"/>
     </attribute>
-    <attribute id="CONTRACTDETAILSTATUS" order="26" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CONTRACTDETAILSTATUS"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CONTRACTDETAILSTATUS"/>
+    <attribute id="Details_CONTRACTDETAILSTATUS" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_CONTRACTDETAILSTATUS"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_CONTRACTDETAILSTATUS"/>
     </attribute>
-    <attribute id="TIMEZONE" order="27" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="TIMEZONE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="TIMEZONE"/>
+    <attribute id="Details_TIMEZONE" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_TIMEZONE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_TIMEZONE"/>
     </attribute>
-    <attribute id="INSURANCECONTRACT_ID" order="28" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="INSURANCECONTRACT_ID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="INSURANCECONTRACT_ID"/>
+    <attribute id="Details_INSURANCECONTRACT_ID" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Details_INSURANCECONTRACT_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Details_INSURANCECONTRACT_ID"/>
     </attribute>
-    <attribute id="EMAILTYPE" order="30" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="EMAILTYPE"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="EMAILTYPE"/>
+    <attribute id="Email_EMAILTYPE" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_EMAILTYPE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_EMAILTYPE"/>
     </attribute>
-    <attribute id="CLIENTEMAIL" order="31" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CLIENTEMAIL"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CLIENTEMAIL"/>
+    <attribute id="Email_CLIENTEMAIL" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_CLIENTEMAIL"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_CLIENTEMAIL"/>
     </attribute>
-    <attribute id="GRAPHMAILID" order="32" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="GRAPHMAILID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="GRAPHMAILID"/>
+    <attribute id="Email_GRAPHMAILID" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_GRAPHMAILID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_GRAPHMAILID"/>
     </attribute>
-    <attribute id="DISPATCHSTATUS" order="34" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="DISPATCHSTATUS"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="DISPATCHSTATUS"/>
+    <attribute id="Email_DISPATCHSTATUS" order="34" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_DISPATCHSTATUS"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_DISPATCHSTATUS"/>
     </attribute>
-    <attribute id="DELIVERYERRORREASON" order="35" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="DELIVERYERRORREASON"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="DELIVERYERRORREASON"/>
+    <attribute id="Email_DELIVERYERRORREASON" order="35" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_DELIVERYERRORREASON"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_DELIVERYERRORREASON"/>
     </attribute>
-    <attribute id="CONTRACTDETAILS_ID" order="36" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CONTRACTDETAILS_ID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CONTRACTDETAILS_ID"/>
+    <attribute id="Email_CONTRACTDETAILS_ID" order="36" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_CONTRACTDETAILS_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_CONTRACTDETAILS_ID"/>
     </attribute>
-    <attribute id="CREATEDAT_1" order="37" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CREATEDAT_1"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CREATEDAT_1"/>
+    <attribute id="Email_ID" order="37" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Email_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Email_ID"/>
     </attribute>
-    <attribute id="CREATEDBY_1" order="38" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CREATEDBY_1"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CREATEDBY_1"/>
+    <attribute id="Contract_CREATEDAT" order="38" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_CREATEDAT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_CREATEDAT"/>
     </attribute>
-    <attribute id="MODIFIEDAT_1" order="39" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="MODIFIEDAT_1"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="MODIFIEDAT_1"/>
+    <attribute id="Contract_CREATEDBY" order="39" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_CREATEDBY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_CREATEDBY"/>
     </attribute>
-    <attribute id="MODIFIEDBY_1" order="40" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="MODIFIEDBY_1"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="MODIFIEDBY_1"/>
+    <attribute id="Contract_MODIFIEDAT" order="40" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_MODIFIEDAT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_MODIFIEDAT"/>
     </attribute>
-    <attribute id="POLICY" order="41" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="POLICY"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="POLICY"/>
+    <attribute id="Contract_MODIFIEDBY" order="41" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_MODIFIEDBY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_MODIFIEDBY"/>
     </attribute>
-    <attribute id="INSURANCEID" order="42" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="INSURANCEID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="INSURANCEID"/>
+    <attribute id="Contract_POLICY" order="42" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_POLICY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_POLICY"/>
     </attribute>
-    <attribute id="INSURANCENAME" order="43" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="INSURANCENAME"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="INSURANCENAME"/>
+    <attribute id="Contract_INSURANCEID" order="43" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_INSURANCEID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_INSURANCEID"/>
     </attribute>
-    <attribute id="CLIENTID" order="44" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CLIENTID"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CLIENTID"/>
+    <attribute id="Contract_INSURANCENAME" order="44" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_INSURANCENAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_INSURANCENAME"/>
     </attribute>
-    <attribute id="CLIENTNAME" order="45" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CLIENTNAME"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CLIENTNAME"/>
+    <attribute id="Contract_CLIENTID" order="45" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_CLIENTID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_CLIENTID"/>
     </attribute>
-    <attribute id="CLIENTEMAIL_1" order="46" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CLIENTEMAIL_1"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="CLIENTEMAIL_1"/>
+    <attribute id="Contract_CLIENTNAME" order="46" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_CLIENTNAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_CLIENTNAME"/>
     </attribute>
-    <attribute id="POLICYSTATUS" order="47" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="POLICYSTATUS"/>
-      <keyMapping columnObjectName="Join_1_2" columnName="POLICYSTATUS"/>
+    <attribute id="Contract_CLIENTEMAIL" order="47" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_CLIENTEMAIL"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_CLIENTEMAIL"/>
+    </attribute>
+    <attribute id="Contract_POLICYSTATUS" order="48" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_POLICYSTATUS"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_POLICYSTATUS"/>
+    </attribute>
+    <attribute id="Contract_ID" order="49" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Contract_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="Contract_ID"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="PROVISIONALREPORTEDAMOUNT" order="10" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="PROVISIONALREPORTEDAMOUNT"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="PROVISIONALREPORTEDAMOUNT"/>
+    <measure id="Details_PROVISIONALREPORTEDAMOUNT" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_PROVISIONALREPORTEDAMOUNT"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_PROVISIONALREPORTEDAMOUNT"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="FINALREPORTEDAMOUNT" order="11" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="FINALREPORTEDAMOUNT"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="FINALREPORTEDAMOUNT"/>
+    <measure id="Details_FINALREPORTEDAMOUNT" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_FINALREPORTEDAMOUNT"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_FINALREPORTEDAMOUNT"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="PROVISIONALREPORTEDNUMBEROFPERSONS" order="13" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="PROVISIONALREPORTEDNUMBEROFPERSONS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="PROVISIONALREPORTEDNUMBEROFPERSONS"/>
+    <measure id="Details_PROVISIONALREPORTEDNUMBEROFPERSONS" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_PROVISIONALREPORTEDNUMBEROFPERSONS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_PROVISIONALREPORTEDNUMBEROFPERSONS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="FINALREPORTEDNUMBEROFPERSONS" order="14" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="FINALREPORTEDNUMBEROFPERSONS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="FINALREPORTEDNUMBEROFPERSONS"/>
+    <measure id="Details_FINALREPORTEDNUMBEROFPERSONS" order="14" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_FINALREPORTEDNUMBEROFPERSONS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_FINALREPORTEDNUMBEROFPERSONS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="PROVISIONALREPORTEDASSETSSTOCKS" order="15" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="PROVISIONALREPORTEDASSETSSTOCKS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="PROVISIONALREPORTEDASSETSSTOCKS"/>
+    <measure id="Details_PROVISIONALREPORTEDASSETSSTOCKS" order="15" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_PROVISIONALREPORTEDASSETSSTOCKS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_PROVISIONALREPORTEDASSETSSTOCKS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="FINALREPORTEDASSETSSTOCKS" order="16" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="FINALREPORTEDASSETSSTOCKS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="FINALREPORTEDASSETSSTOCKS"/>
+    <measure id="Details_FINALREPORTEDASSETSSTOCKS" order="16" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_FINALREPORTEDASSETSSTOCKS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_FINALREPORTEDASSETSSTOCKS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="PROVISIONALREPORTEDVALUEOFGOODS" order="17" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="PROVISIONALREPORTEDVALUEOFGOODS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="PROVISIONALREPORTEDVALUEOFGOODS"/>
+    <measure id="Details_PROVISIONALREPORTEDVALUEOFGOODS" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_PROVISIONALREPORTEDVALUEOFGOODS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_PROVISIONALREPORTEDVALUEOFGOODS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="FINALREPORTEDVALUEOFGOODS" order="18" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="FINALREPORTEDVALUEOFGOODS"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="FINALREPORTEDVALUEOFGOODS"/>
+    <measure id="Details_FINALREPORTEDVALUEOFGOODS" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_FINALREPORTEDVALUEOFGOODS"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_FINALREPORTEDVALUEOFGOODS"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="ALLOWEDDELAY" order="21" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="ALLOWEDDELAY"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="ALLOWEDDELAY"/>
+    <measure id="Details_ALLOWEDDELAY" order="21" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Details_ALLOWEDDELAY"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Details_ALLOWEDDELAY"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="SENTDATETIME" order="29" aggregationType="min" measureType="simple">
-      <descriptions defaultDescription="SENTDATETIME"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="SENTDATETIME"/>
+    <measure id="Email_SENTDATETIME" order="29" aggregationType="min" measureType="simple">
+      <descriptions defaultDescription="Email_SENTDATETIME"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Email_SENTDATETIME"/>
       <exceptionAggregationMetadata/>
     </measure>
-    <measure id="RETRY" order="33" aggregationType="sum" measureType="simple">
-      <descriptions defaultDescription="RETRY"/>
-      <measureMapping columnObjectName="Join_1_2" columnName="RETRY"/>
+    <measure id="Email_RETRY" order="33" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Email_RETRY"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="Email_RETRY"/>
       <exceptionAggregationMetadata/>
     </measure>
   </baseMeasures>
@@ -445,8 +461,8 @@
       <rectangleSize width="230"/>
     </shape>
     <shape modelObjectName="Join_1_2" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
-      <upperLeftCorner x="20" y="30"/>
-      <rectangleSize width="250"/>
+      <upperLeftCorner x="64" y="17"/>
+      <rectangleSize width="377"/>
     </shape>
   </shapes>
 </layout>
