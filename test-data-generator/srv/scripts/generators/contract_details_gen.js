@@ -156,6 +156,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
   };
 
   // Generate suitable email depending on status
+  // TODO multiple depending on status
   const emails = eg.genEmail(contract, contractDetails);
   
   // Return the fake InsuranceContractDetails object, as well as the emails array
