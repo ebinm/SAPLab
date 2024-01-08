@@ -16,7 +16,7 @@
 </dataSources>
 <snapshotProcedures/>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="Email_SENTDATETIME" aggregationType="min"/>
       <viewAttribute id="Email_EMAILTYPE"/>
@@ -105,7 +105,7 @@
     </input>
     <joinAttribute name="JOIN$ID$CONTRACTDETAILS_ID"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_N" joinType="leftOuter" multiJoinNode="Join_1" multiJoinCentralTable="TESTDATASERVICE_CONTRACTDETAILS" multiJoinOrder="Outside In">
     <viewAttributes>
       <viewAttribute id="Email_SENTDATETIME" aggregationType="min"/>
       <viewAttribute id="Email_EMAILTYPE"/>
@@ -461,9 +461,9 @@
       <rectangleSize width="230"/>
     </shape>
     <shape modelObjectName="Join_1_2" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
-      <upperLeftCorner x="64" y="17"/>
-      <rectangleSize width="377"/>
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
     </shape>
   </shapes>
 </layout>
-</Calculation:scenario>
+</Calculation:scenario>   
