@@ -20,56 +20,71 @@ exports.genContractDetails = function generateContractDetails(contract) {
   // TODO make contractNo unique
   const contractNo = faker.number.int({ min: 100000, max: 999999 }).toString();
   const contractDescription = faker.company.buzzPhrase();
-  const reportingPeriodStart = faker.date.between({ from: createdAt, to: faker.date.soon() });
-  // Assume that each reporting period is 30 days long
-  const reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + 30))
   // Assume that the allowed delay is 2 weeks
   const allowedDelay = 14;
-  const finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + allowedDelay));
   const timezone = 'CEST';
-  // TODO
-  const penaltyEndorsement = false;
 
   // Set status and the respective submission/transfer date accordingly
   // 1. Set all values to null first
   // 2. Depending on the randomly selected contractDetailStatus, reassign the corresponding values
+  // 3. Set penaltyEndorsement depending on submissionDate
   let status = null;
+
+  let reportingPeriodStart = null;
+  let reportingPeriodEnd = null;
+  let finalReportingDate = null;
+
   let reportSubmissionDate = null;
   let transferReportingDate = null;
+
+  let penaltyEndorsement = false;
 
   if (contract.policyStatus == 'REVERSED') {
     // If the contract ifself is 'REVERSED', the contractDetailStatus can only be 'CANCELED' or 'REVERSED'
     status = faker.helpers.arrayElement(['CANCELED', 'REVERSED']);
-  } else if (now < reportingPeriodStart) {
-    // Reporting period is in the future
-    status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
-  } else if (reportingPeriodStart <= now && now <= reportingPeriodEnd) {
-    // Reporting period is currently active
-    status = faker.helpers.arrayElement(['FINALIZED', 'NOTIFIED', 'NOTIFIED_FAILED', 'TRANSFER_OK', 'TRANSFER_FAILED']);
-
-    if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-      reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: now });
-
-      if (status == 'TRANSFER_OK') {
-        // Only set transfer date if transfer was successful
-        transferReportingDate = faker.date.between({ from: reportSubmissionDate, to: now });
-      }
-    }
   } else {
-    // Reporting period is in the past
-    status = faker.helpers.arrayElement(['FINALIZED', 'TRANSFER_FAILED', 'TRANSFER_OK', 'REMINDED', 'REMINDED_FAILED'])
+    const random_int = faker.number.int({min: 1, max: 10});
 
-    if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-      // Report submitted
-      reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: reportingPeriodEnd });
+    // Set neutral status to roughly 10 % for a more meaningful dashboard
+    if (random_int == 1) {
+      status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
 
-      if (status == 'TRANSFER_OK') {
-        // Only set transfer date if transfer was successful
-        transferReportingDate = faker.date.between({ from: reportSubmissionDate, to: reportingPeriodEnd });
+      // Reporting period is in the future
+      reportingPeriodStart = faker.date.between({ from: now, to: faker.date.soon() });
+      // Assume that each reporting period is 30 days long
+      reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + 30));
+      finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + allowedDelay));
+    } else {
+      status = faker.helpers.arrayElement(['FINALIZED', 'NOTIFIED', 'NOTIFIED_FAILED', 'TRANSFER_OK', 'TRANSFER_FAILED']);
+
+      // Reporting period is active or in the past
+      reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
+      // Assume that each reporting period is 30 days long
+      reportingPeriodEnd = new Date(reportingPeriodStart);
+      reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + 30);
+      finalReportingDate = new Date(reportingPeriodEnd);
+      finalReportingDate.setDate(finalReportingDate.getDate() + allowedDelay);
+    
+      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
+        // Penalize some ContractDetails in the past
+        if (random_int > 7 && finalReportingDate < now) {
+          penaltyEndorsement = true;
+          reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toLocaleDateString();
+        } else {
+          // Make sure that the submission date is never set in the future
+          if (now <= finalReportingDate) {
+            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: now }).toLocaleDateString();
+          } else {
+            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: finalReportingDate }).toLocaleDateString();
+          }
+        }
+
+        if (status == 'TRANSFER_OK') {
+          // Only set transfer date if transfer was successful
+          transferReportingDate = faker.date.between({ from: reportSubmissionDate, to: now });
+        }
       }
     }
-
-    // TODO set penalty if REMINDED/FINALIZED???
   }
 
   // Generate provisional and final reported values
@@ -156,6 +171,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
   };
 
   // Generate suitable email depending on status
+  // TODO multiple depending on status
   const emails = eg.genEmail(contract, contractDetails);
   
   // Return the fake InsuranceContractDetails object, as well as the emails array

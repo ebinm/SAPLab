@@ -2,8 +2,6 @@
 
 # @serviceUrl = https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com/odata/v4/test-data
 
-msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com
-
 ### Get InsuranceContracts
 GET {{serviceUrl}}/InsuranceContract
 
@@ -20,6 +18,10 @@ content-type: application/json
 {
     "contractCount" : 3
 }
+
+### !! CAUTION !! Reset Database by dumping all data
+POST {{serviceUrl}}/resetDatabase
+content-type: application/json
 
 ### Generate Data
 GET {{serviceUrl}}/generateContracts()

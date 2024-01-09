@@ -18,28 +18,28 @@ class TestDataService extends cds.ApplicationService {
                 await INSERT.into(InsuranceContract).entries(testData[0]);
                 await INSERT.into(ContractDetails).entries(testData[1]);
                 await INSERT.into(Emails).entries(testData[2]);
+
                 console.log('Done.');
             } catch (error) {
                 return request.error('Error inserting data:', error);
             }
         });
 
-        this.on('generateContracts', async function test() {
-            console.log('Generating data for ' + 7 + ' contracts...');
-            const testData = gen.genData(7);
-            console.log('Inserting generated data into database...');
+        // If resetDatabase() is called, clean the database by deleting all data
+        this.on('resetDatabase', async function onResetDatabase(request) {
+            console.log('Resetting database, dumping data...');
+            
             try {
-                await INSERT.into(InsuranceContract).entries(testData[0]);
-                await INSERT.into(ContractDetails).entries(testData[1]);
-                await INSERT.into(Emails).entries(testData[2]);
+                await DELETE.from(Emails);
+                await DELETE.from(ContractDetails);
+                await DELETE.from(InsuranceContract);
+
                 console.log('Done.');
             } catch (error) {
-                return console.error('Error inserting data:', error);
+                return request.error('Error resetting database:', error);
             }
-            console.log('Done.');
-            return "Successfully Generated 7 Contracts";
         });
-        
+
         return super.init();
     }
 }
