@@ -1,6 +1,6 @@
 {
   "name": "data-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
@@ -35,8 +35,7 @@
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
-      },
-      "db": "hana"
+      }
     }
   }
 }
