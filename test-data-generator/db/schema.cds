@@ -7,9 +7,9 @@ namespace testdatagenerator;
 
 entity InsuranceContract {
   key ID              : UUID;
-      createdAt       : DateTime;
+      createdAt       : Date;
       createdBy       : String;
-      modifiedAt      : DateTime;
+      modifiedAt      : Date;
       modifiedBy      : String;
       policy          : String;
       insuranceID     : String;
@@ -26,9 +26,9 @@ entity InsuranceContract {
 
 entity ContractDetails {
   key ID                                 : UUID;
-      createdAt                          : DateTime;
+      createdAt                          : Date;
       createdBy                          : String;
-      modifiedAt                         : DateTime;
+      modifiedAt                         : Date;
       modifiedBy                         : String;
       creationDate                       : String;
       contractNo                         : String;

@@ -11,9 +11,9 @@ exports.genContractDetails = function generateContractDetails(contract) {
 
   // Fake attributes of ContractDetails entity
   const ID = faker.string.uuid();
-  const createdAt = faker.date.between({ from: contract.createdAt, to: now });
+  const createdAt = faker.date.between({ from: contract.createdAt, to: now }).toLocaleDateString();
   const createdBy = faker.string.uuid();
-  const modifiedAt = faker.date.between({ from: createdAt, to: now });
+  const modifiedAt = faker.date.between({ from: createdAt, to: now }).toLocaleDateString();
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
   const creationDate = createdAt.toString();
