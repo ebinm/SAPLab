@@ -28,7 +28,7 @@
     "login": "cf login --origin msgsystems-sci-platform",
     "build": "rimraf ressources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "undeploy": "cf undeploy test-data-generator --delete-services --delete-service-keys --delete-service-brokers"
+    "undeploy": "cf undeploy data-generator --delete-services --delete-service-keys --delete-service-brokers"
   },
   "cds": {
     "requires": {

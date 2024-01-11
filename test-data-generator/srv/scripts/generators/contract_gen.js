@@ -9,9 +9,9 @@ exports.genContract = function generateInsuranceContract() {
 
   // Fake attributes of InsuranceContract entity
   const ID = faker.string.uuid();
-  const createdAt = faker.date.past({ years: 10 }).toLocaleDateString();
+  const createdAt = faker.date.past({ years: 10 }).toISOString().split("T")[0];
   const createdBy = faker.string.uuid();
-  const modifiedAt = faker.date.between({from: createdAt, to: now}).toLocaleDateString();
+  const modifiedAt = faker.date.between({from: createdAt, to: now}).toISOString().split("T")[0];
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
   // Fake numbers starting from 100000 to ensure 6-digit policies
