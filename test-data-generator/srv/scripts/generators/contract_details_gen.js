@@ -69,13 +69,13 @@ exports.genContractDetails = function generateContractDetails(contract) {
         // Penalize some ContractDetails in the past
         if (random_int > 7 && finalReportingDate < now) {
           penaltyEndorsement = true;
-          reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toLocaleDateString();
+          reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toISOString().split("T")[0];
         } else {
           // Make sure that the submission date is never set in the future
           if (now <= finalReportingDate) {
-            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: now }).toLocaleDateString();
+            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: now }).toISOString().split("T")[0];
           } else {
-            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: finalReportingDate }).toLocaleDateString();
+            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: finalReportingDate }).toISOString().split("T")[0];
           }
         }
 
