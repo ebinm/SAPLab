@@ -144,6 +144,7 @@
       <viewAttribute id="Details_CONTRACTDETAILSTATUS"/>
       <viewAttribute id="Details_TIMEZONE"/>
       <viewAttribute id="Details_INSURANCECONTRACT_ID"/>
+      <viewAttribute id="INSURANCECONTRACT_ID"/>
       <viewAttribute id="Contract_CREATEDAT"/>
       <viewAttribute id="Contract_CREATEDBY"/>
       <viewAttribute id="Contract_MODIFIEDAT"/>
@@ -158,7 +159,70 @@
       <viewAttribute id="Contract_ID"/>
       <viewAttribute hidden="true" id="JOIN$ID$INSURANCECONTRACT_ID"/>
     </viewAttributes>
-    <calculatedViewAttributes/>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="DETAILS_creationYear" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(&quot;Details_CREATEDAT&quot;,1)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_creationQuarter" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>rightstru(quarter(&quot;Details_CREATEDAT&quot;), 2)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_creationMonth" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(&quot;Details_CREATEDAT&quot;,2)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportSubmissionDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportSubmissionYear" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;),1)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportSubmissionMonth" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;),2)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportSubmissionQuarter" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>rightstru(quarter(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)),2)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportPeriodStartDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_REPORTINGPERIODSTART&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportPeriodEndDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_REPORTINGPERIODEND&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_finalReportingDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_FINALREPORTINGDATE&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_transferReportingDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_TRANSFERREPORTINGDATE&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_creationsDate" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Details_CREATEDAT&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportStatus" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(isnull(&quot;Details_REPORTSUBMISSIONDATE&quot;),
+if(now()&lt;&quot;Details_REPORTINGPERIODEND&quot;,'Pending',
+if(now()&lt;=&quot;Details_FINALREPORTINGDATE&quot;,'LateNoPenalty','Penalty')),
+if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_REPORTINGPERIODEND&quot;,'OnTime',
+if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_FINALREPORTINGDATE&quot;,'LateNoPenalty','Penalty')))</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportPeriodEndYear" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(longdate(&quot;Details_REPORTINGPERIODEND&quot;), 1)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportStatusGranular" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(isnull(&quot;Details_REPORTSUBMISSIONDATE&quot;),
+if(now()&lt;&quot;Details_REPORTINGPERIODEND&quot;,'Pending', 'Late'),
+if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_REPORTINGPERIODEND&quot;,'OnTime','Late'))
+</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_currentYear" datatype="BOOLEAN" expressionLanguage="COLUMN_ENGINE">
+        <formula>if((&quot;Details_CONTRACTDETAILSTATUS&quot;='TRANSFER_OK' or
+&quot;Details_CONTRACTDETAILSTATUS&quot;='TEMPORARY' or
+&quot;Details_CONTRACTDETAILSTATUS&quot;='CANCELED') and
+component(&quot;Details_CREATEDAT&quot;,1)=component(now(),1) , 1, 0)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_lastYear" datatype="BOOLEAN" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(component(&quot;Details_CREATEDAT&quot;,1)=component(adddays(now(),-365),1) 
+and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
       <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDAT" source="CREATEDAT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDBY" source="CREATEDBY"/>
@@ -212,6 +276,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="Details_CONTRACTDETAILSTATUS" source="Details_CONTRACTDETAILSTATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="Details_TIMEZONE" source="Details_TIMEZONE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="Details_INSURANCECONTRACT_ID" source="Details_INSURANCECONTRACT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$INSURANCECONTRACT_ID" source="INSURANCECONTRACT_ID"/>
     </input>
     <joinAttribute name="JOIN$ID$INSURANCECONTRACT_ID"/>
@@ -372,6 +437,78 @@
       <descriptions defaultDescription="Contract_ID"/>
       <keyMapping columnObjectName="Join_1_2" columnName="Contract_ID"/>
     </attribute>
+    <attribute id="DETAILS_creationYear" order="50" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_creationYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_creationYear"/>
+    </attribute>
+    <attribute id="DETAILS_creationQuarter" order="51" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_creationQuarter"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_creationQuarter"/>
+    </attribute>
+    <attribute id="DETAILS_creationMonth" order="52" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_creationMonth"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_creationMonth"/>
+    </attribute>
+    <attribute id="DETAILS_reportSubmissionDate" order="53" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportSubmissionDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportSubmissionDate"/>
+    </attribute>
+    <attribute id="DETAILS_reportSubmissionYear" order="54" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportSubmissionYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportSubmissionYear"/>
+    </attribute>
+    <attribute id="DETAILS_reportSubmissionMonth" order="55" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportSubmissionMonth"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportSubmissionMonth"/>
+    </attribute>
+    <attribute id="DETAILS_reportSubmissionQuarter" order="56" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportSubmissionQuarter"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportSubmissionQuarter"/>
+    </attribute>
+    <attribute id="DETAILS_reportPeriodStartDate" order="57" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportPeriodStartDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportPeriodStartDate"/>
+    </attribute>
+    <attribute id="DETAILS_reportPeriodEndDate" order="58" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportPeriodEndDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportPeriodEndDate"/>
+    </attribute>
+    <attribute id="DETAILS_finalReportingDate" order="59" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_finalReportingDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_finalReportingDate"/>
+    </attribute>
+    <attribute id="DETAILS_transferReportingDate" order="60" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_transferReportingDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_transferReportingDate"/>
+    </attribute>
+    <attribute id="DETAILS_creationsDate" order="61" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_creationsDate"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_creationsDate"/>
+    </attribute>
+    <attribute id="DETAILS_reportStatus" order="62" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportStatus"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportStatus"/>
+    </attribute>
+    <attribute id="DETAILS_reportPeriodEndYear" order="63" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportPeriodEndYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportPeriodEndYear"/>
+    </attribute>
+  
+    <attribute id="DETAILS_reportStatusGranular" order="64" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportStatusGranular"/>
+  
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportStatusGranular"/>
+  
+    </attribute>
+  
+    <attribute id="DETAILS_currentYear" order="65" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_currentYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_currentYear"/>
+    </attribute>
+    <attribute id="DETAILS_lastYear" order="66" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_lastYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_lastYear"/>
+    </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures>
@@ -444,7 +581,7 @@
     
   
     <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="100" y="228"/>
+      <upperLeftCorner x="110" y="228"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="TESTDATASERVICE_INSURANCECONTRACT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
@@ -466,4 +603,4 @@
     </shape>
   </shapes>
 </layout>
-</Calculation:scenario>   
+</Calculation:scenario>

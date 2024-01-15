@@ -4,7 +4,8 @@
   "role-templates": [],
   "oauth2-configuration": {
     "redirect-uris": [
-      "https://*.eu10-004.hana.ondemand.com/**"
+      "https://*.eu10-004.hana.ondemand.com/**",
+      "https://oauth.pstmn.io/v1/callback"
     ]
   }
 }
