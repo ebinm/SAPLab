@@ -197,13 +197,30 @@
         <formula>longdate(&quot;Details_CREATEDAT&quot;)</formula>
       </calculatedViewAttribute>
       <calculatedViewAttribute id="DETAILS_reportStatus" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
-        <formula>if(isnull(&quot;Details_REPORTSUBMISSIONDATE&quot;),'NoReport',
+        <formula>if(isnull(&quot;Details_REPORTSUBMISSIONDATE&quot;),
 if(now()&lt;&quot;Details_REPORTINGPERIODEND&quot;,'Pending',
+if(now()&lt;=&quot;Details_FINALREPORTINGDATE&quot;,'LateNoPenalty','Penalty')),
 if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_REPORTINGPERIODEND&quot;,'OnTime',
-if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_FINALREPORTINGDATE&quot;,'Late','Penalty'))))</formula>
+if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_FINALREPORTINGDATE&quot;,'LateNoPenalty','Penalty')))</formula>
       </calculatedViewAttribute>
       <calculatedViewAttribute id="DETAILS_reportPeriodEndYear" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
         <formula>component(longdate(&quot;Details_REPORTINGPERIODEND&quot;), 1)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportStatusGranular" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(isnull(&quot;Details_REPORTSUBMISSIONDATE&quot;),
+if(now()&lt;&quot;Details_REPORTINGPERIODEND&quot;,'Pending', 'Late'),
+if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_REPORTINGPERIODEND&quot;,'OnTime','Late'))
+</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_currentYear" datatype="BOOLEAN" expressionLanguage="COLUMN_ENGINE">
+        <formula>if((&quot;Details_CONTRACTDETAILSTATUS&quot;='TRANSFER_OK' or
+&quot;Details_CONTRACTDETAILSTATUS&quot;='TEMPORARY' or
+&quot;Details_CONTRACTDETAILSTATUS&quot;='CANCELED') and
+component(&quot;Details_CREATEDAT&quot;,1)=component(now(),1) , 1, 0)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_lastYear" datatype="BOOLEAN" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(component(&quot;Details_CREATEDAT&quot;,1)=component(adddays(now(),-365),1) 
+and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
       </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
@@ -475,6 +492,22 @@ if(longdate(&quot;Details_REPORTSUBMISSIONDATE&quot;)&lt;=&quot;Details_FINALREP
     <attribute id="DETAILS_reportPeriodEndYear" order="63" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DETAILS_reportPeriodEndYear"/>
       <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportPeriodEndYear"/>
+    </attribute>
+  
+    <attribute id="DETAILS_reportStatusGranular" order="64" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportStatusGranular"/>
+  
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportStatusGranular"/>
+  
+    </attribute>
+  
+    <attribute id="DETAILS_currentYear" order="65" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_currentYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_currentYear"/>
+    </attribute>
+    <attribute id="DETAILS_lastYear" order="66" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_lastYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_lastYear"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
