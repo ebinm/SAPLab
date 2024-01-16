@@ -21,10 +21,8 @@ exports.genContract = function generateInsuranceContract() {
   const clientID = faker.string.uuid();
 
   // Fake client name for 'clientName' and 'clientEmail' fields
-  const firstName = faker.person.firstName();
-  const lastName = faker.person.lastName();
-  const clientName = lastName + ', ' + firstName;
-  const clientEmail = faker.internet.email({ firstName: firstName, lastName: lastName });
+  const clientName = faker.company.name();
+  const clientEmail = faker.internet.email({ firstName: clientName});
 
   // Fake PolicyStatus
   let policyStatus = '';
