@@ -81,11 +81,11 @@ function generateEmail(emailType, emailDispatchStatus, lastEmailDate, contract, 
     const graphMailID = faker.string.uuid();
 
     let deliveryErrorReason = '';
-    // Assume that mails usually never need to be resent multiple times if the address is reachable
     let retry = 0;
 
-    // Set these attributes only if the mail dispatch has failed
-    if (emailDispatchStatus == 'FAILED') {
+    if (emailDispatchStatus == 'RESENT') {
+        retry = faker.helpers.arrayElement([1,2]);
+    } else if (emailDispatchStatus == 'FAILED') {
         deliveryErrorReason = faker.helpers.arrayElement(['Client email address is not reachable.', 'Mail server could not be reached.', 'Request timed out.']);
         retry = 3;
     }

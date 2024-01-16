@@ -102,8 +102,10 @@ exports.genContractDetails = function generateContractDetails(contract) {
   let provisionalReportedValueOfGoods = null;
   let finalReportedValueOfGoods = null;
 
+  // Set variance between 0.5 and 2.0 to avoid value change explosions
+  const variance = faker.number.float({ min: 0.5, max: 2.0})
+
   // Randomly choose one ReportingValueType and set values accordingly
-  // TODO provisional values should normally be closer to final?
   reportingValueType = faker.helpers.arrayElement(['NOP', 'R', 'AS', 'VOG']);
   switch (reportingValueType) {
     case 'NOP':
@@ -111,15 +113,15 @@ exports.genContractDetails = function generateContractDetails(contract) {
       // Realistic value: 2-3 digits
       provisionalReportedNumberOfPersons = faker.number.int({ min: 10, max: 999 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedNumberOfPersons = faker.number.int({ min: 10, max: 999 });
+        finalReportedNumberOfPersons = Math.round(variance * provisionalReportedNumberOfPersons);
       }
       break;
     case 'R':
       reportingValueUnit_code = '€';
-      // Highest value: millions to billions, in 100000 steps
-      provisionalReportedAmount = Math.round(faker.number.float({ min: 1000000, max: 100000000000})/100000)*100000;
+      // Highest value: millions to billions
+      provisionalReportedAmount = faker.number.float({ min: 1000000, max: 100000000000 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedAmount = faker.number.float({ min: 0, max: 100000000, precision: 0.01 });
+        finalReportedAmount = variance * provisionalReportedAmount;
       }
       break;
     case 'AS':
@@ -127,15 +129,15 @@ exports.genContractDetails = function generateContractDetails(contract) {
       // Realistic value: millions to billions
       provisionalReportedAssetsStocks = faker.number.float({ min: 1000000, max: 10000000000, precision: 0.001 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedAssetsStocks = faker.number.float({ min: 0, max: 10000000, precision: 0.001 });
+        finalReportedAssetsStocks = variance * provisionalReportedAssetsStocks;
       }
       break;
     case 'VOG':
       reportingValueUnit_code = '€';
       // Realistic value: millions to billions
-      provisionalReportedValueOfGoods = faker.number.float({ min: 1000000, max: 10000000000, precision: 0.01 });
+      provisionalReportedValueOfGoods = faker.number.float({ min: 1000000, max: 10000000000 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedValueOfGoods = faker.number.float({ min: 0, max: 10000000, precision: 0.01 });
+        finalReportedValueOfGoods = variance * provisionalReportedValueOfGoods;
       }
   }
 
