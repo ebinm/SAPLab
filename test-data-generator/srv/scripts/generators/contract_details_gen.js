@@ -11,8 +11,9 @@ exports.genContractDetails = function generateContractDetails(contract) {
 
   // Fake attributes of ContractDetails entity
   const ID = faker.string.uuid();
-  const createdAt = faker.date.between({ from: contract.createdAt, to: now }).toISOString().split("T")[0];
   const createdBy = faker.string.uuid();
+  // Format Date to match HANA Date format, prevents null errors
+  const createdAt = faker.date.between({ from: contract.createdAt, to: now }).toISOString().split("T")[0];
   const modifiedAt = faker.date.between({ from: createdAt, to: now }).toISOString().split("T")[0];
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;

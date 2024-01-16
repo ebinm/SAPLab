@@ -7,13 +7,13 @@ const cdg = require('./generators/contract_details_gen');
  * @param {int} contractCount - A param specifying the desired count of to be generated InsuranceContract objects
  * @returns {Array} Returns a 2D-array containing an InsuranceContract array, a ContractDetails array and a Mail array.
  */
-exports.genData = function generateData(contractCount) {
+exports.genData = function generateData(contractCount, activeContractDist) {
     const fakeContracts = [];
     const fakeContractDetails = [];
     const fakeEmails = [];
 
     for (let i = 0; i < contractCount; i++) {
-        const contract = cg.genContract();
+        const contract = cg.genContract(activeContractDist);
         fakeContracts.push(contract);
 
         // Only create ContractDetails/Emails if the contract is not INACTIVE

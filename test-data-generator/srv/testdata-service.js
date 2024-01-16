@@ -10,8 +10,7 @@ class TestDataService extends cds.ApplicationService {
         // If generateData(contractCount) is called, generate test data and insert it into database
         this.on('generateData', async function onGenerateData(request) {
             console.log('Generating data for ' + request.data.contractCount + ' contracts...');
-            const testData = gen.genData(request.data.contractCount);
-            console.log('Done.');
+            const testData = gen.genData(request.data.contractCount, request.data.activeContractDist);
 
             console.log('Inserting generated data into database...');
             try {
@@ -19,7 +18,7 @@ class TestDataService extends cds.ApplicationService {
                 await INSERT.into(ContractDetails).entries(testData[1]);
                 await INSERT.into(Emails).entries(testData[2]);
 
-                console.log('Done.');
+                return request.reply(`Successfully generated ${testData[0].length} InsuranceContracts, ${testData[1].length} ContractDetails and ${testData[2].length} Emails.`);
             } catch (error) {
                 return request.error('Error inserting data:', error);
             }
@@ -34,7 +33,7 @@ class TestDataService extends cds.ApplicationService {
                 await DELETE.from(ContractDetails);
                 await DELETE.from(InsuranceContract);
 
-                console.log('Done.');
+                return request.reply('Successfully dumped the database.')
             } catch (error) {
                 return request.error('Error resetting database:', error);
             }

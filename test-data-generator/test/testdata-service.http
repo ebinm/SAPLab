@@ -16,7 +16,8 @@ POST {{serviceUrl}}/generateData
 content-type: application/json
 
 {
-    "contractCount" : 3
+    "contractCount" : 1000,
+    "activeContractDist" : 0.8
 }
 
 ### !! CAUTION !! Reset Database by dumping all data
