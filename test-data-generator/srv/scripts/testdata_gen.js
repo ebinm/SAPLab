@@ -23,7 +23,7 @@ exports.genData = function generateData(contractCount, activeContractDist) {
             for (let n = 0; n < contractDetailsCount; n++) {
                 const result = cdg.genContractDetails(contract)
                 fakeContractDetails.push(result[0])
-                fakeEmails.push(result[1]);
+                fakeEmails.push(...result[1]);
             }
         }
     }
