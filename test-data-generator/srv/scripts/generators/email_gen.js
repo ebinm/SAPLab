@@ -1,6 +1,13 @@
 const { faker } = require('@faker-js/faker');
 
 /**
+ * Adjustable generation parameters for Emails
+ */
+// Set unlikely changes with the client's ID or email address to roughly 20%
+const clientChangesEmailProb = 0.2;
+
+
+/**
  * Generates one or more fake Email objects
  * @param {InsuranceContract} contract - The InsuranceContract the Email object is associated with
  * @param {ContractDetails} contractDetails - The ContractDetails the Email object is associated with
@@ -11,19 +18,19 @@ exports.genEmails = function generateEmails(contract, contractDetails) {
 
     let lastEmailDate = contractDetails.createdAt;
 
-    // Set unlikely changes with the client's ID or email address to below 20%
+    // Generate emails for client information changes
     let random = faker.number.float();
-    if (random < 0.2) {
+    if (random < clientChangesEmailProb) {
         fakeEmails.push(generateEmail('UPDATE', 'COMPLETE', lastEmailDate, contract, contractDetails));
         lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
     }
     random = faker.number.float();
-    if (random < 0.2) {
+    if (random < clientChangesEmailProb) {
         fakeEmails.push(generateEmail('UPDATE_CLIENT', 'COMPLETE', lastEmailDate, contract, contractDetails));
         lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
     }
     random = faker.number.float();
-    if (random < 0.2) {
+    if (random < clientChangesEmailProb) {
         fakeEmails.push(generateEmail('REINSTATED', 'COMPLETE', lastEmailDate, contract, contractDetails));
         lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
     }

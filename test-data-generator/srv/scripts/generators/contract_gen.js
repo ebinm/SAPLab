@@ -1,10 +1,19 @@
 const { faker } = require('@faker-js/faker');
 
 /**
+ * Adjustable generation parameters for InsuranceContracts
+ */
+// Define that the created InsuranceContracts range back 10 years
+const contractCreationYearRange = 10;
+// Set the share of active contracts to roughly 80 %
+const activeContractDist = 0.8;
+
+
+/**
  * Generates one fake InsuranceContract object
  * @returns {InsuranceContract} Returns one fake InsuranceContract object.
  */
-exports.genContract = function generateInsuranceContract(activeContractDist) {
+exports.genContract = function generateInsuranceContract() {
   const now = new Date();
 
   // Fake attributes of InsuranceContract entity
@@ -12,7 +21,7 @@ exports.genContract = function generateInsuranceContract(activeContractDist) {
   const createdBy = faker.string.uuid();
 
   // Format Date to match HANA Date format, prevents null errors
-  const createdAt = faker.date.past({ years: 10 }).toISOString().split("T")[0];
+  const createdAt = faker.date.past({ years: contractCreationYearRange }).toISOString().split("T")[0];
   const modifiedAt = faker.date.between({from: createdAt, to: now}).toISOString().split("T")[0];
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
