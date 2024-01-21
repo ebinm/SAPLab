@@ -2,38 +2,14 @@ const { faker } = require('@faker-js/faker');
 const eg = require('./email_gen');
 
 /**
- * Adjustable generation parameters for ContractDetails
- */
-// Upper/lower bounds for the count of ContractDetails per InsuranceContract
-exports.lowerBoundContractDetailsCount = 1;
-exports.upperBoundContractDetailsCount = 10;
-// Assume the standard of 30 days to report
-const reportingDuration = 30;
-// Assume two weeks of allowed reporting delay
-const allowedDelay = 14;
-// Rarely make status neutral for a more meaningful dashboard
-const neutralContractsProb = 0.1;
-// Penalize some contracts in the past
-const nonpenalizedContractsProb = 0.7;
-// Variance to avoid vast reporting value differences
-const reportingValueVariance = faker.number.float({ min: 0.5, max: 2.0});
-// Upper/lower bounds for provisional/final values
-const lowerBoundNOP = 10;
-const upperBoundNOP = 999;
-const lowerBoundR = 1000000;
-const upperBoundR = 100000000000;
-const lowerBoundAS = 1000000;
-const upperBoundAS = 10000000000;
-const lowerBoundVOG = 1000000;
-const upperBoundVOG = 10000000000;
-
-
-/**
  * Generates one fake ContractDetails object with its associated Emails
  * @param {InsuranceContract} contract - The InsuranceContract the ContractDetails object is associated with
+ * @param {GenerationParameters} parameters - An object which olds all params necessary for data generation
  * @returns {Array} Returns a nested 2D array with one fake ContractDetails object and an array of one or more associated Emails
  */
-exports.genContractDetails = function generateContractDetails(contract) {
+exports.genContractDetails = function generateContractDetails(contract, parameters) {
+  const reportingValueVariance = faker.number.float({ min: parameters.lowerBoundReportingValueVariance, max: parameters.upperBoundReportingValueVariance});
+
   const now = new Date();
 
   // Fake attributes of ContractDetails entity
@@ -71,26 +47,26 @@ exports.genContractDetails = function generateContractDetails(contract) {
   } else {
     let random = faker.number.float();
 
-    if (random < neutralContractsProb) {
+    if (random < parameters.neutralContractsProb) {
       status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
 
       // Reporting period is in the future
       reportingPeriodStart = faker.date.between({ from: now, to: faker.date.soon() });
-      reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + reportingDuration));
-      finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + allowedDelay));
+      reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + parameters.reportingDuration));
+      finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.allowedDelay));
     } else {
       status = faker.helpers.arrayElement(['FINALIZED', 'REMINDED', 'REMINDED_FAILED', 'NOTIFIED', 'NOTIFIED_FAILED', 'TRANSFER_OK', 'TRANSFER_FAILED']);
 
       // Reporting period is active or in the past
       reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
       reportingPeriodEnd = new Date(reportingPeriodStart);
-      reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + reportingDuration);
+      reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.reportingDuration);
       finalReportingDate = new Date(reportingPeriodEnd);
-      finalReportingDate.setDate(finalReportingDate.getDate() + allowedDelay);
+      finalReportingDate.setDate(finalReportingDate.getDate() + parameters.allowedDelay);
     
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         // Penalize some ContractDetails in the past
-        if (random > nonpenalizedContractsProb && finalReportingDate < now) {
+        if (random > parameters.nonpenalizedContractsProb && finalReportingDate < now) {
           penaltyEndorsement = true;
           reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toISOString().split("T")[0];
         } else {
@@ -130,7 +106,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
     case 'NOP':
       reportingValueUnit_code = 'persons';
       // Realistic value: 2-3 digits
-      provisionalReportedNumberOfPersons = faker.number.int({ min: lowerBoundNOP, max: upperBoundNOP });
+      provisionalReportedNumberOfPersons = faker.number.int({ min: parameters.lowerBoundNOP, max: parameters.upperBoundNOP });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedNumberOfPersons = Math.round(reportingValueVariance * provisionalReportedNumberOfPersons);
       }
@@ -138,7 +114,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
     case 'R':
       reportingValueUnit_code = '€';
       // Highest value: millions to billions
-      provisionalReportedAmount = faker.number.float({ min: lowerBoundR, max: upperBoundR });
+      provisionalReportedAmount = faker.number.float({ min: parameters.lowerBoundR, max: parameters.upperBoundR });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedAmount = reportingValueVariance * provisionalReportedAmount;
       }
@@ -146,7 +122,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
     case 'AS':
       reportingValueUnit_code = 'stocks';
       // Realistic value: millions to billions
-      provisionalReportedAssetsStocks = faker.number.float({ min: lowerBoundAS, max: upperBoundAS, precision: 0.001 });
+      provisionalReportedAssetsStocks = faker.number.float({ min: parameters.lowerBoundAS, max: parameters.upperBoundAS, precision: 0.001 });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedAssetsStocks = reportingValueVariance * provisionalReportedAssetsStocks;
       }
@@ -154,7 +130,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
     case 'VOG':
       reportingValueUnit_code = '€';
       // Realistic value: millions to billions
-      provisionalReportedValueOfGoods = faker.number.float({ min: lowerBoundVOG, max: upperBoundVOG });
+      provisionalReportedValueOfGoods = faker.number.float({ min: parameters.lowerBoundVOG, max: parameters.upperBoundVOG });
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         finalReportedValueOfGoods = reportingValueVariance * provisionalReportedValueOfGoods;
       }
@@ -182,7 +158,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
     finalReportedValueOfGoods: finalReportedValueOfGoods,
     reportingPeriodStart: reportingPeriodStart,
     reportingPeriodEnd: reportingPeriodEnd,
-    allowedDelay: allowedDelay,
+    allowedDelay: parameters.allowedDelay,
     finalReportingDate: finalReportingDate,
     reportSubmissionDate: reportSubmissionDate,
     transferReportingDate: transferReportingDate,
@@ -193,7 +169,7 @@ exports.genContractDetails = function generateContractDetails(contract) {
   };
 
   // Generate suitable emails depending on status
-  const emails = eg.genEmails(contract, contractDetails);
+  const emails = eg.genEmails(contract, contractDetails, parameters);
   
   // Return the fake InsuranceContractDetails object, as well as the emails array
   return [contractDetails, emails];
