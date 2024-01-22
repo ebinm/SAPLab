@@ -66,7 +66,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
     
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         // Penalize some ContractDetails in the past
-        if (random > parameters.nonpenalizedContractsProb && finalReportingDate < now) {
+        if (random > parameters.nonPenalizedContractsProb && finalReportingDate < now) {
           penaltyEndorsement = true;
           reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toISOString().split("T")[0];
         } else {
