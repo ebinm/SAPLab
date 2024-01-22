@@ -30,31 +30,31 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
     }
 
     // Determine email types based on ContractDetail status
-    if (contractDetails.status == 'CANCELED' || contractDetails.status == 'REVERSED') {
+    if (contractDetails.contractDetailStatus == 'CANCELED' || contractDetails.contractDetailStatus == 'REVERSED') {
         fakeEmails.push(generateEmail('REVERSED',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.status == 'NOTIFIED' || contractDetails.status == 'NOTIFIED_FAILED') {
-        const emailDispatchStatus = '';
-        if (contractDetails.status == 'NOTIFIED_FAILED') {
+    } else if (contractDetails.contractDetailStatus == 'NOTIFIED' || contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
+        var emailDispatchStatus = '';
+        if (contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
             emailDispatchStatus = 'FAILED';
         } else {
             emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
         }
 
         fakeEmails.push(generateEmail('NOTIFICATION',  emailDispatchStatus, lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.status == 'REMINDED' || contractDetails.status == 'REMINDED_FAILED') {
+    } else if (contractDetails.contractDetailStatus == 'REMINDED' || contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
         // REMINDER emails are alwys preceded by NOTIFICATION emails
         fakeEmails.push(generateEmail('NOTIFICATION', faker.helpers.arrayElement(['RESENT', 'COMPLETE']), lastEmailDate, contract, contractDetails));
         lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
     
-        const emailDispatchStatus = '';
-        if (contractDetails.status == 'REMINDED_FAILED') {
+        var emailDispatchStatus = '';
+        if (contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
             emailDispatchStatus = 'FAILED';
         } else {
             emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
         }
 
         fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.status == 'FINALIZED' || contractDetails.status == 'TRANSFER_OK' || contractDetails.status == 'TRANSFER_FAILED') {
+    } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
         // TODO: add reminder/notification mails
         fakeEmails.push(generateEmail('SUMMARY',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
     }

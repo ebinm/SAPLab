@@ -101,8 +101,8 @@ class GenerationParameters {
     if (this.reportingDuration <= 0) {
       return "The reporting duration must be a positive number of days!";
     }
-    if (this.allowedDelay = 0) {
-      return "The allowed delay must be zero or a positive number of days!";
+    if (this.allowedDelay <= 0) {
+      return "The allowed delay must be a positive number of days!";
     }
 
     return "";
