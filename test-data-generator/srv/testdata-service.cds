@@ -11,6 +11,7 @@ service TestDataService {
         activeContractDist : Double,
         lowerBoundContractDetailsCount : Integer,
         upperBoundContractDetailsCount : Integer,
+        timezone : String,
         reportingDuration : Integer,
         allowedDelay : Integer,
         latenessProb : Double,

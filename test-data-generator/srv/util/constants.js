@@ -17,6 +17,7 @@ const ACTIVE_CONTRACT_DIST = 0.8;
 // Upper/lower bounds for the count of ContractDetails per InsuranceContract
 const LOWERBOUND_CONTRACTDETAILS_COUNT = 1;
 const UPPERBOUND_CONTRACTDETAILS_COUNT = 10;
+const TIMEZONE = 'CST';
 // Assume the standard of 30 days to report
 const REPORTING_DURATION = 30;
 // Assume two weeks of allowed reporting delay
@@ -53,6 +54,7 @@ module.exports = {
     ACTIVE_CONTRACT_DIST,
     LOWERBOUND_CONTRACTDETAILS_COUNT,
     UPPERBOUND_CONTRACTDETAILS_COUNT,
+    TIMEZONE,
     REPORTING_DURATION,
     ALLOWED_DELAY,
     LATENESS_PROB,

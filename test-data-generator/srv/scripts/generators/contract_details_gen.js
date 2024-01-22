@@ -24,7 +24,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
   // TODO make contractNo unique
   const contractNo = faker.number.int({ min: 100000, max: 999999 }).toString();
   const contractDescription = faker.company.buzzPhrase();
-  const timezone = 'CEST';
+  const timezone = parameters.timezone;
 
   // Set status and the respective submission/transfer date accordingly
   // 1. Set all values to null first

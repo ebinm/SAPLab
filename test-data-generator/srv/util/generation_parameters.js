@@ -11,6 +11,7 @@ class GenerationParameters {
     activeContractDist,
     lowerBoundContractDetailsCount,
     upperBoundContractDetailsCount,
+    timezone,
     reportingDuration,
     allowedDelay,
     latenessProb,
@@ -39,6 +40,7 @@ class GenerationParameters {
     this.upperBoundContractDetailsCount =
       upperBoundContractDetailsCount ??
       constants.UPPERBOUND_CONTRACTDETAILS_COUNT;
+    this.timezone = timezone ?? constants.TIMEZONE;
     this.reportingDuration = reportingDuration ?? constants.REPORTING_DURATION;
     this.allowedDelay = allowedDelay ?? constants.ALLOWED_DELAY;
     this.latenessProb = latenessProb ?? constants.LATENESS_PROB;
@@ -126,6 +128,7 @@ class GenerationParameters {
       * Active Contracts Distribution: ${this.activeContractDist}
       * Lower Bound Contract Details Count: ${this.lowerBoundContractDetailsCount}
       * Upper Bound Contract Details Count: ${this.upperBoundContractDetailsCount}
+      * Timezone: ${this.timezone}
       * Reporting Duration: ${this.reportingDuration}
       * Allowed Delay: ${this.allowedDelay}
       * Lateness Probability: ${this.latenessProb}
