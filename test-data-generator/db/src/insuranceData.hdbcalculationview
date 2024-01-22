@@ -222,6 +222,9 @@ component(&quot;Details_CREATEDAT&quot;,1)=component(now(),1) , 1, 0)</formula>
         <formula>if(component(&quot;Details_CREATEDAT&quot;,1)=component(adddays(now(),-365),1) 
 and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
       </calculatedViewAttribute>
+      <calculatedViewAttribute id="EMAIL_sendDateTime" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
+        <formula>longdate(&quot;Email_SENTDATETIME&quot;)</formula>
+      </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
       <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDAT" source="CREATEDAT"/>
@@ -503,11 +506,18 @@ and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
   
     <attribute id="DETAILS_currentYear" order="65" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DETAILS_currentYear"/>
+  
       <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_currentYear"/>
+  
     </attribute>
     <attribute id="DETAILS_lastYear" order="66" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DETAILS_lastYear"/>
       <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_lastYear"/>
+    </attribute>
+  
+    <attribute id="EMAIL_sendDateTime" order="67" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMAIL_sendDateTime"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="EMAIL_sendDateTime"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
