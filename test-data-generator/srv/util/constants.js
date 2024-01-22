@@ -23,6 +23,8 @@ const REPORTING_DURATION = 30;
 const ALLOWED_DELAY = 14;
 // Rarely make status neutral for a more meaningful dashboard
 const NEUTRAL_CONTRACTS_PROB = 0.1;
+// Set probability of report lateness
+const LATENESS_PROB = 0.2;
 // Penalize some contracts in the past
 const NONPENALIZED_CONTRACTS_PROB = 0.7;
 // Variance to avoid vast reporting value differences

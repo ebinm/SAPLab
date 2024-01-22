@@ -13,6 +13,7 @@ class GenerationParameters {
     upperBoundContractDetailsCount,
     reportingDuration,
     allowedDelay,
+    latenessProb,
     neutralContractsProb,
     nonPenalizedContractsProb,
     lowerBoundReportingValueVariance,
@@ -40,6 +41,7 @@ class GenerationParameters {
       constants.UPPERBOUND_CONTRACTDETAILS_COUNT;
     this.reportingDuration = reportingDuration ?? constants.REPORTING_DURATION;
     this.allowedDelay = allowedDelay ?? constants.ALLOWED_DELAY;
+    this.latenessProb = latenessProb ?? constants.LATENESS_PROB;
     this.neutralContractsProb =
       neutralContractsProb ?? constants.NEUTRAL_CONTRACTS_PROB;
     this.nonPenalizedContractsProb =
@@ -74,6 +76,7 @@ class GenerationParameters {
     }
     if (this.activeContractDist < 0 || this.activeContractDist > 1 ||
       this.neutralContractsProb < 0 || this.neutralContractsProb > 1 ||
+      this.latenessProb < 0 || this.latenessProb > 1 ||
       this.nonPenalizedContractsProb < 0 || this.nonPenalizedContractsProb > 1 ||
       this.clientChangesEmailProb < 0 || this.clientChangesEmailProb > 1) {
       return "All probabilities must be in the range [0, 1]!";
@@ -117,6 +120,7 @@ class GenerationParameters {
       * Upper Bound Contract Details Count: ${this.upperBoundContractDetailsCount}
       * Reporting Duration: ${this.reportingDuration}
       * Allowed Delay: ${this.allowedDelay}
+      * Lateness Probability: ${this.latenessProb}
       * Neutral Contracts Probability: ${this.neutralContractsProb}
       * Non-Penalized Contracts Probability: ${this.nonPenalizedContractsProb}
       * Lower Bound Reporting Value Variance: ${this.lowerBoundReportingValueVariance}

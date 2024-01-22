@@ -55,14 +55,28 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
       reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + parameters.reportingDuration));
       finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.allowedDelay));
     } else {
-      status = faker.helpers.arrayElement(['FINALIZED', 'REMINDED', 'REMINDED_FAILED', 'NOTIFIED', 'NOTIFIED_FAILED', 'TRANSFER_OK', 'TRANSFER_FAILED']);
+      random = faker.number.float();
 
-      // Reporting period is active or in the past
-      reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
-      reportingPeriodEnd = new Date(reportingPeriodStart);
-      reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.reportingDuration);
-      finalReportingDate = new Date(reportingPeriodEnd);
-      finalReportingDate.setDate(finalReportingDate.getDate() + parameters.allowedDelay);
+      // Determine whether it should be late or not
+      if (random < parameters.latenessProb) {
+        status = faker.helpers.arrayElement(['REMINDED', 'REMINDED_FAILED', 'NOTIFIED', 'NOTIFIED_FAILED'])
+
+        // Reporting period should be in the past
+        finalReportingDate = faker.date.recent( { days: 14 });
+        reportingPeriodEnd = new Date(finalReportingDate);
+        reportingPeriodEnd.setDate(finalReportingDate.getDate() - parameters.allowedDelay);
+        reportingPeriodStart = new Date(reportingPeriodEnd);
+        reportingPeriodStart.setDate(reportingPeriodEnd.getDate() - parameters.reportingDuration);
+      } else {
+        status = faker.helpers.arrayElement(['FINALIZED',  'TRANSFER_OK', 'TRANSFER_FAILED']);
+
+        // Reporting period is active or in the past
+        reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
+        reportingPeriodEnd = new Date(reportingPeriodStart);
+        reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.reportingDuration);
+        finalReportingDate = new Date(reportingPeriodEnd);
+        finalReportingDate.setDate(finalReportingDate.getDate() + parameters.allowedDelay);
+      }
     
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         // Penalize some ContractDetails in the past
