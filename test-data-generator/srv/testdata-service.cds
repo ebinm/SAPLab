@@ -15,7 +15,7 @@ service TestDataService {
         allowedDelay : Integer,
         latenessProb : Double,
         neutralContractsProb : Double,
-        nonPenalizedContractsProb : Double,
+        penalizedContractsProb : Double,
         lowerBoundReportingValueVariance : Double,
         upperBoundReportingValueVariance : Double,
         lowerBoundNOP : Integer,

@@ -15,7 +15,7 @@ class GenerationParameters {
     allowedDelay,
     latenessProb,
     neutralContractsProb,
-    nonPenalizedContractsProb,
+    penalizedContractsProb,
     lowerBoundReportingValueVariance,
     upperBoundReportingValueVariance,
     lowerBoundNOP,
@@ -44,8 +44,8 @@ class GenerationParameters {
     this.latenessProb = latenessProb ?? constants.LATENESS_PROB;
     this.neutralContractsProb =
       neutralContractsProb ?? constants.NEUTRAL_CONTRACTS_PROB;
-    this.nonPenalizedContractsProb =
-      nonPenalizedContractsProb ?? constants.NONPENALIZED_CONTRACTS_PROB;
+    this.penalizedContractsProb =
+      penalizedContractsProb ?? constants.PENALIZED_CONTRACTS_PROB;
     this.lowerBoundReportingValueVariance =
       lowerBoundReportingValueVariance ??
       constants.LOWERBOUND_REPORTING_VALUE_VARIANCE;
@@ -74,17 +74,25 @@ class GenerationParameters {
     } else if (this.contractCreationYearRange >= 50) {
       return "The year range of the generated contract creation dates must be realistic! (< 50 years)";
     }
-    if (this.activeContractDist < 0 || this.activeContractDist > 1 ||
-      this.neutralContractsProb < 0 || this.neutralContractsProb > 1 ||
-      this.latenessProb < 0 || this.latenessProb > 1 ||
-      this.nonPenalizedContractsProb < 0 || this.nonPenalizedContractsProb > 1 ||
-      this.clientChangesEmailProb < 0 || this.clientChangesEmailProb > 1) {
+    if (
+      this.activeContractDist < 0 ||
+      this.activeContractDist > 1 ||
+      this.neutralContractsProb < 0 ||
+      this.neutralContractsProb > 1 ||
+      this.latenessProb < 0 ||
+      this.latenessProb > 1 ||
+      this.penalizedContractsProb < 0 ||
+      this.penalizedContractsProb > 1 ||
+      this.clientChangesEmailProb < 0 ||
+      this.clientChangesEmailProb > 1
+    ) {
       return "All probabilities must be in the range [0, 1]!";
     }
     if (
       this.lowerBoundContractDetailsCount >=
         this.upperBoundContractDetailsCount ||
-      this.lowerBoundReportingValueVariance >= this.upperBoundReportingValueVariance ||
+      this.lowerBoundReportingValueVariance >=
+        this.upperBoundReportingValueVariance ||
       this.lowerBoundNOP >= this.upperBoundNOP ||
       this.lowerBoundR >= this.upperBoundR ||
       this.lowerBoundAS >= this.upperBoundAS ||
@@ -122,7 +130,7 @@ class GenerationParameters {
       * Allowed Delay: ${this.allowedDelay}
       * Lateness Probability: ${this.latenessProb}
       * Neutral Contracts Probability: ${this.neutralContractsProb}
-      * Non-Penalized Contracts Probability: ${this.nonPenalizedContractsProb}
+      * Penalized Contracts Probability: ${this.penalizedContractsProb}
       * Lower Bound Reporting Value Variance: ${this.lowerBoundReportingValueVariance}
       * Upper Bound Reporting Value Variance: ${this.upperBoundReportingValueVariance}
       * Lower Bound NOP: ${this.lowerBoundNOP}

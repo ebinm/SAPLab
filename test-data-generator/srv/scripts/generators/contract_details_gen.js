@@ -47,7 +47,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
   } else {
     let random = faker.number.float();
 
-    if (random < parameters.neutralContractsProb) {
+    if (random <= parameters.neutralContractsProb) {
       status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
 
       // Reporting period is in the future
@@ -58,7 +58,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
       random = faker.number.float();
 
       // Determine whether it should be late or not
-      if (random < parameters.latenessProb) {
+      if (random <= parameters.latenessProb) {
         status = faker.helpers.arrayElement(['REMINDED', 'REMINDED_FAILED', 'NOTIFIED', 'NOTIFIED_FAILED'])
 
         // Reporting period should be in the past
@@ -80,7 +80,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
     
       if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
         // Penalize some ContractDetails in the past
-        if (random > parameters.nonPenalizedContractsProb && finalReportingDate < now) {
+        if (random <= parameters.penalizedContractsProb && finalReportingDate < now) {
           penaltyEndorsement = true;
           reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toISOString().split("T")[0];
         } else {
