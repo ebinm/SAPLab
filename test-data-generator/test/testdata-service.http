@@ -16,12 +16,33 @@ POST {{serviceUrl}}/generateData
 content-type: application/json
 
 {
-    "contractCount" : 3
+    "contractCount" : 900,
+    "contractCreationYearRange" : 40,
+    "activeContractProb" : 0.6,
+    "lowerBoundContractDetailsCount" : 10,
+    "upperBoundContractDetailsCount" : 20,
+    "failureProb" : 0.2,
+    "timezone" : "EST",
+    "reportingDuration" : 20,
+    "allowedDelay" : 20,
+    "neutralContractsProb" : 0.2,
+    "penalizedContractsProb" : 0.5,
+    "outlierProb" : 0.25,
+    "lowerBoundOutlierRValueVariance": 0,
+    "upperBoundOutlierRValueVariance": 5,
+    "lowerBoundNormalRValueVariance" : 0.8,
+    "upperBoundNormalRValueVariance" : 1.2,
+    "lowerBoundNOP" : 10,
+    "upperBoundNOP" : 100,
+    "lowerBoundR" : 1,
+    "upperBoundR" : 1111,
+    "lowerBoundAS" : 111,
+    "upperBoundAS" : 1111,
+    "lowerBoundVOG" : 1111,
+    "upperBoundVOG" : 11111,
+    "clientChangesEmailProb" : 0.1
 }
 
 ### !! CAUTION !! Reset Database by dumping all data
 POST {{serviceUrl}}/resetDatabase
 content-type: application/json
-
-### Generate Data
-GET {{serviceUrl}}/generateContracts()
