@@ -3,7 +3,7 @@
  */
 
 // Define number of to be created InsuranceContracts
-const CONTRACT_COUNT = 10;
+const CONTRACT_COUNT = 1000;
 // Define that the created InsuranceContracts range back 10 years
 const CONTRACT_CREATION_YEAR_RANGE = 10;
 // Set the share of active contracts to roughly 80 %

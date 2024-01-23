@@ -1,1 +1,6 @@
 /* Enter your custom styles here */
+
+.inputWidth {
+    width: 500px; /* Adjust the width as needed */
+    height: 1000px;
+}
