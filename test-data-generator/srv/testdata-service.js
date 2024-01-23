@@ -19,6 +19,7 @@ class TestDataService extends cds.ApplicationService {
         request.data.activeContractProb,
         request.data.lowerBoundContractDetailsCount,
         request.data.upperBoundContractDetailsCount,
+        request.data.failureProb,
         request.data.timezone,
         request.data.reportingDuration,
         request.data.allowedDelay,

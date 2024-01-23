@@ -21,6 +21,7 @@ content-type: application/json
     "activeContractProb" : 0.6,
     "lowerBoundContractDetailsCount" : 10,
     "upperBoundContractDetailsCount" : 20,
+    "failureProb" : 0.2,
     "timezone" : "EST",
     "reportingDuration" : 20,
     "allowedDelay" : 20,

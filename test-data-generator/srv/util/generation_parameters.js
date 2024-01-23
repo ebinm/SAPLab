@@ -11,6 +11,7 @@ class GenerationParameters {
     activeContractProb,
     lowerBoundContractDetailsCount,
     upperBoundContractDetailsCount,
+    failureProb,
     timezone,
     reportingDuration,
     allowedDelay,
@@ -43,6 +44,7 @@ class GenerationParameters {
     this.upperBoundContractDetailsCount =
       upperBoundContractDetailsCount ??
       constants.UPPERBOUND_CONTRACTDETAILS_COUNT;
+    this.failureProb = failureProb ?? constants.FAILURE_PROB;
     this.timezone = timezone ?? constants.TIMEZONE;
     this.reportingDuration = reportingDuration ?? constants.REPORTING_DURATION;
     this.allowedDelay = allowedDelay ?? constants.ALLOWED_DELAY;
@@ -87,10 +89,12 @@ class GenerationParameters {
       return "The year range of the generated contract creation dates must be realistic! (< 50 years)";
     }
     if (
-      this.outlierProb < 0 ||
-      this.outlierProb > 1 ||
       this.activeContractProb < 0 ||
       this.activeContractProb > 1 ||
+      this.failureProb < 0 ||
+      this.failureProb > 1 ||
+      this.outlierProb < 0 ||
+      this.outlierProb > 1 ||
       this.neutralContractsProb < 0 ||
       this.neutralContractsProb > 1 ||
       this.latenessProb < 0 ||
@@ -143,6 +147,7 @@ class GenerationParameters {
       * Active Contracts Distribution: ${this.activeContractProb}
       * Lower Bound Contract Details Count: ${this.lowerBoundContractDetailsCount}
       * Upper Bound Contract Details Count: ${this.upperBoundContractDetailsCount}
+      * Failure Probability: ${this.failureProb}
       * Timezone: ${this.timezone}
       * Reporting Duration: ${this.reportingDuration}
       * Allowed Delay: ${this.allowedDelay}

@@ -3,7 +3,7 @@
  */
 
 // Define number of to be created InsuranceContracts
-const CONTRACT_COUNT = 10;
+const CONTRACT_COUNT = 100;
 // Define that the created InsuranceContracts range back 10 years
 const CONTRACT_CREATION_YEAR_RANGE = 10;
 // Set the share of active contracts to roughly 80 %
@@ -17,6 +17,8 @@ const ACTIVE_CONTRACT_DIST = 0.8;
 // Upper/lower bounds for the count of ContractDetails per InsuranceContract
 const LOWERBOUND_CONTRACTDETAILS_COUNT = 2;
 const UPPERBOUND_CONTRACTDETAILS_COUNT = 10;
+// Define whether the ContractDetails should have failed or not
+const FAILURE_PROB = 0.1;
 const TIMEZONE = 'CST';
 // Assume the standard of 30 days to report
 const REPORTING_DURATION = 30;
@@ -59,6 +61,7 @@ module.exports = {
     ACTIVE_CONTRACT_DIST,
     LOWERBOUND_CONTRACTDETAILS_COUNT,
     UPPERBOUND_CONTRACTDETAILS_COUNT,
+    FAILURE_PROB,
     TIMEZONE,
     REPORTING_DURATION,
     ALLOWED_DELAY,

@@ -49,15 +49,15 @@ exports.genContractDetails = function generateContractDetails(
   let penaltyEndorsement = false;
 
   // Random variable for data randomization
-  let random = null;
+  let random_float = null;
 
   if (contract.policyStatus == "REVERSED") {
     // If the contract ifself is 'REVERSED', the contractDetailStatus can only be 'CANCELED' or 'REVERSED'
     status = faker.helpers.arrayElement(["CANCELED", "REVERSED"]);
   } else {
-    random = faker.number.float();
+    random_float = faker.number.float();
 
-    if (random <= parameters.neutralContractsProb) {
+    if (random_float <= parameters.neutralContractsProb) {
       status = faker.helpers.arrayElement(["TEMPORARY", "NEW_IN_PROCESS"]);
 
       // Reporting period is in the future
@@ -76,10 +76,10 @@ exports.genContractDetails = function generateContractDetails(
         )
       );
     } else {
-      random = faker.number.float();
+      random_float = faker.number.float();
 
       // Determine whether it should be late or not
-      if (random <= parameters.latenessProb) {
+      if (random_float <= parameters.latenessProb) {
         status = faker.helpers.arrayElement([
           "REMINDED",
           "REMINDED_FAILED",
@@ -98,11 +98,13 @@ exports.genContractDetails = function generateContractDetails(
           reportingPeriodEnd.getDate() - parameters.reportingDuration
         );
       } else {
-        status = faker.helpers.arrayElement([
-          "FINALIZED",
-          "TRANSFER_OK",
-          "TRANSFER_FAILED",
-        ]);
+        random_float = faker.number.float();
+
+        if (random_float <= parameters.failureProb) {
+          status = "TRANSFER_FAILED";
+        } else {
+          status = faker.helpers.arrayElement(["FINALIZED", "TRANSFER_OK"]);
+        }
 
         // Reporting period is active or in the past
         reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
@@ -123,7 +125,7 @@ exports.genContractDetails = function generateContractDetails(
       ) {
         // Penalize some ContractDetails in the past
         if (
-          random <= parameters.penalizedContractsProb &&
+          random_float <= parameters.penalizedContractsProb &&
           finalReportingDate < now
         ) {
           penaltyEndorsement = true;
@@ -172,15 +174,15 @@ exports.genContractDetails = function generateContractDetails(
   let finalReportedValueOfGoods = null;
 
   // Randomly determine whether the ContractDetails should be an outlier
-  random = faker.number.float();
+  random_float = faker.number.float();
   var isOutlier = false;
-  if (random > parameters.outlierProb) {
+  if (random_float > parameters.outlierProb) {
     isOutlier = true;
   }
   var reportingValueVariance;
   if (isOutlier) {
-    random = faker.number.float();
-    if (random > 0.5) {
+    random_float = faker.number.float();
+    if (random_float > 0.5) {
       reportingValueVariance = faker.number.float({
         min: 1.0,
         max: parameters.upperBoundReportingValueVariance,
