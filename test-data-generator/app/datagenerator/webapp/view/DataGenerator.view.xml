@@ -1,0 +1,11 @@
+<mvc:View controllerName="datagenerator.controller.DataGenerator"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Button id="_IDGenButton1" text="Login" press="login"></Button>
+            <Button id="_IDGenButton2" text="Generate Data" press="generateData"></Button>
+            <Button id="_IDGenButton3" text="Reset Database" press="resetDatabase"></Button>
+        </content>
+    </Page>
+</mvc:View>
