@@ -8,7 +8,7 @@ class GenerationParameters {
   constructor(
     contractCount,
     contractCreationYearRange,
-    activeContractDist,
+    activeContractProb,
     lowerBoundContractDetailsCount,
     upperBoundContractDetailsCount,
     timezone,
@@ -17,8 +17,11 @@ class GenerationParameters {
     latenessProb,
     neutralContractsProb,
     penalizedContractsProb,
-    lowerBoundReportingValueVariance,
-    upperBoundReportingValueVariance,
+    outlierProb,
+    lowerBoundOutlierRValueVariance,
+    upperBoundOutlierRValueVariance,
+    lowerBoundNormalRValueVariance,
+    upperBoundNormalRValueVariance,
     lowerBoundNOP,
     upperBoundNOP,
     lowerBoundR,
@@ -32,8 +35,8 @@ class GenerationParameters {
     this.contractCount = contractCount ?? constants.CONTRACT_COUNT;
     this.contractCreationYearRange =
       contractCreationYearRange ?? constants.CONTRACT_CREATION_YEAR_RANGE;
-    this.activeContractDist =
-      activeContractDist ?? constants.ACTIVE_CONTRACT_DIST;
+    this.activeContractProb =
+      activeContractProb ?? constants.ACTIVE_CONTRACT_DIST;
     this.lowerBoundContractDetailsCount =
       lowerBoundContractDetailsCount ??
       constants.LOWERBOUND_CONTRACTDETAILS_COUNT;
@@ -48,12 +51,19 @@ class GenerationParameters {
       neutralContractsProb ?? constants.NEUTRAL_CONTRACTS_PROB;
     this.penalizedContractsProb =
       penalizedContractsProb ?? constants.PENALIZED_CONTRACTS_PROB;
-    this.lowerBoundReportingValueVariance =
-      lowerBoundReportingValueVariance ??
-      constants.LOWERBOUND_REPORTING_VALUE_VARIANCE;
-    this.upperBoundReportingValueVariance =
-      upperBoundReportingValueVariance ??
-      constants.UPPERBOUND_REPORTING_VALUE_VARIANCE;
+    this.outlierProb = outlierProb ?? constants.OUTLIER_PROB;
+    this.lowerBoundOutlierRValueVariance =
+      lowerBoundOutlierRValueVariance ??
+      constants.LOWERBOUND_OUTLIER_RVALUE_VARIANCE;
+    this.upperBoundOutlierRValueVariance =
+      upperBoundOutlierRValueVariance ??
+      constants.UPPERBOUND_OUTLIER_RVALUE_VARIANCE;
+    this.lowerBoundNormalRValueVariance =
+      lowerBoundNormalRValueVariance ??
+      constants.LOWERBOUND_NORMAL_RVALUE_VARIANCE;
+    this.upperBoundNormalRValueVariance =
+      upperBoundNormalRValueVariance ??
+      constants.UPPERBOUND_NORMAL_RVALUE_VARIANCE;
     this.lowerBoundNOP = lowerBoundNOP ?? constants.LOWERBOUND_NOP;
     this.upperBoundNOP = upperBoundNOP ?? constants.UPPERBOUND_NOP;
     this.lowerBoundR = lowerBoundR ?? constants.LOWERBOUND_R;
@@ -77,8 +87,10 @@ class GenerationParameters {
       return "The year range of the generated contract creation dates must be realistic! (< 50 years)";
     }
     if (
-      this.activeContractDist < 0 ||
-      this.activeContractDist > 1 ||
+      this.outlierProb < 0 ||
+      this.outlierProb > 1 ||
+      this.activeContractProb < 0 ||
+      this.activeContractProb > 1 ||
       this.neutralContractsProb < 0 ||
       this.neutralContractsProb > 1 ||
       this.latenessProb < 0 ||
@@ -93,8 +105,10 @@ class GenerationParameters {
     if (
       this.lowerBoundContractDetailsCount >=
         this.upperBoundContractDetailsCount ||
-      this.lowerBoundReportingValueVariance >=
-        this.upperBoundReportingValueVariance ||
+      this.lowerBoundNormalRValueVariance >=
+        this.upperBoundNormalRValueVariance ||
+      this.lowerBoundOutlierRValueVariance >=
+        this.upperBoundOutlierRValueVariance ||
       this.lowerBoundNOP >= this.upperBoundNOP ||
       this.lowerBoundR >= this.upperBoundR ||
       this.lowerBoundAS >= this.upperBoundAS ||
@@ -103,7 +117,8 @@ class GenerationParameters {
       return "The lower bound should never be greater/equal than the upper bound!";
     } else if (
       this.lowerBoundContractDetailsCount < 0 ||
-      this.lowerBoundReportingValueVariance < 0 ||
+      this.lowerBoundNormalRValueVariance < 0 ||
+      this.lowerBoundOutlierRValueVariance < 0 ||
       this.lowerBoundNOP < 0 ||
       this.lowerBoundR < 0 ||
       this.lowerBoundAS < 0 ||
@@ -125,7 +140,7 @@ class GenerationParameters {
     console.log(`
       * Contract count: ${this.contractCount}
       * Contract Creation Year Range: ${this.contractCreationYearRange}
-      * Active Contracts Distribution: ${this.activeContractDist}
+      * Active Contracts Distribution: ${this.activeContractProb}
       * Lower Bound Contract Details Count: ${this.lowerBoundContractDetailsCount}
       * Upper Bound Contract Details Count: ${this.upperBoundContractDetailsCount}
       * Timezone: ${this.timezone}
@@ -134,8 +149,11 @@ class GenerationParameters {
       * Lateness Probability: ${this.latenessProb}
       * Neutral Contracts Probability: ${this.neutralContractsProb}
       * Penalized Contracts Probability: ${this.penalizedContractsProb}
-      * Lower Bound Reporting Value Variance: ${this.lowerBoundReportingValueVariance}
-      * Upper Bound Reporting Value Variance: ${this.upperBoundReportingValueVariance}
+      * Outlier Probability: ${this.outlierProb}
+      * Lower Bound Outlier Reporting Value Variance: ${this.lowerBoundOutlierRValueVariance}
+      * Upper Bound Outlier Reporting Value Variance: ${this.upperBoundOutlierRValueVariance}
+      * Lower Bound Normal Reporting Value Variance: ${this.lowerBoundNormalRValueVariance}
+      * Upper Bound Normal Reporting Value Variance: ${this.upperBoundNormalRValueVariance}
       * Lower Bound NOP: ${this.lowerBoundNOP}
       * Upper Bound NOP: ${this.upperBoundNOP}
       * Lower Bound R: ${this.lowerBoundR}
