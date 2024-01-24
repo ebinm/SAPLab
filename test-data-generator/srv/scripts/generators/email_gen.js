@@ -55,7 +55,6 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
 
         fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
     } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
-        // TODO: add reminder/notification mails
         fakeEmails.push(generateEmail('SUMMARY',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
     }
 

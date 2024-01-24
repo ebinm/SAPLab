@@ -24,13 +24,6 @@ This is the CAP project to generate test data for our the InValNoS dashboard.
 - Run `cds watch` in the project's root to start a local CAP server and utilize the in-memory SQlite database
 - Navigate to the file `test/testdata-service.http` and start generating fake test data for InValNoS!
 
-## TODOs
-
-- See `TODO` comments in the code
-  - Fake mails
-  - Realistic distribution of status, provisional/final values etc.
-- Connect the server to the HANA database
-
 ## Learn More
 
 Learn more at these links:
