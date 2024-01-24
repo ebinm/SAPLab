@@ -28,7 +28,6 @@ exports.genContractDetails = function generateContractDetails(
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
   const creationDate = createdAt.toString();
-  // TODO make contractNo unique
   const contractNo = faker.number.int({ min: 100000, max: 999999 }).toString();
   const contractDescription = faker.company.buzzPhrase();
   const timezone = parameters.timezone;
@@ -205,7 +204,6 @@ exports.genContractDetails = function generateContractDetails(
   switch (reportingValueType) {
     case "NOP":
       reportingValueUnit_code = "persons";
-      // Realistic value: 2-3 digits
       provisionalReportedNumberOfPersons = faker.number.int({
         min: parameters.lowerBoundNOP,
         max: parameters.upperBoundNOP,
@@ -222,7 +220,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "R":
       reportingValueUnit_code = "€";
-      // Highest value: millions to billions
       provisionalReportedAmount = faker.number.float({
         min: parameters.lowerBoundR,
         max: parameters.upperBoundR,
@@ -238,7 +235,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "AS":
       reportingValueUnit_code = "stocks";
-      // Realistic value: millions to billions
       provisionalReportedAssetsStocks = faker.number.float({
         min: parameters.lowerBoundAS,
         max: parameters.upperBoundAS,
@@ -246,8 +242,7 @@ exports.genContractDetails = function generateContractDetails(
       });
       if (
         status == "FINALIZED" ||
-        status == "TRANSFER_OK" ||
-        status == "TRANSFER_FAILED"
+        status == "TRANSFER_OK"
       ) {
         finalReportedAssetsStocks =
           reportingValueVariance * provisionalReportedAssetsStocks;
@@ -255,7 +250,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "VOG":
       reportingValueUnit_code = "€";
-      // Realistic value: millions to billions
       provisionalReportedValueOfGoods = faker.number.float({
         min: parameters.lowerBoundVOG,
         max: parameters.upperBoundVOG,
