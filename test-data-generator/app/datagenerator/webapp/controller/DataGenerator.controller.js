@@ -6,7 +6,7 @@ sap.ui.define(
   function (Controller) {
     "use strict";
 
-    //const baseUrl =
+    const baseUrl =
     "https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-gene245694e8.cfapps.eu10-004.hana.ondemand.com/odata/v4/test-data";
     var authorizationEndpoint =
       "https://tum-praktika-shared-sb-tdd.authentication.eu10.hana.ondemand.com/oauth/authorize";
@@ -15,13 +15,13 @@ sap.ui.define(
     var clientId =
       "sb-data-generator-msgsystemsag-06-tum-praktika-shd-tdd-invalnos!t219625";
     var clientSecret = "fIXuXLI9lB+dFO+mwIiQD5dC9Iw=";
-    //var redirectUri =
+    var redirectUri =
     ("https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com/app/datagenerator/webapp/index.html");
 
     var responseType = "code";
 
-    const baseUrl = "http://localhost:4004/odata/v4/test-data";
-    var redirectUri = "http://localhost:4004/datagenerator/webapp/index.html";
+    //const baseUrl = "http://localhost:4004/odata/v4/test-data";
+    //var redirectUri = "http://localhost:4004/datagenerator/webapp/index.html";
 
     var accessToken = null;
 

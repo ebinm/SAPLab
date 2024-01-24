@@ -1,156 +1,165 @@
 <mvc:View controllerName="datagenerator.controller.DataGenerator"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
     <Page id="page" title="{i18n>title}">
         <content>
 
             <Button id="loginButton" text="Login" press="login"></Button>
             <Button id="logoutButton" text="Logout" press="logout"></Button>
 
-            <VBox id="_IDGenHBox1" justifyContent="SpaceBetween" class="sapUiSmallMargin" visible="{/isLoggedIn}">
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup234"
+			    editable="false"
+			    layout="ColumnLayout"
+			    title="Contracts"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                
+				    <Label text="Contract Count" id="labelContractCount"/>
+                    <Input id="inputContractCount" type="Number" value="1000">
+                    
+                    </Input>
 
-                <HBox id="parameterInputBox">
-                    <VBox class="sapUiSmallMargin" id="contractCountBox">
-                        <Label text="Contract Count" id="labelContractCount"/>
-                        <Input id="inputContractCount" type="Number" value="1000"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="contractCreationYearRangeBox">
-                        <Label text="Contract Creation Year Range" id="labelContractCreationYearRange"/>
-                        <Input id="inputContractCreationYearRange" type="Number" value="10"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="activeContractDistBox">
-                        <Label text="Active Contract Distribution" id="labelActiveContractDist"/>
-                        <Input id="inputActiveContractDist" type="Number" value="0.8"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Contract Creation Year Range" id="labelContractCreationYearRange"/>
+                    <Input id="inputContractCreationYearRange" type="Number" value="10"/>
 
-                <HBox id="upperBoundNOPRBox2">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundContractDetailsCountBox">
-                        <Label text="Lower Bound Contract Details Count" id="labelLowerBoundContractDetailsCount"/>
-                        <Input id="inputLowerBoundContractDetailsCount" type="Number" value="1"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundContractDetailsCountBox">
-                        <Label text="Upper Bound Contract Details Count" id="labelUpperBoundContractDetailsCount"/>
-                        <Input id="inputUpperBoundContractDetailsCount" type="Number" value="10"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Active Contract Distribution" id="labelActiveContractDist"/>
+                    <Input id="inputActiveContractDist" type="Number" value="0.8"/>
+			    </f:content>
+		    </f:SimpleForm>
 
-                <HBox id="additionalParametersBox">
-                    <VBox class="sapUiSmallMargin" id="timezoneBox">
-                        <Label text="Timezone" id="labelTimezone"/>
-                        <Input id="inputTimezone" value="CST"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="reportingDurationBox">
-                        <Label text="Reporting Duration" id="labelReportingDuration"/>
-                        <Input id="inputReportingDuration" type="Number" value="30"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="allowedDelayBox">
-                        <Label text="Allowed Delay" id="labelAllowedDelay"/>
-                        <Input id="inputAllowedDelay" type="Number" value="14"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+             <f:SimpleForm id="SimpleFormChangeColumn_oneGroup2345"
+			    editable="false"
+			    layout="ColumnLayout"
+                title="Contract Details"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    
+                    <Label text="Lower Bound Contract Details Count" id="labelLowerBoundContractDetailsCount"/>
+                    <Input id="inputLowerBoundContractDetailsCount" type="Number" value="1"/>
 
-                <HBox id="probabilityParametersBox">
-                    <VBox class="sapUiSmallMargin" id="latenessProbBox">
-                        <Label text="Lateness Probability" id="labelLatenessProb"/>
-                        <Input id="inputLatenessProb" type="Number" value="0.2"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="neutralContractsProbBox">
-                        <Label text="Neutral Contracts Probability" id="labelNeutralContractsProb"/>
-                        <Input id="inputNeutralContractsProb" type="Number" value="0.1"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="penalizedContractsProbBox">
-                        <Label text="Penalized Contracts Probability" id="labelPenalizedContractsProb"/>
-                        <Input id="inputPenalizedContractsProb" type="Number" value="0.7"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    
 
-                <HBox id="additionalProbabilityParametersBox">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundReportingValueVarianceBox">
-                        <Label text="Lower Bound Reporting Value Variance" id="labelLowerBoundReportingValueVariance"/>
-                        <Input id="inputLowerBoundReportingValueVariance" type="Number" value="0.5"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundReportingValueVarianceBox">
-                        <Label text="Upper Bound Reporting Value Variance" id="labelUpperBoundReportingValueVariance"/>
-                        <Input id="inputUpperBoundReportingValueVariance" type="Number" value="2.0"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Upper Bound Contract Details Count" id="labelUpperBoundContractDetailsCount"/>
+                    <Input id="inputUpperBoundContractDetailsCount" type="Number" value="10"/>
+				    
+			    </f:content>
+		    </f:SimpleForm>
 
-                <HBox id="numericParametersBox">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundNOPBox">
-                        <Label text="Lower Bound NOP" id="labelLowerBoundNOP"/>
-                        <Input id="inputLowerBoundNOP" type="Number" value="10"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundNOPBox">
-                        <Label text="Upper Bound NOP" id="labelUpperBoundNOP"/>
-                        <Input id="inputUpperBoundNOP" type="Number" value="999"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup235"
+			    editable="false"
+			    layout="ColumnLayout"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    <Label text="Timezone" id="labelTimezone"/>
+                    <Input id="inputTimezone" value="CST"/>
+				    
+                    <Label text="Reporting Duration" id="labelReportingDuration"/>
+                    <Input id="inputReportingDuration" type="Number" value="30"/>
 
-                <HBox id="upperBoundNOPRBox">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundRBox">
-                        <Label text="Lower Bound R" id="labelLowerBoundR"/>
-                        <Input id="inputLowerBoundR" type="Number" value="1000000"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundRBox">
-                        <Label text="Upper Bound R" id="labelUpperBoundR"/>
-                        <Input id="inputUpperBoundR" type="Number" value="100000000000"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Allowed Delay" id="labelAllowedDelay"/>
+                    <Input id="inputAllowedDelay" type="Number" value="14"/>
 
-                <HBox id="upperBoundRASBox">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundASBox">
-                        <Label text="Lower Bound AS" id="labelLowerBoundAS"/>
-                        <Input id="inputLowerBoundAS" type="Number" value="1000000"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundASBox">
-                        <Label text="Upper Bound AS" id="labelUpperBoundAS"/>
-                        <Input id="inputUpperBoundAS" type="Number" value="10000000000"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Lateness Probability" id="labelLatenessProb"/>
+                    <Input id="inputLatenessProb" type="Number" value="0.2"/>
 
-                <HBox id="upperBoundASVOGBox">
-                    <VBox class="sapUiSmallMargin" id="lowerBoundVOGBox">
-                        <Label text="Lower Bound VOG" id="labelLowerBoundVOG"/>
-                        <Input id="inputLowerBoundVOG" type="Number" value="1000000"/>
-                    </VBox>
-                    <VBox class="sapUiSmallMargin" id="upperBoundVOGBox">
-                        <Label text="Upper Bound VOG" id="labelUpperBoundVOG"/>
-                        <Input id="inputUpperBoundVOG" type="Number" value="10000000000"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Neutral Contracts Probability" id="labelNeutralContractsProb"/>
+                    <Input id="inputNeutralContractsProb" type="Number" value="0.1"/>
 
-                <HBox id="clientChangesEmailBox">
-                    <VBox class="sapUiSmallMargin" id="clientChangesEmailProbBox">
-                        <Label text="Client Changes Email Probability" id="labelClientChangesEmailProb"/>
-                        <Input id="inputClientChangesEmailProb" type="Number" value="0.2"/>
-                    </VBox>
-                    <!-- Add more VBox sections for other parameters -->
-                </HBox>
+                    <Label text="Penalized Contracts Probability" id="labelPenalizedContractsProb"/>
+                    <Input id="inputPenalizedContractsProb" type="Number" value="0.7"/>
+			    </f:content>
+		    </f:SimpleForm>
 
-                <VBox id="generateDataButtonBox">
-                    <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
-                        <Button id="_IDGenButton2" text="Generate Data" press="generateData"></Button>
-                    </VBox>
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup2346"
+			    editable="false"
+			    layout="ColumnLayout"
+                title="Reporting Values"
+			    columnsM="2"
+			    columnsL="2"
+			    columnsXL="2"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    <Label text="Lower Bound Reporting Value Variance" id="labelLowerBoundReportingValueVariance"/>
+                    <Input id="inputLowerBoundReportingValueVariance" type="Number" value="0.5"/>
+
+                    <Label text="Lower Bound NOP" id="labelLowerBoundNOP"/>
+                    <Input id="inputLowerBoundNOP" type="Number" value="10"/>
+
+                    <Label text="Lower Bound R" id="labelLowerBoundR"/>
+                    <Input id="inputLowerBoundR" type="Number" value="1000000"/>
+
+                    <Label text="Lower Bound AS" id="labelLowerBoundAS"/>
+                    <Input id="inputLowerBoundAS" type="Number" value="1000000"/>
+
+                    <Label text="Lower Bound VOG" id="labelLowerBoundVOG"/>
+                    <Input id="inputLowerBoundVOG" type="Number" value="1000000"/>
+
+                    <Label text="Upper Bound Reporting Value Variance" id="labelUpperBoundReportingValueVariance"/>
+                    <Input id="inputUpperBoundReportingValueVariance" type="Number" value="2.0"/>
+
+                    <Label text="Upper Bound NOP" id="labelUpperBoundNOP"/>
+                    <Input id="inputUpperBoundNOP" type="Number" value="999"/>
+
+                    <Label text="Upper Bound R" id="labelUpperBoundR"/>
+                    <Input id="inputUpperBoundR" type="Number" value="100000000000"/>
+
+                    <Label text="Upper Bound AS" id="labelUpperBoundAS"/>
+                    <Input id="inputUpperBoundAS" type="Number" value="10000000000"/>
+
+                    <Label text="Upper Bound VOG" id="labelUpperBoundVOG"/>
+                    <Input id="inputUpperBoundVOG" type="Number" value="10000000000"/>
+				    
+			    </f:content>
+		    </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup236"
+			    editable="false"
+			    layout="ColumnLayout"
+			    title="Emails"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                
+				    <Label text="Client Changes Email Probability" id="labelClientChangesEmailProb"/>
+                    <Input id="inputClientChangesEmailProb" type="Number" value="0.2"/>
+
+			    </f:content>
+		    </f:SimpleForm>
+
+            
+
+            <VBox id="generateDataButtonBox" visible="{/isLoggedIn}">
+                <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
+                    <Button id="_IDGenButton2" text="Generate Data" press="generateData"></Button>
                 </VBox>
+            </VBox>
 
-                <VBox id="generateDataButtonBox2">
-                    <VBox id="_IDGenVBox2" class="sapUiSmallMargin">
-                        <Button id="_IDGenButton3" text="Reset Database" press="resetDatabase"></Button>
-                    </VBox>
+            <VBox id="generateDataButtonBox2" visible="{/isLoggedIn}">
+                <VBox id="_IDGenVBox2" class="sapUiSmallMargin">
+                    <Button id="_IDGenButton3" text="Reset Database" press="resetDatabase"></Button>
                 </VBox>
+            </VBox>
                 
 
-            </VBox>
+        
         </content>
     </Page>
 </mvc:View>
