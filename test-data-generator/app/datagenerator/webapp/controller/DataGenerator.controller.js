@@ -97,8 +97,8 @@ sap.ui.define(
           contractCreationYearRange: parseInt(
             this.getView().byId("inputContractCreationYearRange").getValue()
           ),
-          activeContractDist: parseFloat(
-            this.getView().byId("inputActiveContractDist").getValue()
+          activeContractProb: parseFloat(
+            this.getView().byId("inputActiveContractProb").getValue()
           ),
           lowerBoundContractDetailsCount: parseInt(
             this.getView()
@@ -109,6 +109,9 @@ sap.ui.define(
             this.getView()
               .byId("inputUpperBoundContractDetailsCount")
               .getValue()
+          ),
+          failureProb: parseFloat(
+            this.getView().byId("inputFailureProb").getValue()
           ),
           timezone: this.getView().byId("inputTimezone").getValue(),
           reportingDuration: parseInt(
@@ -126,14 +129,27 @@ sap.ui.define(
           penalizedContractsProb: parseFloat(
             this.getView().byId("inputPenalizedContractsProb").getValue()
           ),
-          lowerBoundReportingValueVariance: parseFloat(
+          outlierProb: parseFloat(
+            this.getView().byId("inputOutlierProb").getValue()
+          ),
+          lowerBoundOutlierRValueVariance: parseFloat(
             this.getView()
-              .byId("inputLowerBoundReportingValueVariance")
+              .byId("inputLowerBoundOutlierRValueVariance")
               .getValue()
           ),
-          upperBoundReportingValueVariance: parseFloat(
+          upperBoundOutlierRValueVariance: parseFloat(
             this.getView()
-              .byId("inputUpperBoundReportingValueVariance")
+              .byId("inputUpperBoundOutlierRValueVariance")
+              .getValue()
+          ),
+          lowerBoundNormalRValueVariance: parseFloat(
+            this.getView()
+              .byId("inputLowerBoundNormalRValueVariance")
+              .getValue()
+          ),
+          upperBoundNormalRValueVariance: parseFloat(
+            this.getView()
+              .byId("inputUpperBoundNormalRValueVariance")
               .getValue()
           ),
           lowerBoundNOP: parseInt(

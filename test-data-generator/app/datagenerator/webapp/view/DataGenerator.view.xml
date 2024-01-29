@@ -21,15 +21,13 @@
 			    <f:content>
                 
 				    <Label text="Contract Count" id="labelContractCount"/>
-                    <Input id="inputContractCount" type="Number" value="1000">
-                    
-                    </Input>
+                    <Input id="inputContractCount" type="Number" value="1000"/>
 
                     <Label text="Contract Creation Year Range" id="labelContractCreationYearRange"/>
                     <Input id="inputContractCreationYearRange" type="Number" value="10"/>
 
-                    <Label text="Active Contract Distribution" id="labelActiveContractDist"/>
-                    <Input id="inputActiveContractDist" type="Number" value="0.8"/>
+                    <Label text="Active Contract Probability" id="labelActiveContractProb"/>
+                    <Input id="inputActiveContractProb" type="Number" value="0.8"/>
 			    </f:content>
 		    </f:SimpleForm>
 
@@ -45,7 +43,7 @@
 			    <f:content>
                     
                     <Label text="Lower Bound Contract Details Count" id="labelLowerBoundContractDetailsCount"/>
-                    <Input id="inputLowerBoundContractDetailsCount" type="Number" value="1"/>
+                    <Input id="inputLowerBoundContractDetailsCount" type="Number" value="2"/>
 
                     
 
@@ -64,6 +62,9 @@
                 visible="{/isLoggedIn}"
 			    >
 			    <f:content>
+                    <Label text="Failure Probability" id="labelFailureProb"/>
+                    <Input id="inputFailureProb" type="Number" value="0.1"/>
+
                     <Label text="Timezone" id="labelTimezone"/>
                     <Input id="inputTimezone" value="CST"/>
 				    
@@ -81,6 +82,9 @@
 
                     <Label text="Penalized Contracts Probability" id="labelPenalizedContractsProb"/>
                     <Input id="inputPenalizedContractsProb" type="Number" value="0.7"/>
+
+                    <Label text="Outlier Probability" id="labeOutlierProb"/>
+                    <Input id="inputOutlierProb" type="Number" value="0.1"/>
 			    </f:content>
 		    </f:SimpleForm>
 
@@ -94,8 +98,11 @@
                 visible="{/isLoggedIn}"
 			    >
 			    <f:content>
-                    <Label text="Lower Bound Reporting Value Variance" id="labelLowerBoundReportingValueVariance"/>
-                    <Input id="inputLowerBoundReportingValueVariance" type="Number" value="0.5"/>
+                    <Label text="Lower Bound Normal Reporting Value Variance" id="labelLowerBoundNormalRValueVariance"/>
+                    <Input id="inputLowerBoundNormalRValueVariance" type="Number" value="0.7"/>
+
+                    <Label text="Lower Bound Outlier Reporting Value Variance" id="labelLowerBoundOutlierRValueVariance"/>
+                    <Input id="inputLowerBoundOutlierRValueVariance" type="Number" value="0"/>
 
                     <Label text="Lower Bound NOP" id="labelLowerBoundNOP"/>
                     <Input id="inputLowerBoundNOP" type="Number" value="10"/>
@@ -109,8 +116,11 @@
                     <Label text="Lower Bound VOG" id="labelLowerBoundVOG"/>
                     <Input id="inputLowerBoundVOG" type="Number" value="1000000"/>
 
-                    <Label text="Upper Bound Reporting Value Variance" id="labelUpperBoundReportingValueVariance"/>
-                    <Input id="inputUpperBoundReportingValueVariance" type="Number" value="2.0"/>
+                    <Label text="Upper Bound Normal Reporting Value Variance" id="labelUpperBoundNormalRValueVariance"/>
+                    <Input id="inputUpperBoundNormalRValueVariance" type="Number" value="1.3"/>
+
+                    <Label text="Upper Bound Outlier Reporting Value Variance" id="labelUpperBoundOutlierRValueVariance"/>
+                    <Input id="inputUpperBoundOutlierRValueVariance" type="Number" value="3.2"/>
 
                     <Label text="Upper Bound NOP" id="labelUpperBoundNOP"/>
                     <Input id="inputUpperBoundNOP" type="Number" value="999"/>
