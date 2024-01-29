@@ -28,15 +28,14 @@ exports.genContractDetails = function generateContractDetails(
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
   const creationDate = createdAt.toString();
-  // TODO make contractNo unique
   const contractNo = faker.number.int({ min: 100000, max: 999999 }).toString();
   const contractDescription = faker.company.buzzPhrase();
   const timezone = parameters.timezone;
 
-  // Set status and the respective submission/transfer date accordingly
+  // Set ContractDetails status and the respective submission/transfer date accordingly
   // 1. Set all values to null first
   // 2. Depending on the randomly selected contractDetailStatus, reassign the corresponding values
-  // 3. Set penaltyEndorsement depending on submissionDate
+  // 3. Set penaltyEndorsement depending on submissionDate and penalizedProb
   let status = null;
 
   let reportingPeriodStart = null;
@@ -161,7 +160,7 @@ exports.genContractDetails = function generateContractDetails(
 
   // Generate provisional and final reported values
   // 1. Set all values to null first
-  // 2. Depending on selected ReportingValueType, reassign the corresponding values
+  // 2. Depending on selected ReportingValueType and isOutlier variable, reassign the corresponding values
   let reportingValueType = null;
   let reportingValueUnit_code = null;
   let provisionalReportedAmount = null;
@@ -173,10 +172,10 @@ exports.genContractDetails = function generateContractDetails(
   let provisionalReportedValueOfGoods = null;
   let finalReportedValueOfGoods = null;
 
-  // Randomly determine whether the ContractDetails should be an outlier
+  // Determine whether this ContractDetails object should be an outlier
   random_float = faker.number.float();
   var isOutlier = false;
-  if (random_float > parameters.outlierProb) {
+  if (random_float <= parameters.outlierProb) {
     isOutlier = true;
   }
   var reportingValueVariance;
@@ -185,27 +184,26 @@ exports.genContractDetails = function generateContractDetails(
     if (random_float > 0.5) {
       reportingValueVariance = faker.number.float({
         min: 1.0,
-        max: parameters.upperBoundReportingValueVariance,
+        max: parameters.upperBoundOutlierRValueVariance,
       });
     } else {
       reportingValueVariance = faker.number.float({
-        min: parameters.lowerBoundReportingValueVariance,
+        min: parameters.lowerBoundOutlierRValueVariance,
         max: 1.0,
       });
     }
   } else {
     reportingValueVariance = faker.number.float({
-      min: parameters.lowerBoundReportingValueVariance,
-      max: parameters.upperBoundReportingValueVariance,
+      min: parameters.lowerBoundNormalRValueVariance,
+      max: parameters.upperBoundNormalRValueVariance,
     });
   }
 
-  // Randomly choose one ReportingValueType and set values accordingly
+  // Randomly choose one ReportingValueType and set values accordingly with variance
   reportingValueType = faker.helpers.arrayElement(["NOP", "R", "AS", "VOG"]);
   switch (reportingValueType) {
     case "NOP":
       reportingValueUnit_code = "persons";
-      // Realistic value: 2-3 digits
       provisionalReportedNumberOfPersons = faker.number.int({
         min: parameters.lowerBoundNOP,
         max: parameters.upperBoundNOP,
@@ -222,7 +220,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "R":
       reportingValueUnit_code = "€";
-      // Highest value: millions to billions
       provisionalReportedAmount = faker.number.float({
         min: parameters.lowerBoundR,
         max: parameters.upperBoundR,
@@ -238,7 +235,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "AS":
       reportingValueUnit_code = "stocks";
-      // Realistic value: millions to billions
       provisionalReportedAssetsStocks = faker.number.float({
         min: parameters.lowerBoundAS,
         max: parameters.upperBoundAS,
@@ -255,7 +251,6 @@ exports.genContractDetails = function generateContractDetails(
       break;
     case "VOG":
       reportingValueUnit_code = "€";
-      // Realistic value: millions to billions
       provisionalReportedValueOfGoods = faker.number.float({
         min: parameters.lowerBoundVOG,
         max: parameters.upperBoundVOG,

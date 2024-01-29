@@ -11,6 +11,15 @@ GET {{serviceUrl}}/ContractDetails
 ### Get Emails
 GET {{serviceUrl}}/Emails
 
+### Get InsuranceContract Count
+GET {{serviceUrl}}/getInsuranceContractCount()
+
+### Get ContractDetails Count
+GET {{serviceUrl}}/getContractDetailsCount()
+
+### Get Email Count
+GET {{serviceUrl}}/getEmailCount()
+
 ### Generate Data
 POST {{serviceUrl}}/generateData
 content-type: application/json

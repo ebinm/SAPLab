@@ -72,5 +72,3 @@ entity Emails {
       // Connect Mail with ContractDetails
       contractDetails     : Association to ContractDetails;
 }
-
-// TODO: enums?

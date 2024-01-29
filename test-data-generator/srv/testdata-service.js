@@ -10,6 +10,36 @@ class TestDataService extends cds.ApplicationService {
     // Get the entity definitions from the db/schema.cds file to interact with the database
     const { InsuranceContract, ContractDetails, Emails } = cds.entities;
 
+    // Get InsuranceContracts count
+    this.on("getInsuranceContractCount", async function getInsuranceContractCount() {
+      try {
+        var result = await SELECT.from(InsuranceContract);
+        return result.length;
+      } catch (error) {
+        return request.error("Error resetting database:", error);
+      }
+    });
+
+    // Get ContractDetails count
+    this.on("getContractDetailsCount", async function getContractDetailsCount() {
+      try {
+        var result = await SELECT.from(ContractDetails);
+        return result.length;
+      } catch (error) {
+        return request.error("Error resetting database:", error);
+      }
+    });
+
+    // Get Email count
+    this.on("getEmailCount", async function getEmailCount() {
+      try {
+        var result = await SELECT.from(Emails);
+        return result.length;
+      } catch (error) {
+        return request.error("Error resetting database:", error);
+      }
+    });
+
     // If generateData(contractCount) is called, generate test data and insert it into database
     this.on("generateData", async function onGenerateData(request) {
       // Collect all request parameters in GenerationParameters class
