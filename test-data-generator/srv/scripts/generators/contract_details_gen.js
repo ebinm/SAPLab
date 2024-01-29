@@ -175,7 +175,7 @@ exports.genContractDetails = function generateContractDetails(
   // Randomly determine whether the ContractDetails should be an outlier
   random_float = faker.number.float();
   var isOutlier = false;
-  if (random_float > parameters.outlierProb) {
+  if (random_float <= parameters.outlierProb) {
     isOutlier = true;
   }
   var reportingValueVariance;
@@ -184,11 +184,11 @@ exports.genContractDetails = function generateContractDetails(
     if (random_float > 0.5) {
       reportingValueVariance = faker.number.float({
         min: 1.0,
-        max: parameters.upperBoundReportingValueVariance,
+        max: parameters.upperBoundOutlierRValueVariance,
       });
     } else {
       reportingValueVariance = faker.number.float({
-        min: parameters.lowerBoundReportingValueVariance,
+        min: parameters.lowerBoundOutlierRValueVariance,
         max: 1.0,
       });
     }
