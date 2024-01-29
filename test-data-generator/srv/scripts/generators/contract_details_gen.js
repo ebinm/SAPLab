@@ -32,10 +32,10 @@ exports.genContractDetails = function generateContractDetails(
   const contractDescription = faker.company.buzzPhrase();
   const timezone = parameters.timezone;
 
-  // Set status and the respective submission/transfer date accordingly
+  // Set ContractDetails status and the respective submission/transfer date accordingly
   // 1. Set all values to null first
   // 2. Depending on the randomly selected contractDetailStatus, reassign the corresponding values
-  // 3. Set penaltyEndorsement depending on submissionDate
+  // 3. Set penaltyEndorsement depending on submissionDate and penalizedProb
   let status = null;
 
   let reportingPeriodStart = null;
@@ -160,7 +160,7 @@ exports.genContractDetails = function generateContractDetails(
 
   // Generate provisional and final reported values
   // 1. Set all values to null first
-  // 2. Depending on selected ReportingValueType, reassign the corresponding values
+  // 2. Depending on selected ReportingValueType and isOutlier variable, reassign the corresponding values
   let reportingValueType = null;
   let reportingValueUnit_code = null;
   let provisionalReportedAmount = null;
@@ -172,7 +172,7 @@ exports.genContractDetails = function generateContractDetails(
   let provisionalReportedValueOfGoods = null;
   let finalReportedValueOfGoods = null;
 
-  // Randomly determine whether the ContractDetails should be an outlier
+  // Determine whether this ContractDetails object should be an outlier
   random_float = faker.number.float();
   var isOutlier = false;
   if (random_float <= parameters.outlierProb) {
@@ -194,12 +194,12 @@ exports.genContractDetails = function generateContractDetails(
     }
   } else {
     reportingValueVariance = faker.number.float({
-      min: parameters.lowerBoundReportingValueVariance,
-      max: parameters.upperBoundReportingValueVariance,
+      min: parameters.lowerBoundNormalRValueVariance,
+      max: parameters.upperBoundNormalRValueVariance,
     });
   }
 
-  // Randomly choose one ReportingValueType and set values accordingly
+  // Randomly choose one ReportingValueType and set values accordingly with variance
   reportingValueType = faker.helpers.arrayElement(["NOP", "R", "AS", "VOG"]);
   switch (reportingValueType) {
     case "NOP":
@@ -242,7 +242,8 @@ exports.genContractDetails = function generateContractDetails(
       });
       if (
         status == "FINALIZED" ||
-        status == "TRANSFER_OK"
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
       ) {
         finalReportedAssetsStocks =
           reportingValueVariance * provisionalReportedAssetsStocks;
