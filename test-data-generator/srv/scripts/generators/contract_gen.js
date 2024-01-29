@@ -32,7 +32,7 @@ exports.genContract = function generateInsuranceContract(parameters) {
 
   // Set roughly 80 % of all contracts to 'ACTIVE'
   const random_float = faker.number.float();
-  if (random_float <= parameters.activeContractDist) {
+  if (random_float <= parameters.activeContractProb) {
     policyStatus = 'ACTIVE';
   } else {
     policyStatus = faker.helpers.arrayElement(['INACTIVE', 'REVERSED']);

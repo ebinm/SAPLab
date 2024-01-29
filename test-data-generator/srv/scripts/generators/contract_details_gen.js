@@ -1,5 +1,5 @@
-const { faker } = require('@faker-js/faker');
-const eg = require('./email_gen');
+const { faker } = require("@faker-js/faker");
+const eg = require("./email_gen");
 
 /**
  * Generates one fake ContractDetails object with its associated Emails
@@ -7,17 +7,24 @@ const eg = require('./email_gen');
  * @param {GenerationParameters} parameters - An object which olds all params necessary for data generation
  * @returns {Array} Returns a nested 2D array with one fake ContractDetails object and an array of one or more associated Emails
  */
-exports.genContractDetails = function generateContractDetails(contract, parameters) {
-  const reportingValueVariance = faker.number.float({ min: parameters.lowerBoundReportingValueVariance, max: parameters.upperBoundReportingValueVariance});
-
+exports.genContractDetails = function generateContractDetails(
+  contract,
+  parameters
+) {
   const now = new Date();
 
   // Fake attributes of ContractDetails entity
   const ID = faker.string.uuid();
   const createdBy = faker.string.uuid();
   // Format Date to match HANA Date format, prevents null errors
-  const createdAt = faker.date.between({ from: contract.createdAt, to: now }).toISOString().split("T")[0];
-  const modifiedAt = faker.date.between({ from: createdAt, to: now }).toISOString().split("T")[0];
+  const createdAt = faker.date
+    .between({ from: contract.createdAt, to: now })
+    .toISOString()
+    .split("T")[0];
+  const modifiedAt = faker.date
+    .between({ from: createdAt, to: now })
+    .toISOString()
+    .split("T")[0];
   // For simplicity: modifying user is the same as the creating user
   const modifiedBy = createdBy;
   const creationDate = createdAt.toString();
@@ -41,60 +48,112 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
 
   let penaltyEndorsement = false;
 
-  if (contract.policyStatus == 'REVERSED') {
-    // If the contract ifself is 'REVERSED', the contractDetailStatus can only be 'CANCELED' or 'REVERSED'
-    status = faker.helpers.arrayElement(['CANCELED', 'REVERSED']);
-  } else {
-    let random = faker.number.float();
+  // Random variable for data randomization
+  let random_float = null;
 
-    if (random <= parameters.neutralContractsProb) {
-      status = faker.helpers.arrayElement(['TEMPORARY', 'NEW_IN_PROCESS']);
+  if (contract.policyStatus == "REVERSED") {
+    // If the contract ifself is 'REVERSED', the contractDetailStatus can only be 'CANCELED' or 'REVERSED'
+    status = faker.helpers.arrayElement(["CANCELED", "REVERSED"]);
+  } else {
+    random_float = faker.number.float();
+
+    if (random_float <= parameters.neutralContractsProb) {
+      status = faker.helpers.arrayElement(["TEMPORARY", "NEW_IN_PROCESS"]);
 
       // Reporting period is in the future
-      reportingPeriodStart = faker.date.between({ from: now, to: faker.date.soon() });
-      reportingPeriodEnd = new Date(reportingPeriodStart.setDate(reportingPeriodStart.getDate() + parameters.reportingDuration));
-      finalReportingDate = new Date(reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.allowedDelay));
+      reportingPeriodStart = faker.date.between({
+        from: now,
+        to: faker.date.soon(),
+      });
+      reportingPeriodEnd = new Date(
+        reportingPeriodStart.setDate(
+          reportingPeriodStart.getDate() + parameters.reportingDuration
+        )
+      );
+      finalReportingDate = new Date(
+        reportingPeriodEnd.setDate(
+          reportingPeriodEnd.getDate() + parameters.allowedDelay
+        )
+      );
     } else {
-      random = faker.number.float();
+      random_float = faker.number.float();
 
       // Determine whether it should be late or not
-      if (random <= parameters.latenessProb) {
-        status = faker.helpers.arrayElement(['REMINDED', 'REMINDED_FAILED', 'NOTIFIED', 'NOTIFIED_FAILED'])
+      if (random_float <= parameters.latenessProb) {
+        status = faker.helpers.arrayElement([
+          "REMINDED",
+          "REMINDED_FAILED",
+          "NOTIFIED",
+          "NOTIFIED_FAILED",
+        ]);
 
         // Reporting period should be in the past
-        finalReportingDate = faker.date.recent( { days: 14 });
+        finalReportingDate = faker.date.recent({ days: 14 });
         reportingPeriodEnd = new Date(finalReportingDate);
-        reportingPeriodEnd.setDate(finalReportingDate.getDate() - parameters.allowedDelay);
+        reportingPeriodEnd.setDate(
+          finalReportingDate.getDate() - parameters.allowedDelay
+        );
         reportingPeriodStart = new Date(reportingPeriodEnd);
-        reportingPeriodStart.setDate(reportingPeriodEnd.getDate() - parameters.reportingDuration);
+        reportingPeriodStart.setDate(
+          reportingPeriodEnd.getDate() - parameters.reportingDuration
+        );
       } else {
-        status = faker.helpers.arrayElement(['FINALIZED',  'TRANSFER_OK', 'TRANSFER_FAILED']);
+        random_float = faker.number.float();
+
+        if (random_float <= parameters.failureProb) {
+          status = "TRANSFER_FAILED";
+        } else {
+          status = faker.helpers.arrayElement(["FINALIZED", "TRANSFER_OK"]);
+        }
 
         // Reporting period is active or in the past
         reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
         reportingPeriodEnd = new Date(reportingPeriodStart);
-        reportingPeriodEnd.setDate(reportingPeriodEnd.getDate() + parameters.reportingDuration);
+        reportingPeriodEnd.setDate(
+          reportingPeriodEnd.getDate() + parameters.reportingDuration
+        );
         finalReportingDate = new Date(reportingPeriodEnd);
-        finalReportingDate.setDate(finalReportingDate.getDate() + parameters.allowedDelay);
+        finalReportingDate.setDate(
+          finalReportingDate.getDate() + parameters.allowedDelay
+        );
       }
-    
-      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
+
+      if (
+        status == "FINALIZED" ||
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
+      ) {
         // Penalize some ContractDetails in the past
-        if (random <= parameters.penalizedContractsProb && finalReportingDate < now) {
+        if (
+          random_float <= parameters.penalizedContractsProb &&
+          finalReportingDate < now
+        ) {
           penaltyEndorsement = true;
-          reportSubmissionDate = faker.date.between({ from: finalReportingDate, to: now }).toISOString().split("T")[0];
+          reportSubmissionDate = faker.date
+            .between({ from: finalReportingDate, to: now })
+            .toISOString()
+            .split("T")[0];
         } else {
           // Make sure that the submission date is never set in the future
           if (now <= finalReportingDate) {
-            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: now }).toISOString().split("T")[0];
+            reportSubmissionDate = faker.date
+              .between({ from: reportingPeriodStart, to: now })
+              .toISOString()
+              .split("T")[0];
           } else {
-            reportSubmissionDate = faker.date.between({ from: reportingPeriodStart, to: finalReportingDate }).toISOString().split("T")[0];
+            reportSubmissionDate = faker.date
+              .between({ from: reportingPeriodStart, to: finalReportingDate })
+              .toISOString()
+              .split("T")[0];
           }
         }
 
-        if (status == 'TRANSFER_OK') {
+        if (status == "TRANSFER_OK") {
           // Only set transfer date if transfer was successful
-          transferReportingDate = faker.date.between({ from: reportSubmissionDate, to: now });
+          transferReportingDate = faker.date.between({
+            from: reportSubmissionDate,
+            to: now,
+          });
         }
       }
     }
@@ -114,39 +173,100 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
   let provisionalReportedValueOfGoods = null;
   let finalReportedValueOfGoods = null;
 
+  // Randomly determine whether the ContractDetails should be an outlier
+  random_float = faker.number.float();
+  var isOutlier = false;
+  if (random_float > parameters.outlierProb) {
+    isOutlier = true;
+  }
+  var reportingValueVariance;
+  if (isOutlier) {
+    random_float = faker.number.float();
+    if (random_float > 0.5) {
+      reportingValueVariance = faker.number.float({
+        min: 1.0,
+        max: parameters.upperBoundReportingValueVariance,
+      });
+    } else {
+      reportingValueVariance = faker.number.float({
+        min: parameters.lowerBoundReportingValueVariance,
+        max: 1.0,
+      });
+    }
+  } else {
+    reportingValueVariance = faker.number.float({
+      min: parameters.lowerBoundReportingValueVariance,
+      max: parameters.upperBoundReportingValueVariance,
+    });
+  }
+
   // Randomly choose one ReportingValueType and set values accordingly
-  reportingValueType = faker.helpers.arrayElement(['NOP', 'R', 'AS', 'VOG']);
+  reportingValueType = faker.helpers.arrayElement(["NOP", "R", "AS", "VOG"]);
   switch (reportingValueType) {
-    case 'NOP':
-      reportingValueUnit_code = 'persons';
+    case "NOP":
+      reportingValueUnit_code = "persons";
       // Realistic value: 2-3 digits
-      provisionalReportedNumberOfPersons = faker.number.int({ min: parameters.lowerBoundNOP, max: parameters.upperBoundNOP });
-      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedNumberOfPersons = Math.round(reportingValueVariance * provisionalReportedNumberOfPersons);
+      provisionalReportedNumberOfPersons = faker.number.int({
+        min: parameters.lowerBoundNOP,
+        max: parameters.upperBoundNOP,
+      });
+      if (
+        status == "FINALIZED" ||
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
+      ) {
+        finalReportedNumberOfPersons = Math.round(
+          reportingValueVariance * provisionalReportedNumberOfPersons
+        );
       }
       break;
-    case 'R':
-      reportingValueUnit_code = '€';
+    case "R":
+      reportingValueUnit_code = "€";
       // Highest value: millions to billions
-      provisionalReportedAmount = faker.number.float({ min: parameters.lowerBoundR, max: parameters.upperBoundR });
-      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedAmount = reportingValueVariance * provisionalReportedAmount;
+      provisionalReportedAmount = faker.number.float({
+        min: parameters.lowerBoundR,
+        max: parameters.upperBoundR,
+      });
+      if (
+        status == "FINALIZED" ||
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
+      ) {
+        finalReportedAmount =
+          reportingValueVariance * provisionalReportedAmount;
       }
       break;
-    case 'AS':
-      reportingValueUnit_code = 'stocks';
+    case "AS":
+      reportingValueUnit_code = "stocks";
       // Realistic value: millions to billions
-      provisionalReportedAssetsStocks = faker.number.float({ min: parameters.lowerBoundAS, max: parameters.upperBoundAS, precision: 0.001 });
-      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedAssetsStocks = reportingValueVariance * provisionalReportedAssetsStocks;
+      provisionalReportedAssetsStocks = faker.number.float({
+        min: parameters.lowerBoundAS,
+        max: parameters.upperBoundAS,
+        precision: 0.001,
+      });
+      if (
+        status == "FINALIZED" ||
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
+      ) {
+        finalReportedAssetsStocks =
+          reportingValueVariance * provisionalReportedAssetsStocks;
       }
       break;
-    case 'VOG':
-      reportingValueUnit_code = '€';
+    case "VOG":
+      reportingValueUnit_code = "€";
       // Realistic value: millions to billions
-      provisionalReportedValueOfGoods = faker.number.float({ min: parameters.lowerBoundVOG, max: parameters.upperBoundVOG });
-      if (status == 'FINALIZED' || status == 'TRANSFER_OK' || status == 'TRANSFER_FAILED') {
-        finalReportedValueOfGoods = reportingValueVariance * provisionalReportedValueOfGoods;
+      provisionalReportedValueOfGoods = faker.number.float({
+        min: parameters.lowerBoundVOG,
+        max: parameters.upperBoundVOG,
+      });
+      if (
+        status == "FINALIZED" ||
+        status == "TRANSFER_OK" ||
+        status == "TRANSFER_FAILED"
+      ) {
+        finalReportedValueOfGoods =
+          reportingValueVariance * provisionalReportedValueOfGoods;
       }
   }
 
@@ -184,7 +304,7 @@ exports.genContractDetails = function generateContractDetails(contract, paramete
 
   // Generate suitable emails depending on status
   const emails = eg.genEmails(contract, contractDetails, parameters);
-  
+
   // Return the fake InsuranceContractDetails object, as well as the emails array
   return [contractDetails, emails];
-}
+};

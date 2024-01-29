@@ -15,8 +15,10 @@ const ACTIVE_CONTRACT_DIST = 0.8;
  */
 
 // Upper/lower bounds for the count of ContractDetails per InsuranceContract
-const LOWERBOUND_CONTRACTDETAILS_COUNT = 1;
+const LOWERBOUND_CONTRACTDETAILS_COUNT = 2;
 const UPPERBOUND_CONTRACTDETAILS_COUNT = 10;
+// Define whether the ContractDetails should have failed or not
+const FAILURE_PROB = 0.1;
 const TIMEZONE = 'CST';
 // Assume the standard of 30 days to report
 const REPORTING_DURATION = 30;
@@ -28,9 +30,13 @@ const NEUTRAL_CONTRACTS_PROB = 0.1;
 const LATENESS_PROB = 0.2;
 // Penalize some contracts in the past
 const PENALIZED_CONTRACTS_PROB = 0.7;
-// Variance to avoid vast reporting value differences
-const LOWERBOUND_REPORTING_VALUE_VARIANCE = 0.5;
-const UPPERBOUND_REPORTING_VALUE_VARIANCE = 2.0;
+// Set probabilty of outliers with vast reporting value differences
+const OUTLIER_PROB = 0.1;
+// Variance to randomize reporting value differences
+const LOWERBOUND_OUTLIER_RVALUE_VARIANCE = 0;
+const UPPERBOUND_OUTLIER_RVALUE_VARIANCE = 3.2;
+const LOWERBOUND_NORMAL_RVALUE_VARIANCE = 0.7;
+const UPPERBOUND_NORMAL_RVALUE_VARIANCE = 1.3;
 // Upper/lower bounds for provisional/final values
 const LOWERBOUND_NOP = 10;
 const UPPERBOUND_NOP = 999;
@@ -49,19 +55,24 @@ const UPPERBOUND_VOG = 10000000000;
 const CLIENTCHANGESEMAIL_PROB = 0.2;
 
 module.exports = {
+    OUTLIER_PROB,
     CONTRACT_COUNT,
     CONTRACT_CREATION_YEAR_RANGE,
     ACTIVE_CONTRACT_DIST,
     LOWERBOUND_CONTRACTDETAILS_COUNT,
     UPPERBOUND_CONTRACTDETAILS_COUNT,
+    FAILURE_PROB,
     TIMEZONE,
     REPORTING_DURATION,
     ALLOWED_DELAY,
     LATENESS_PROB,
     NEUTRAL_CONTRACTS_PROB,
     PENALIZED_CONTRACTS_PROB,
-    LOWERBOUND_REPORTING_VALUE_VARIANCE,
-    UPPERBOUND_REPORTING_VALUE_VARIANCE,
+    OUTLIER_PROB,
+    LOWERBOUND_OUTLIER_RVALUE_VARIANCE,
+    UPPERBOUND_OUTLIER_RVALUE_VARIANCE,
+    LOWERBOUND_NORMAL_RVALUE_VARIANCE,
+    UPPERBOUND_NORMAL_RVALUE_VARIANCE,
     LOWERBOUND_NOP,
     UPPERBOUND_NOP,
     LOWERBOUND_R,
