@@ -28,12 +28,12 @@ service TestDataService {
         upperBoundNormalRValueVariance : Double,
         lowerBoundNOP : Integer,
         upperBoundNOP : Integer,
-        lowerBoundR : Integer,
-        upperBoundR : Integer,
-        lowerBoundAS : Integer,
-        upperBoundAS : Integer,
-        lowerBoundVOG : Integer,
-        upperBoundVOG : Integer,
+        lowerBoundR : Decimal,
+        upperBoundR : Decimal,
+        lowerBoundAS : Decimal,
+        upperBoundAS : Decimal,
+        lowerBoundVOG : Decimal,
+        upperBoundVOG : Decimal,
         clientChangesEmailProb : Double,
         ) returns String;
     action resetDatabase() returns String;

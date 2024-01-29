@@ -1,41 +1,44 @@
 {
-  "name": "data-generator",
-  "version": "1.0.1",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@faker-js/faker": "^8.3.1",
-    "@sap/cds": "^7",
-    "@sap/cds-hana": "^2",
-    "@sap/hdi-deploy": "^4.9.1",
-    "@sap/xssec": "^3",
-    "express": "^4",
-    "passport": "^0",
-    "rimraf": "^5.0.5"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^7"
-  },
-  "engines": {
-    "node": "^18"
-  },
-  "scripts": {
-    "start": "cds-serve",
-    "gen": "cds build --for hana",
-    "login": "cf login --origin msgsystems-sci-platform",
-    "build": "rimraf ressources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "undeploy": "cf undeploy data-generator --delete-services --delete-service-keys --delete-service-brokers"
-  },
-  "cds": {
-    "requires": {
-      "[production]": {
-        "db": "hana",
-        "auth": "xsuaa"
-      }
+    "name": "data-generator",
+    "version": "1.0.1",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@faker-js/faker": "^8.3.1",
+        "@sap/cds": "^7",
+        "@sap/cds-hana": "^2",
+        "@sap/hdi-deploy": "^4.9.1",
+        "@sap/xssec": "^3",
+        "express": "^4",
+        "passport": "^0",
+        "rimraf": "^5.0.5"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.120.1",
+        "rimraf": "^3.0.2"
+    },
+    "engines": {
+        "node": "^18"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "gen": "cds build --for hana",
+        "login": "cf login --origin msgsystems-sci-platform",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "undeploy": "cf undeploy data-generator --delete-services --delete-service-keys --delete-service-brokers",
+        "watch-datagenerator": "cds watch --open datagenerator/webapp/index.html?sap-ui-xx-viewCache=false"
+    },
+    "cds": {
+        "requires": {
+            "[production]": {
+                "db": "hana",
+                "auth": "xsuaa"
+            }
+        }
     }
-  }
 }

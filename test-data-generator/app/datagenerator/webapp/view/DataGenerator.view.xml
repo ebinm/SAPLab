@@ -1,0 +1,175 @@
+<mvc:View controllerName="datagenerator.controller.DataGenerator"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+    <Page id="page" title="{i18n>title}">
+        <content>
+
+            <Button id="loginButton" text="Login" press="login"></Button>
+            <Button id="logoutButton" text="Logout" press="logout"></Button>
+
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup234"
+			    editable="false"
+			    layout="ColumnLayout"
+			    title="Contracts"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                
+				    <Label text="Contract Count" id="labelContractCount"/>
+                    <Input id="inputContractCount" type="Number" value="1000"/>
+
+                    <Label text="Contract Creation Year Range" id="labelContractCreationYearRange"/>
+                    <Input id="inputContractCreationYearRange" type="Number" value="10"/>
+
+                    <Label text="Active Contract Probability" id="labelActiveContractProb"/>
+                    <Input id="inputActiveContractProb" type="Number" value="0.8"/>
+			    </f:content>
+		    </f:SimpleForm>
+
+             <f:SimpleForm id="SimpleFormChangeColumn_oneGroup2345"
+			    editable="false"
+			    layout="ColumnLayout"
+                title="Contract Details"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    
+                    <Label text="Lower Bound Contract Details Count" id="labelLowerBoundContractDetailsCount"/>
+                    <Input id="inputLowerBoundContractDetailsCount" type="Number" value="2"/>
+
+                    
+
+                    <Label text="Upper Bound Contract Details Count" id="labelUpperBoundContractDetailsCount"/>
+                    <Input id="inputUpperBoundContractDetailsCount" type="Number" value="10"/>
+				    
+			    </f:content>
+		    </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup235"
+			    editable="false"
+			    layout="ColumnLayout"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    <Label text="Failure Probability" id="labelFailureProb"/>
+                    <Input id="inputFailureProb" type="Number" value="0.1"/>
+
+                    <Label text="Timezone" id="labelTimezone"/>
+                    <Input id="inputTimezone" value="CST"/>
+				    
+                    <Label text="Reporting Duration" id="labelReportingDuration"/>
+                    <Input id="inputReportingDuration" type="Number" value="30"/>
+
+                    <Label text="Allowed Delay" id="labelAllowedDelay"/>
+                    <Input id="inputAllowedDelay" type="Number" value="14"/>
+
+                    <Label text="Lateness Probability" id="labelLatenessProb"/>
+                    <Input id="inputLatenessProb" type="Number" value="0.2"/>
+
+                    <Label text="Neutral Contracts Probability" id="labelNeutralContractsProb"/>
+                    <Input id="inputNeutralContractsProb" type="Number" value="0.1"/>
+
+                    <Label text="Penalized Contracts Probability" id="labelPenalizedContractsProb"/>
+                    <Input id="inputPenalizedContractsProb" type="Number" value="0.7"/>
+
+                    <Label text="Outlier Probability" id="labeOutlierProb"/>
+                    <Input id="inputOutlierProb" type="Number" value="0.1"/>
+			    </f:content>
+		    </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup2346"
+			    editable="false"
+			    layout="ColumnLayout"
+                title="Reporting Values"
+			    columnsM="2"
+			    columnsL="2"
+			    columnsXL="2"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                    <Label text="Lower Bound Normal Reporting Value Variance" id="labelLowerBoundNormalRValueVariance"/>
+                    <Input id="inputLowerBoundNormalRValueVariance" type="Number" value="0.7"/>
+
+                    <Label text="Lower Bound Outlier Reporting Value Variance" id="labelLowerBoundOutlierRValueVariance"/>
+                    <Input id="inputLowerBoundOutlierRValueVariance" type="Number" value="0"/>
+
+                    <Label text="Lower Bound NOP" id="labelLowerBoundNOP"/>
+                    <Input id="inputLowerBoundNOP" type="Number" value="10"/>
+
+                    <Label text="Lower Bound R" id="labelLowerBoundR"/>
+                    <Input id="inputLowerBoundR" type="Number" value="1000000"/>
+
+                    <Label text="Lower Bound AS" id="labelLowerBoundAS"/>
+                    <Input id="inputLowerBoundAS" type="Number" value="1000000"/>
+
+                    <Label text="Lower Bound VOG" id="labelLowerBoundVOG"/>
+                    <Input id="inputLowerBoundVOG" type="Number" value="1000000"/>
+
+                    <Label text="Upper Bound Normal Reporting Value Variance" id="labelUpperBoundNormalRValueVariance"/>
+                    <Input id="inputUpperBoundNormalRValueVariance" type="Number" value="1.3"/>
+
+                    <Label text="Upper Bound Outlier Reporting Value Variance" id="labelUpperBoundOutlierRValueVariance"/>
+                    <Input id="inputUpperBoundOutlierRValueVariance" type="Number" value="3.2"/>
+
+                    <Label text="Upper Bound NOP" id="labelUpperBoundNOP"/>
+                    <Input id="inputUpperBoundNOP" type="Number" value="999"/>
+
+                    <Label text="Upper Bound R" id="labelUpperBoundR"/>
+                    <Input id="inputUpperBoundR" type="Number" value="100000000000"/>
+
+                    <Label text="Upper Bound AS" id="labelUpperBoundAS"/>
+                    <Input id="inputUpperBoundAS" type="Number" value="10000000000"/>
+
+                    <Label text="Upper Bound VOG" id="labelUpperBoundVOG"/>
+                    <Input id="inputUpperBoundVOG" type="Number" value="10000000000"/>
+				    
+			    </f:content>
+		    </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleFormChangeColumn_oneGroup236"
+			    editable="false"
+			    layout="ColumnLayout"
+			    title="Emails"
+			    columnsM="2"
+			    columnsL="3"
+			    columnsXL="3"
+                visible="{/isLoggedIn}"
+			    >
+			    <f:content>
+                
+				    <Label text="Client Changes Email Probability" id="labelClientChangesEmailProb"/>
+                    <Input id="inputClientChangesEmailProb" type="Number" value="0.2"/>
+
+			    </f:content>
+		    </f:SimpleForm>
+
+            
+
+            <VBox id="generateDataButtonBox" visible="{/isLoggedIn}">
+                <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
+                    <Button id="_IDGenButton2" text="Generate Data" press="generateData"></Button>
+                </VBox>
+            </VBox>
+
+            <VBox id="generateDataButtonBox2" visible="{/isLoggedIn}">
+                <VBox id="_IDGenVBox2" class="sapUiSmallMargin">
+                    <Button id="_IDGenButton3" text="Reset Database" press="resetDatabase"></Button>
+                </VBox>
+            </VBox>
+                
+
+        
+        </content>
+    </Page>
+</mvc:View>
