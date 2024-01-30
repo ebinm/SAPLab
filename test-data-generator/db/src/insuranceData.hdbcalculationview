@@ -225,6 +225,9 @@ and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
       <calculatedViewAttribute id="EMAIL_sendDateTime" datatype="DATE" expressionLanguage="COLUMN_ENGINE">
         <formula>longdate(&quot;Email_SENTDATETIME&quot;)</formula>
       </calculatedViewAttribute>
+      <calculatedViewAttribute id="DETAILS_reportPeriodStartYear" datatype="NVARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(longdate(&quot;Details_REPORTINGPERIODSTART&quot;), 1)</formula>
+      </calculatedViewAttribute>
     </calculatedViewAttributes>
     <input node="TESTDATASERVICE_INSURANCECONTRACT">
       <mapping xsi:type="Calculation:AttributeMapping" target="Contract_CREATEDAT" source="CREATEDAT"/>
@@ -517,7 +520,14 @@ and &quot;Details_CREATEDAT&quot;&lt;=adddays(now(),-365), 1, 0)</formula>
   
     <attribute id="EMAIL_sendDateTime" order="67" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="EMAIL_sendDateTime"/>
+  
       <keyMapping columnObjectName="Join_1_2" columnName="EMAIL_sendDateTime"/>
+  
+    </attribute>
+  
+    <attribute id="DETAILS_reportPeriodStartYear" order="68" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DETAILS_reportPeriodStartYear"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DETAILS_reportPeriodStartYear"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>

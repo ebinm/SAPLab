@@ -12,7 +12,7 @@
             <f:SimpleForm id="SimpleFormChangeColumn_oneGroup234"
 			    editable="false"
 			    layout="ColumnLayout"
-			    title="Contracts"
+			    title="Insurance Contracts"
 			    columnsM="2"
 			    columnsL="3"
 			    columnsXL="3"
@@ -21,13 +21,13 @@
 			    <f:content>
                 
 				    <Label text="Contract Count" id="labelContractCount"/>
-                    <Input id="inputContractCount" type="Number" value="1000"/>
+                    <Input id="inputContractCount" type="Number" value="100"/>
 
                     <Label text="Contract Creation Year Range" id="labelContractCreationYearRange"/>
                     <Input id="inputContractCreationYearRange" type="Number" value="5"/>
 
                     <Label text="Active Contract Probability" id="labelActiveContractProb"/>
-                    <Input id="inputActiveContractProb" type="Number" value="0.8"/>
+                    <Input id="inputActiveContractProb" type="Number" value="0.9"/>
 			    </f:content>
 		    </f:SimpleForm>
 
@@ -66,19 +66,19 @@
                     <Input id="inputFailureProb" type="Number" value="0.1"/>
 				    
                     <Label text="Reporting Duration" id="labelReportingDuration"/>
-                    <Input id="inputReportingDuration" type="Number" value="30"/>
+                    <Input id="inputReportingDuration" type="Number" value="15"/>
 
                     <Label text="Allowed Delay" id="labelAllowedDelay"/>
-                    <Input id="inputAllowedDelay" type="Number" value="14"/>
+                    <Input id="inputAllowedDelay" type="Number" value="5"/>
 
                     <Label text="Lateness Probability" id="labelLatenessProb"/>
-                    <Input id="inputLatenessProb" type="Number" value="0.2"/>
+                    <Input id="inputLatenessProb" type="Number" value="0.005"/>
 
                     <Label text="Neutral Contracts Probability" id="labelNeutralContractsProb"/>
                     <Input id="inputNeutralContractsProb" type="Number" value="0.1"/>
 
                     <Label text="Penalized Contracts Probability" id="labelPenalizedContractsProb"/>
-                    <Input id="inputPenalizedContractsProb" type="Number" value="0.7"/>
+                    <Input id="inputPenalizedContractsProb" type="Number" value="0.2"/>
 
                     <Label text="Outlier Probability" id="labeOutlierProb"/>
                     <Input id="inputOutlierProb" type="Number" value="0.01"/>
