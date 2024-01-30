@@ -86,7 +86,7 @@ exports.genContractDetails = function generateContractDetails(
           "NOTIFIED_FAILED",
         ]);
 
-        // Reporting period should be in the past
+        // Reporting period should be in the recent past
         finalReportingDate = faker.date.recent({ days: 14 });
         reportingPeriodEnd = new Date(finalReportingDate);
         reportingPeriodEnd.setDate(
@@ -97,14 +97,6 @@ exports.genContractDetails = function generateContractDetails(
           reportingPeriodEnd.getDate() - parameters.reportingDuration
         );
       } else {
-        random_float = faker.number.float();
-
-        if (random_float <= parameters.failureProb) {
-          status = "TRANSFER_FAILED";
-        } else {
-          status = faker.helpers.arrayElement(["FINALIZED", "TRANSFER_OK"]);
-        }
-
         // Reporting period is active or in the past
         reportingPeriodStart = faker.date.between({ from: createdAt, to: now });
         reportingPeriodEnd = new Date(reportingPeriodStart);
@@ -115,6 +107,19 @@ exports.genContractDetails = function generateContractDetails(
         finalReportingDate.setDate(
           finalReportingDate.getDate() + parameters.allowedDelay
         );
+
+        random_float = faker.number.float();
+
+        if (random_float <= parameters.failureProb) {
+          status = "TRANSFER_FAILED";
+        } else {
+          // Set status depending on report activeness
+          if (finalReportingDate < now) {
+            status = "TRANSFER_OK";
+          } else {
+            status = "FINALIZED";
+          }
+        }
       }
 
       if (
