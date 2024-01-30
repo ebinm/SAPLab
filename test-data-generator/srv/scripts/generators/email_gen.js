@@ -29,7 +29,7 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
         lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
     }
 
-    // Determine email types based on ContractDetail status
+    // Determine email types based on ContractDetails status
     if (contractDetails.contractDetailStatus == 'CANCELED' || contractDetails.contractDetailStatus == 'REVERSED') {
         fakeEmails.push(generateEmail('REVERSED',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
     } else if (contractDetails.contractDetailStatus == 'NOTIFIED' || contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
@@ -55,7 +55,7 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
 
         fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
     } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
-        fakeEmails.push(generateEmail('SUMMARY',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
+        fakeEmails.push(generateEmail('SUMMARY',  'COMPLETE', lastEmailDate, contract, contractDetails));
     }
 
     return fakeEmails;
