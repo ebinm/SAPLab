@@ -25,18 +25,19 @@ POST {{serviceUrl}}/generateData
 content-type: application/json
 
 {
-    "contractCount" : 900,
+    "contractCount" : 800,
     "contractCreationYearRange" : 40,
-    "activeContractProb" : 0.6,
+    "activeContractProb" : 0.9,
     "lowerBoundContractDetailsCount" : 10,
     "upperBoundContractDetailsCount" : 20,
     "failureProb" : 0.2,
     "timezone" : "EST",
     "reportingDuration" : 20,
     "allowedDelay" : 20,
-    "neutralContractsProb" : 0.2,
+    "neutralContractsProb" : 0.05,
     "penalizedContractsProb" : 0.5,
-    "outlierProb" : 0.25,
+    "outlierProb" : 0,
+    "latenessProb" : 0.05,
     "lowerBoundOutlierRValueVariance": 0,
     "upperBoundOutlierRValueVariance": 5,
     "lowerBoundNormalRValueVariance" : 0.8,

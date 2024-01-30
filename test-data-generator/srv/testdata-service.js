@@ -16,7 +16,8 @@ class TestDataService extends cds.ApplicationService {
         var result = await SELECT.from(InsuranceContract);
         return result.length;
       } catch (error) {
-        return request.error("Error resetting database:", error);
+        error.additionalInfo = "Error getting InsuranceContract count!";
+        throw error;
       }
     });
 
@@ -26,7 +27,8 @@ class TestDataService extends cds.ApplicationService {
         var result = await SELECT.from(ContractDetails);
         return result.length;
       } catch (error) {
-        return request.error("Error resetting database:", error);
+        error.additionalInfo = "Error getting ContractDetails count!";
+        throw error;
       }
     });
 
@@ -36,7 +38,8 @@ class TestDataService extends cds.ApplicationService {
         var result = await SELECT.from(Emails);
         return result.length;
       } catch (error) {
-        return request.error("Error resetting database:", error);
+        error.additionalInfo = "Error getting Emails count!";
+        throw error;
       }
     });
 

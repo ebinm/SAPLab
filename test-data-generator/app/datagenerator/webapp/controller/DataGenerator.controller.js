@@ -192,11 +192,11 @@ sap.ui.define(
           contentType: "application/json",
           data: requestData,
           success: function (data) {
-            console.log("Function called successfully!");
+            alert("Data generation was successful!");
             console.log(data);
           },
           error: function (error) {
-            console.log("Error calling function: " + error.responseText);
+            alert("Error calling function: " + error.responseText);
             console.log(error);
           },
         });
@@ -214,11 +214,11 @@ sap.ui.define(
           contentType: "application/json", // Set the content type to JSON
           //data: JSON.stringify({ contractCount : 3 }), // Pass your JSON data here
           success: function (data) {
-            console.log("Function called successfully!");
+            alert("Database reset was successful!");
             console.log(data);
           },
           error: function (error) {
-            console.log("Error calling function: " + error.responseText);
+            alert("Error calling function: " + error.responseText);
             console.log(error);
           },
         });

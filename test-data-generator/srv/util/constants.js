@@ -6,8 +6,8 @@
 const CONTRACT_COUNT = 1000;
 // Define that the created InsuranceContracts range back 10 years
 const CONTRACT_CREATION_YEAR_RANGE = 10;
-// Set the share of active contracts to roughly 80 %
-const ACTIVE_CONTRACT_DIST = 0.8;
+// Set the share of active contracts to roughly 90 %
+const ACTIVE_CONTRACT_DIST = 0.9;
 
 
 /**
@@ -25,16 +25,16 @@ const REPORTING_DURATION = 30;
 // Assume two weeks of allowed reporting delay
 const ALLOWED_DELAY = 14;
 // Rarely make status neutral for a more meaningful dashboard
-const NEUTRAL_CONTRACTS_PROB = 0.1;
+const NEUTRAL_CONTRACTS_PROB = 0.05;
 // Set probability of report lateness
-const LATENESS_PROB = 0.2;
+const LATENESS_PROB = 0.05;
 // Penalize some contracts in the past
 const PENALIZED_CONTRACTS_PROB = 0.7;
 // Set probabilty of outliers with vast reporting value differences
-const OUTLIER_PROB = 0.1;
+const OUTLIER_PROB = 0.01;
 // Variance to randomize reporting value differences
 const LOWERBOUND_OUTLIER_RVALUE_VARIANCE = 0;
-const UPPERBOUND_OUTLIER_RVALUE_VARIANCE = 3.2;
+const UPPERBOUND_OUTLIER_RVALUE_VARIANCE = 2;
 const LOWERBOUND_NORMAL_RVALUE_VARIANCE = 0.7;
 const UPPERBOUND_NORMAL_RVALUE_VARIANCE = 1.3;
 // Upper/lower bounds for provisional/final values
