@@ -127,6 +127,8 @@ exports.genContractDetails = function generateContractDetails(
         status == "TRANSFER_OK" ||
         status == "TRANSFER_FAILED"
       ) {
+        random_float = faker.number.float();
+
         // Penalize some ContractDetails in the past
         if (
           random_float <= parameters.penalizedContractsProb &&
