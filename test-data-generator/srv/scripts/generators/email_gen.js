@@ -10,52 +10,53 @@ const { faker } = require('@faker-js/faker');
 exports.genEmails = function generateEmails(contract, contractDetails, parameters) {
     const fakeEmails = [];
 
-    let lastEmailDate = contractDetails.createdAt;
+    let lastEmailDate = contractDetails.reportingPeriodStart;
 
-    // Generate emails for client information changes
-    let random = faker.number.float();
-    if (random < parameters.clientChangesEmailProb) {
-        fakeEmails.push(generateEmail('UPDATE', 'COMPLETE', lastEmailDate, contract, contractDetails));
-        lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
-    }
-    random = faker.number.float();
-    if (random < parameters.clientChangesEmailProb) {
-        fakeEmails.push(generateEmail('UPDATE_CLIENT', 'COMPLETE', lastEmailDate, contract, contractDetails));
-        lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
-    }
-    random = faker.number.float();
-    if (random < parameters.clientChangesEmailProb) {
-        fakeEmails.push(generateEmail('REINSTATED', 'COMPLETE', lastEmailDate, contract, contractDetails));
-        lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
-    }
-
-    // Determine email types based on ContractDetails status
-    if (contractDetails.contractDetailStatus == 'CANCELED' || contractDetails.contractDetailStatus == 'REVERSED') {
-        fakeEmails.push(generateEmail('REVERSED',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.contractDetailStatus == 'NOTIFIED' || contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
-        var emailDispatchStatus = '';
-        if (contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
-            emailDispatchStatus = 'FAILED';
-        } else {
-            emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
+    const now = new Date();
+    // Only create Emails if reportingPeriodStart is in past
+    if (lastEmailDate < now) {
+        // Generate emails for client information changes
+        let random = faker.number.float();
+        if (random < parameters.clientChangesEmailProb) {
+            fakeEmails.push(generateEmail('UPDATE', 'COMPLETE', lastEmailDate, contract, contractDetails));
+        }
+        random = faker.number.float();
+        if (random < parameters.clientChangesEmailProb) {
+            fakeEmails.push(generateEmail('UPDATE_CLIENT', 'COMPLETE', lastEmailDate, contract, contractDetails));
+        }
+        random = faker.number.float();
+        if (random < parameters.clientChangesEmailProb) {
+            fakeEmails.push(generateEmail('REINSTATED', 'COMPLETE', lastEmailDate, contract, contractDetails));
         }
 
-        fakeEmails.push(generateEmail('NOTIFICATION',  emailDispatchStatus, lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.contractDetailStatus == 'REMINDED' || contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
-        // REMINDER emails are alwys preceded by NOTIFICATION emails
-        fakeEmails.push(generateEmail('NOTIFICATION', faker.helpers.arrayElement(['RESENT', 'COMPLETE']), lastEmailDate, contract, contractDetails));
-        lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
-    
-        var emailDispatchStatus = '';
-        if (contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
-            emailDispatchStatus = 'FAILED';
-        } else {
-            emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
-        }
+        // Determine email types based on ContractDetails status
+        if (contractDetails.contractDetailStatus == 'CANCELED' || contractDetails.contractDetailStatus == 'REVERSED') {
+            fakeEmails.push(generateEmail('REVERSED',  faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'FAILED', 'RESENT']), lastEmailDate, contract, contractDetails));
+        } else if (contractDetails.contractDetailStatus == 'NOTIFIED' || contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
+            var emailDispatchStatus = '';
+            if (contractDetails.contractDetailStatus == 'NOTIFIED_FAILED') {
+                emailDispatchStatus = 'FAILED';
+            } else {
+                emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
+            }
 
-        fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
-    } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
-        fakeEmails.push(generateEmail('SUMMARY',  'COMPLETE', lastEmailDate, contract, contractDetails));
+            fakeEmails.push(generateEmail('NOTIFICATION',  emailDispatchStatus, lastEmailDate, contract, contractDetails));
+        } else if (contractDetails.contractDetailStatus == 'REMINDED' || contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
+            // REMINDER emails are alwys preceded by NOTIFICATION emails
+            fakeEmails.push(generateEmail('NOTIFICATION', faker.helpers.arrayElement(['RESENT', 'COMPLETE']), lastEmailDate, contract, contractDetails));
+            lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
+        
+            var emailDispatchStatus = '';
+            if (contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
+                emailDispatchStatus = 'FAILED';
+            } else {
+                emailDispatchStatus = faker.helpers.arrayElement(['WAITING', 'COMPLETE', 'RESENT']);
+            }
+
+            fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
+        } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
+            fakeEmails.push(generateEmail('SUMMARY',  'COMPLETE', lastEmailDate, contract, contractDetails));
+        }
     }
 
     return fakeEmails;
@@ -76,7 +77,13 @@ function generateEmail(emailType, emailDispatchStatus, lastEmailDate, contract, 
     // Fake attributes of Mail entity
     const ID = faker.string.uuid();
 
-    const sentDateTime = faker.date.between({ from: lastEmailDate, to: now });
+    var sentDateTime;
+    if (lastEmailDate < now) {
+        sentDateTime = faker.date.between({ from: lastEmailDate - 1, to: now + 1});
+    } else {
+        sentDateTime = now;
+    }
+
     const clientEmail = contract.clientEmail;
     const graphMailID = faker.string.uuid();
 
