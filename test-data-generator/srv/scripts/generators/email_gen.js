@@ -42,7 +42,7 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
 
             fakeEmails.push(generateEmail('NOTIFICATION',  emailDispatchStatus, lastEmailDate, contract, contractDetails));
         } else if (contractDetails.contractDetailStatus == 'REMINDED' || contractDetails.contractDetailStatus == 'REMINDED_FAILED') {
-            // REMINDER emails are alwys preceded by NOTIFICATION emails
+            // REMINDER emails are always preceded by NOTIFICATION emails
             fakeEmails.push(generateEmail('NOTIFICATION', faker.helpers.arrayElement(['RESENT', 'COMPLETE']), lastEmailDate, contract, contractDetails));
             lastEmailDate = fakeEmails[fakeEmails.length - 1].sentDateTime;
         
@@ -55,7 +55,7 @@ exports.genEmails = function generateEmails(contract, contractDetails, parameter
 
             fakeEmails.push(generateEmail('REMINDER', emailDispatchStatus, lastEmailDate, contract, contractDetails));
         } else if (contractDetails.contractDetailStatus == 'FINALIZED' || contractDetails.contractDetailStatus == 'TRANSFER_OK' || contractDetails.contractDetailStatus == 'TRANSFER_FAILED') {
-            fakeEmails.push(generateEmail('SUMMARY',  'COMPLETE', lastEmailDate, contract, contractDetails));
+            fakeEmails.push(generateEmail('SUMMARY',  'COMPLETE', contractDetails.finalReportingDate, contract, contractDetails));
         }
     }
 
@@ -79,7 +79,11 @@ function generateEmail(emailType, emailDispatchStatus, lastEmailDate, contract, 
 
     var sentDateTime;
     if (lastEmailDate < now) {
-        sentDateTime = faker.date.between({ from: lastEmailDate - 1, to: now + 1});
+        if (emailType == "SUMMARY") {
+            sentDateTime = lastEmailDate;
+        } else {
+            sentDateTime = faker.date.between({ from: lastEmailDate - 1, to: now + 1});
+        }
     } else {
         sentDateTime = now;
     }
