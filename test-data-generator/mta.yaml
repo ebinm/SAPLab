@@ -1,7 +1,7 @@
 _schema-version: "3.1"
 ID: data-generator
-description: A simple CAP project.
-version: 1.0.1
+description: A customizable test data generator for InValNoS.
+version: 2.0.0
 modules:
 - name: data-generator-srv
   type: nodejs

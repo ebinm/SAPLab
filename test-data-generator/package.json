@@ -1,7 +1,7 @@
 {
     "name": "data-generator",
-    "version": "1.0.1",
-    "description": "A simple CAP project.",
+    "version": "2.0.0",
+    "description": "A customizable test data generator for InValNoS.",
     "repository": "<Add your repository here>",
     "license": "UNLICENSED",
     "private": true,
@@ -12,8 +12,7 @@
         "@sap/hdi-deploy": "^4.9.1",
         "@sap/xssec": "^3",
         "express": "^4",
-        "passport": "^0",
-        "rimraf": "^5.0.5"
+        "passport": "^0"
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",
