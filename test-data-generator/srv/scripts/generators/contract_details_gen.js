@@ -4,7 +4,7 @@ const eg = require("./email_gen");
 /**
  * Generates one fake ContractDetails object with its associated Emails
  * @param {InsuranceContract} contract - The InsuranceContract the ContractDetails object is associated with
- * @param {GenerationParameters} parameters - An object which olds all params necessary for data generation
+ * @param {GenerationParameters} parameters - An object which holds all params necessary for data generation
  * @returns {Array} Returns a nested 2D array with one fake ContractDetails object and an array of one or more associated Emails
  */
 exports.genContractDetails = function generateContractDetails(
@@ -179,38 +179,46 @@ exports.genContractDetails = function generateContractDetails(
   let provisionalReportedValueOfGoods = null;
   let finalReportedValueOfGoods = null;
 
-  // Determine whether this ContractDetails object should be an outlier
-  random_float = faker.number.float();
   var isOutlier = false;
-  if (random_float <= parameters.outlierProb) {
-    isOutlier = true;
-  }
-  var reportingValueVariance;
-  if (isOutlier) {
+  var reportingValueVariance = 1;
+
+  if (
+    status == "FINALIZED" ||
+    status == "TRANSFER_OK" ||
+    status == "TRANSFER_FAILED"
+  ) {
+    // Determine whether this ContractDetails object should be an outlier
     random_float = faker.number.float();
-    if (random_float > 0.5) {
-      reportingValueVariance = faker.number.float({
-        min: 1.0,
-        max: parameters.upperBoundOutlierRValueVariance,
-      });
+
+    if (random_float <= parameters.outlierProb) {
+      isOutlier = true;
+    }
+    if (isOutlier) {
+      random_float = faker.number.float();
+      if (random_float > 0.5) {
+        reportingValueVariance = faker.number.float({
+          min: 1.0,
+          max: parameters.upperBoundOutlierRValueVariance,
+        });
+      } else {
+        reportingValueVariance = faker.number.float({
+          min: parameters.lowerBoundOutlierRValueVariance,
+          max: 1.0,
+        });
+      }
     } else {
       reportingValueVariance = faker.number.float({
-        min: parameters.lowerBoundOutlierRValueVariance,
-        max: 1.0,
+        min: parameters.lowerBoundNormalRValueVariance,
+        max: parameters.upperBoundNormalRValueVariance,
       });
     }
-  } else {
-    reportingValueVariance = faker.number.float({
-      min: parameters.lowerBoundNormalRValueVariance,
-      max: parameters.upperBoundNormalRValueVariance,
-    });
   }
 
   // Randomly choose one ReportingValueType and set values accordingly with variance
   reportingValueType = faker.helpers.arrayElement(["NOP", "R", "AS", "VOG"]);
   switch (reportingValueType) {
     case "NOP":
-      reportingValueUnit_code = "persons";
+      reportingValueUnit_code = "NOP";
       provisionalReportedNumberOfPersons = faker.number.int({
         min: parameters.lowerBoundNOP,
         max: parameters.upperBoundNOP,
@@ -226,7 +234,7 @@ exports.genContractDetails = function generateContractDetails(
       }
       break;
     case "R":
-      reportingValueUnit_code = "€";
+      reportingValueUnit_code = "R";
       provisionalReportedAmount = faker.number.float({
         min: parameters.lowerBoundR,
         max: parameters.upperBoundR,
@@ -241,7 +249,7 @@ exports.genContractDetails = function generateContractDetails(
       }
       break;
     case "AS":
-      reportingValueUnit_code = "stocks";
+      reportingValueUnit_code = "AS";
       provisionalReportedAssetsStocks = faker.number.float({
         min: parameters.lowerBoundAS,
         max: parameters.upperBoundAS,
@@ -257,7 +265,7 @@ exports.genContractDetails = function generateContractDetails(
       }
       break;
     case "VOG":
-      reportingValueUnit_code = "€";
+      reportingValueUnit_code = "VOG";
       provisionalReportedValueOfGoods = faker.number.float({
         min: parameters.lowerBoundVOG,
         max: parameters.upperBoundVOG,

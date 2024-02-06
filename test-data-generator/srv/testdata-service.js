@@ -43,7 +43,7 @@ class TestDataService extends cds.ApplicationService {
       }
     });
 
-    // If generateData(contractCount) is called, generate test data and insert it into database
+    // If generateData() is called, generate test data and insert it into database
     this.on("generateData", async function onGenerateData(request) {
       // Collect all request parameters in GenerationParameters class
       const parameters = new GenerationParameters(
