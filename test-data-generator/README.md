@@ -4,11 +4,12 @@ This is the CAP project to generate test data for our the InValNoS dashboard.
 
 | File or Folder   | Purpose                                   |
 | ---------------- | ----------------------------------------- |
-| `app/`         | content for UI frontends (no need for us) |
+| `app/`         | content for UI frontend                   |
 | `db/`          | domain models                             |
 | `srv/`         | service models and code                   |
 | `test/`        | http files to test/access the endpoints   |
 | `package.json` | project metadata and configuration        |
+| `mta.yaml`     | multi-app configuration for deployment    |
 
 ## Next Steps
 
