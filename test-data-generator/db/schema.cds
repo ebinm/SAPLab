@@ -5,6 +5,7 @@
 
 namespace testdatagenerator;
 
+// Section 1: InsuranceContract Entity Definition
 entity InsuranceContract {
   key ID              : UUID;
       createdAt       : Date;
@@ -24,6 +25,7 @@ entity InsuranceContract {
                           on contractDetails.insuranceContract = $self;
 }
 
+// Section 2: ContractDetails Entity Definition
 entity ContractDetails {
   key ID                                 : UUID;
       createdAt                          : Date;
@@ -59,6 +61,7 @@ entity ContractDetails {
       insuranceContract                  : Association to InsuranceContract;
 }
 
+// Section 3: Emails Entity Definition
 entity Emails {
   key ID                  : UUID;
       sentDateTime        : Timestamp;
