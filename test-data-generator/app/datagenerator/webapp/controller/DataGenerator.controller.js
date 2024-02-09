@@ -6,6 +6,7 @@ sap.ui.define(
   function (Controller) {
     "use strict";
 
+    // Section 1: Data Generator Controller 
     const baseUrl =
     "https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-gene245694e8.cfapps.eu10-004.hana.ondemand.com/odata/v4/test-data";
     var authorizationEndpoint =
@@ -20,11 +21,9 @@ sap.ui.define(
 
     var responseType = "code";
 
-    //const baseUrl = "http://localhost:4004/odata/v4/test-data";
-    //var redirectUri = "http://localhost:4004/datagenerator/webapp/index.html";
-
     var accessToken = null;
 
+    // Function 1.1: Authorize via OAuth
     function authorize() {
       // Make a request to Node.js function
       // Step 1: Initiate the Authorization Request
@@ -34,6 +33,7 @@ sap.ui.define(
       window.location.href = authorizationUrl;
     }
 
+    // Function 1.2: Generate Token for OAuth
     function generateToken(authorizationCode) {
       // Step 3: Exchange the Authorization Code for an Access Token
       if (authorizationCode) {
@@ -70,6 +70,7 @@ sap.ui.define(
     }
 
     return Controller.extend("project1.controller.View1", {
+      // Function 1.3: On Initialization
       onInit: function () {
         //alert("Hello Ebin");
         var oModel = new sap.ui.model.json.JSONModel({
@@ -88,6 +89,7 @@ sap.ui.define(
         }
       },
 
+      // Function 1.4: Generate test data
       generateData: function () {
         // Make a request to Node.js function
         var requestData = JSON.stringify({
@@ -202,6 +204,7 @@ sap.ui.define(
         });
       },
 
+      // Function 1.5: Delete all test data
       resetDatabase: function () {
         // Make a request to Node.js function
         $.ajax({
@@ -224,10 +227,12 @@ sap.ui.define(
         });
       },
 
+      // Function 1.6: Login to Data Generator
       login: function () {
         authorize();
       },
 
+      // Function 1.7: Logout from Data Generator
       logout: function () {
         // Clear all cookies
         var cookies = document.cookie.split("; ");

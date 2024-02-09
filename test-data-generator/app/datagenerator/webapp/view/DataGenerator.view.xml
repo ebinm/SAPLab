@@ -1,3 +1,4 @@
+<!-- View of Data Generator -->
 <mvc:View controllerName="datagenerator.controller.DataGenerator"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
@@ -6,9 +7,11 @@
     <Page id="page" title="{i18n>title}">
         <content>
 
+            <!-- Section 1: Login/logout buttons -->
             <Button id="loginButton" text="Login" press="login"></Button>
             <Button id="logoutButton" text="Logout" press="logout"></Button>
 
+            <!-- Section 2: Input fields for data generation -->
             <f:SimpleForm id="SimpleFormChangeColumn_oneGroup234"
 			    editable="false"
 			    layout="ColumnLayout"
@@ -155,13 +158,14 @@
 		    </f:SimpleForm>
 
             
-
+            <!-- Section 3: Button to generate data -->
             <VBox id="generateDataButtonBox" visible="{/isLoggedIn}">
                 <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
                     <Button id="_IDGenButton2" text="Generate Data" press="generateData"></Button>
                 </VBox>
             </VBox>
 
+            <!-- Section 3: Button to delete data -->
             <VBox id="generateDataButtonBox2" visible="{/isLoggedIn}">
                 <VBox id="_IDGenVBox2" class="sapUiSmallMargin">
                     <Button id="_IDGenButton3" text="Reset Database" press="resetDatabase"></Button>
