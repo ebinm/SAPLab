@@ -1,4 +1,4 @@
-# Getting Started (deployed)
+# Getting Started
 
 This is the CAP project to generate test data for our the InValNoS dashboard.
 

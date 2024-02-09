@@ -1,5 +1,5 @@
 /**
- * Adjustable default generation parameters for InsuranceContracts
+ * Section 1: Adjustable default generation parameters for InsuranceContracts
  */
 
 // Define number of to be created InsuranceContracts
@@ -11,7 +11,7 @@ const ACTIVE_CONTRACT_DIST = 0.9;
 
 
 /**
- * Adjustable default generation parameters for ContractDetails
+ * Section 2: Adjustable default generation parameters for ContractDetails
  */
 
 // Upper/lower bounds for the count of ContractDetails per InsuranceContract
@@ -48,7 +48,7 @@ const LOWERBOUND_VOG = 1000000;
 const UPPERBOUND_VOG = 10000000000;
 
 /**
- * Adjustable default generation parameters for Emails
+ * Section 3: Adjustable default generation parameters for Emails
  */
 
 // Set unlikely changes with the client's ID or email address to roughly 20%

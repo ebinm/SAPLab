@@ -1,8 +1,9 @@
 const { faker } = require("@faker-js/faker");
 const eg = require("./email_gen");
 
+// Section 1: ContractDetails generation
 /**
- * Generates one fake ContractDetails object with its associated Emails
+ * Function 1.1: Generates one fake ContractDetails object with its associated Emails
  * @param {InsuranceContract} contract - The InsuranceContract the ContractDetails object is associated with
  * @param {GenerationParameters} parameters - An object which holds all params necessary for data generation
  * @returns {Array} Returns a nested 2D array with one fake ContractDetails object and an array of one or more associated Emails

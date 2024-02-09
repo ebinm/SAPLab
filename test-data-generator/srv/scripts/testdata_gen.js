@@ -3,7 +3,8 @@ const cg = require("./generators/contract_gen");
 const cdg = require("./generators/contract_details_gen");
 
 /**
- * Generates the desired number of fake InsuranceContract objects with a random number of ContractDetails and Mail objects
+ * Section 1: Data generation and arranging
+ * Function 1.1: Generates the desired number of fake InsuranceContract objects with a random number of ContractDetails and Mail objects
  * @param {GenerationParameters} parameters - An object which holds all params necessary for data generation
  * @returns {Array} Returns a 2D-array containing an InsuranceContract array, a ContractDetails array and a Mail array.
  */

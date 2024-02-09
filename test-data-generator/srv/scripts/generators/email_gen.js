@@ -1,7 +1,8 @@
 const { faker } = require("@faker-js/faker");
 
+// Section 1: Email generation
 /**
- * Generates one or more fake Email objects
+ * Function 1.1: Generates fake Email objects depending on the contract/contractDetails
  * @param {InsuranceContract} contract - The InsuranceContract the Email object is associated with
  * @param {ContractDetails} contractDetails - The ContractDetails the Email object is associated with
  * @param {GenerationParameters} parameters - An object which olds all params necessary for data generation
@@ -157,7 +158,7 @@ exports.genEmails = function generateEmails(
 };
 
 /**
- * Generates one fake Email object
+ * Function 1.2: Generates one fake Email object
  * @param {String} emailType - Defines the type of the generated Email should be
  * @param {String} emailDispatchStatus - Defines which dispatch status the generated Email should have
  * @param {Date} lastEmailDate - Specifies the date of the last email, if it exists

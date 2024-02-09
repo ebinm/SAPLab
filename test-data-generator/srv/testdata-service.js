@@ -10,7 +10,8 @@ class TestDataService extends cds.ApplicationService {
     // Get the entity definitions from the db/schema.cds file to interact with the database
     const { InsuranceContract, ContractDetails, Emails } = cds.entities;
 
-    // Get InsuranceContracts count
+    // Section 1: GET endpoints
+    // Function 1.1: Get InsuranceContracts count
     this.on("getInsuranceContractCount", async function getInsuranceContractCount() {
       try {
         var result = await SELECT.from(InsuranceContract);
@@ -21,7 +22,7 @@ class TestDataService extends cds.ApplicationService {
       }
     });
 
-    // Get ContractDetails count
+    // Function 1.2: Get ContractDetails count
     this.on("getContractDetailsCount", async function getContractDetailsCount() {
       try {
         var result = await SELECT.from(ContractDetails);
@@ -32,7 +33,7 @@ class TestDataService extends cds.ApplicationService {
       }
     });
 
-    // Get Email count
+    // Function 1.3: Get Email count
     this.on("getEmailCount", async function getEmailCount() {
       try {
         var result = await SELECT.from(Emails);
@@ -43,7 +44,8 @@ class TestDataService extends cds.ApplicationService {
       }
     });
 
-    // If generateData() is called, generate test data and insert it into database
+    // Section 2: POST endpoint for generating data
+    // Function 2.1: If generateData() is called, generate test data and insert it into database
     this.on("generateData", async function onGenerateData(request) {
       // Collect all request parameters in GenerationParameters class
       const parameters = new GenerationParameters(
@@ -113,7 +115,8 @@ class TestDataService extends cds.ApplicationService {
       }
     });
 
-    // If resetDatabase() is called, clean the database by deleting all data
+    // Section 3: POST endpoint for resetting database
+    // Function 3.1: If resetDatabase() is called, clean the database by deleting all data
     this.on("resetDatabase", async function onResetDatabase(request) {
       console.log("Resetting database, dumping data...");
 

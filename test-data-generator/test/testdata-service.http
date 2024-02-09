@@ -2,6 +2,7 @@
 
 # @serviceUrl = https://msgsystemsag-06-tum-praktika-shd-tdd-invalnos-data-generator.cfapps.eu10-004.hana.ondemand.com/odata/v4/test-data
 
+### Section 1: GET requests
 ### Get InsuranceContracts
 GET {{serviceUrl}}/InsuranceContract
 
@@ -20,6 +21,7 @@ GET {{serviceUrl}}/getContractDetailsCount()
 ### Get Email Count
 GET {{serviceUrl}}/getEmailCount()
 
+### Section 2: POST requests
 ### Generate Data
 POST {{serviceUrl}}/generateData
 content-type: application/json

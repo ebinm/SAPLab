@@ -1,13 +1,17 @@
 using testdatagenerator as db from '../db/schema';
 
-// Service definition
+// Section 1: Service definition
 service TestDataService {
     entity InsuranceContract as projection on db.InsuranceContract;
     entity ContractDetails   as projection on db.ContractDetails;
     entity Emails            as projection on db.Emails;
+    // Function 1.1: GET InsuranceContract count
     function getInsuranceContractCount() returns Integer;
+    // Function 1.2: GET ContractDetails count
     function getContractDetailsCount() returns Integer;
+    // Function 1.3: GET Email count
     function getEmailCount() returns Integer;
+    // Function 1.4: POST generateData
     action generateData(
         contractCount : Integer,
         contractCreationYearRange : Integer,
@@ -36,5 +40,6 @@ service TestDataService {
         upperBoundVOG : Decimal,
         clientChangesEmailProb : Double,
         ) returns String;
+    // Function 1.5: POST resetDatabase
     action resetDatabase() returns String;
 }

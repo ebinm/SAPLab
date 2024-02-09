@@ -1,7 +1,8 @@
 const { faker } = require("@faker-js/faker");
 
+// Section 1: InsuranceObject generation
 /**
- * Generates one fake InsuranceContract object
+ * Function 1.1: Generates one fake InsuranceContract object
  * @param {GenerationParameters} parameters - An object which holds all params necessary for data generation
  * @returns {InsuranceContract} Returns one fake InsuranceContract object.
  */

@@ -1,10 +1,10 @@
 const constants = require("./constants");
 
 /**
- * Class holding all params necessary for data generation
+ * Section 1: Class holding all params necessary for data generation
  */
 class GenerationParameters {
-  // Constructor to initialize the class instance with default params or params of the request
+  // Function 1.1: Constructor to initialize the class instance with default params or params of the request
   constructor(
     contractCount,
     contractCreationYearRange,
@@ -78,7 +78,7 @@ class GenerationParameters {
       clientChangesEmailProb ?? constants.CLIENTCHANGESEMAIL_PROB;
   }
 
-  // Validates the input given in the request
+  // Function 1.2: Validate the input given in the request
   validateParameters() {
     if (this.contractCount <= 0) {
       return "The count of to be generated contracts must not be (below) zero!";
@@ -140,6 +140,7 @@ class GenerationParameters {
     return "";
   }
 
+  // Function 1.3: Display parsed parameters in the log for debugging
   displayParameters() {
     console.log(`
       * Contract count: ${this.contractCount}
